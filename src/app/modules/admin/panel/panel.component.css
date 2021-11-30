@@ -1,0 +1,14 @@
+i.fa, i.fas
+{
+    font-size: 50px;
+    color: darkgrey;
+}
+.text-description
+{
+    font-size: 18px;
+}
+
+mat-card:hover
+{
+    cursor: pointer;
+}

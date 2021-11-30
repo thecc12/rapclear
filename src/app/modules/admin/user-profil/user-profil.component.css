@@ -1,0 +1,14 @@
+.input-field
+{
+    margin-bottom: 15px;
+}
+.btn-danger
+{
+    background-color: #dc3545 !important;
+    border-color: #dc3545!important;
+}
+.btn-success
+{
+    background-color: #4dbd74 !important;
+    border-color: #4dbd74 !important;
+}

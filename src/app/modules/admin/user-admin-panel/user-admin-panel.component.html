@@ -1,0 +1,39 @@
+<br>
+<button class="btn btn-warning" routerLink="/user/admin"> Back</button>
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card" style="border-radius: 15px;">
+        <div class="card-header linear-gradient">
+          <h3 class="text-center mx-4 mb-2">User Panel</h3>
+        </div>
+        <div class="card-body linear-gradient2">
+          <app-input-email-search (emailInputEvent)="searchUser($event)"></app-input-email-search>
+
+          <div class="row">
+            <div class="col-4">
+              <!-- <div class="row"> -->
+              <app-list-user [emailUser]="emailForSearchUser" (selectedUser)="setSelectedUser($event)">
+              </app-list-user>
+              <!-- </div>    -->
+
+            </div>
+            <div class="col-8">
+              <mat-card>
+                <app-tabs>
+                  <app-tab-item title="Profil">
+                    <app-user-profil [user]="selectedUser"></app-user-profil>
+                  </app-tab-item>
+                  <app-tab-item title="Investments">
+                    <app-user-investments [user]="selectedUser"></app-user-investments>
+                  </app-tab-item>
+                </app-tabs>
+              </mat-card>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

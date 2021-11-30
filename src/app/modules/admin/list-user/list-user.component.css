@@ -1,0 +1,23 @@
+mat-card
+{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+mat-divider{
+    /* margin-bottom: 15px!important; */
+}
+
+mat-selection-list {
+    max-height: 400px;
+    overflow: auto;
+  }
+.rounded-smal-pp
+ {
+     width: 3em;
+     height: 3em;
+     vertical-align: middle;
+ }
+ mat-list-option
+ {
+     height: 100px!important;
+ }

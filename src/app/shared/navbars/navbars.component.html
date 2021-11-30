@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: rgb(10, 51, 114) !important; margin-bottom: 5px;">
+  <img src="assets/img/crypto-logo.png" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+  <a class="navbar-brand" href="#" style="color: rgb(228, 165, 30) !important; margin-left: 10px;"></a>
+  <button aria-controls="navbarSupportedContent" (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed" class="navbar-toggler" type="button" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="isCollapsed" [isAnimated]="true">
+
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item">
+        <button type="button" routerLink="/user/investment/add" class="btn btn-block btn-warning" style="height: 35px; width: 100px; color: white !important; margin-top: 10px; background-color: rgb(228, 165, 30); border-radius: 15px;">.<b> INVEST </b>.</button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link button" routerLink="/user/dashboard" style="color: white !important;"><b>Dashboard</b> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link button" routerLink="/user/profil" style="color: white !important;"><b>Profil</b> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link button" routerLink="/user/familly" style="color: white !important;"><b>Referals</b> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link button" routerLink="/user/history" style="color: white !important;"><b>History</b> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown" dropdown *ngIf="isAdmin">
+        <a id="admin-dropdown" class="nav-link dropdown-toggle" href dropdownToggle (click)="false"
+          aria-controls="your-dropdown"  style="color: white !important;"><b>Admin</b>
+        </a>
+        <div id="your-dropdown" class="dropdown-menu" aria-labelledby="link-dropdown" *dropdownMenu style="background: linear-gradient(rgb(10, 51, 114), white) !important;">
+          <!-- <a class="dropdown-item" routerLink="/user/profil" style="color: rgb(7, 6, 5);"><b>Profil</b></a> -->
+          <!-- <a class="dropdown-item" href="#" style="color: rgb(18, 16, 13);"><b>Settings</b></a> -->
+          <a class="dropdown-item" routerLink="/user/admin"><b>Panel</b></a>
+          <a class="dropdown-item" routerLink="/user/admin/user-panel"><b>Users Panel</b></a>
+          <a class="dropdown-item" routerLink="/user/admin/investments-panel"><b>Investment panel</b></a>
+          <a class="dropdown-item" routerLink="/user/admin/setting-panel"><b>Setting panel</b></a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a id="link-dropdown" class="nav-link dropdown-toggle" href dropdownToggle (click)="false"
+          aria-controls="your-dropdown"  style="color: white !important;"><b><i class="icon-list" style="color: white !important;"></i></b>
+        </a>
+        <div id="your-dropdown" class="dropdown-menu" aria-labelledby="link-dropdown" *dropdownMenu style="background: linear-gradient(rgb(10, 51, 114), white) !important;">
+          <!-- <a class="dropdown-item" routerLink="/user/profil" style="color: rgb(7, 6, 5);"><b>Profil</b></a> -->
+          <!-- <a class="dropdown-item" href="#" style="color: rgb(18, 16, 13);"><b>Settings</b></a> -->
+          <a class="dropdown-item" routerLink="/user/requests"><b>Requests</b></a>
+          <a class="dropdown-item" (click)="logOut()"><b>Log Out</b></a>
+        </div>
+      </li>
+      <li class="nav-item d-md-down-none">
+        <a class="nav-link" href="#"><i class="icon-bell" style="color: white !important;"></i><span class="badge badge-pill badge-warning">!</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<div class="header" style="color: white; font-size: large; margin-left: 15px;">
+  <b>{{userName}}</b>
+</div>

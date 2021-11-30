@@ -1,0 +1,105 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-9 order-xl-1">
+      <div class="card" style="border-radius: 15px;">
+        <div class="card-header linear-gradient"
+          style="color: white; background-color: rgb(10, 51, 114); border-radius: 15px 15px 0 0; color: rgb(240, 159, 9);">
+          <h3 class="text-center mx-4 mb-2">
+            User's details
+          </h3>
+        </div>
+        <div class="card-body linear-gradient2" style="background-color: rgba(16, 67, 124, 0.15);">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div>
+                    <label for="id"><b> User Name</b></label>
+                    <input type="text" class="form-control" placeholder="Fullname"
+                      value="{{name}}" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label><b>Email</b></label>
+                  <input type="text" class="form-control" placeholder="Email" value="{{email}}" disabled>
+                </div>
+              </div>
+            </div><br><br>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div>
+                    <label for="id"><b> User ID</b></label>
+                    <input type="text" class="form-control" placeholder="User ID"
+                      value="{{id}}" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label><b>My Referral ID</b></label>
+                <div class="input-group mb-3" (click)="copyMessage(id);idCopied()" popover="Id copied">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Copy link</span>
+                  </div>
+                  <input type="text" id="referral" placeholder="{{id}}" class="form-control"
+                    value="{{mySponsorShipId}}" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label><b>Registration Date</b></label>
+                  <input type="text" class="form-control" placeholder="Registration Date" value="{{dateCreation}}" disabled>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label><b>Parent Referral ID</b></label>
+                  <input class="form-control" placeholder="No sponsorship" value="{{parentSponsorShipId}}" disabled>
+                </div>
+              </div>
+            </div><br><br>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label><b>Network</b></label>
+                  <input type="text" class="form-control" placeholder="Network" value="{{network}}" disabled>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label><b>Phone</b></label>
+                  <input type="number" class="form-control" placeholder="Phone number" value="{{phone}}" disabled>
+                </div>
+              </div>
+            </div><br><br>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label><b>Country</b></label>
+                  <input type="text" class="form-control" placeholder="Country" value="{{country}}" disabled>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label><b>City</b></label>
+                  <input type="text" class="form-control" placeholder="City" value="{{city}}" disabled>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <!-- <p>Your information is confidential,
+               please make sure that the information entered here is correct.</p> -->
+            
+
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
