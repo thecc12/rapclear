@@ -1,0 +1,8 @@
+<mat-card>
+    <div class="row">
+        <mat-form-field  class="col-12">
+            <input matInput placeholder="User Email" [formControl]="emailInput" (keyup)="sendValue()">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>     
+</mat-card>

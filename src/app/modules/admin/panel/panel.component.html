@@ -1,0 +1,54 @@
+<br>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-header linear-gradient">
+                    <h3 class="text-center mx-4 mb-2">Admin Panel</h3>
+                </div>
+                <div class="card-body linear-gradient2">
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-card [routerLink]="['/user/admin/user-panel']">
+                                <div class="row text-center">
+                                    <div class="col-12 mb-3">
+                                        <i class="fa fa-users "></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="text-description">Users</p>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+
+                        <div class="col-4">
+                            <mat-card [routerLink]="['/user/admin/investments-panel']">
+                                <div class="row text-center">
+                                    <div class="col-12 mb-3">
+                                        <i class="fa fa-box-open "></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="text-description">Investments</p>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+
+                        <div class="col-4">
+                            <mat-card [routerLink]="['/user/admin/setting-panel']">
+                                <div class="row text-center">
+                                    <div class="col-12 mb-3">
+                                        <i class="fas fa-tools "></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="text-description">Settings</p>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

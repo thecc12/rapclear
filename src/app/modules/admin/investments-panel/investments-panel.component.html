@@ -1,0 +1,133 @@
+<br>
+<button class="btn btn-warning" routerLink="/user/admin"> Back</button>
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card" style="border-radius: 15px;">
+        <div class="card-header linear-gradient">
+          <h3 class="text-center mx-4 mb-2">User Panel</h3>
+        </div>
+        <div class="card-body linear-gradient2">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> All Investments ( {{listAllInvestment.length}} )</mat-panel-title>
+                <mat-panel-description> List all investments </mat-panel-description>
+              </mat-expansion-panel-header>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Amount</th>
+                    <th>Plan</th>
+                    <th>Date of purchase</th>
+                    <th>Date of sale</th>
+                    <th>Hours</th>
+                    <th>Owner</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let investment of listAllInvestment;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{investment.amount}}</td>
+                    <td>{{investment.plan}}</td>
+                    <td>{{getFormatDate(investment.payDate)}}</td>
+                    <td>{{getFormatDate(investment.saleDate)}}</td>
+                    <td>{{getFormatHours(investment.saleDate)}}</td>
+                    <td>{{getBuyer(investment.idOwner)}}</td>
+                    <td>
+                      <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Not On Market ( {{listNotOnMarketInvestment.length}} )</mat-panel-title>
+                <mat-panel-description> Investments not on the market </mat-panel-description>
+              </mat-expansion-panel-header>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Amount</th>
+                    <th>Plan</th>
+                    <th>Date of purchase</th>
+                    <th>Hours</th>
+                    <th>Owner</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let investment of listNotOnMarketInvestment;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{investment.amount}}</td>
+                    <td>{{investment.plan}}</td>
+                    <td>{{getFormatDate(investment.payDate)}}</td>
+                    <td>{{getFormatHours(investment.saleDate)}}</td>
+                    <td>{{getBuyer(investment.idOwner)}}</td>
+                    <td>
+                      <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> On Market ( {{listOnMarketInvestment.length}} )</mat-panel-title>
+                <mat-panel-description> Investments on the market </mat-panel-description>
+              </mat-expansion-panel-header>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Amount</th>
+                    <th>Date of purchase</th>
+                    <th>Date of sale</th>
+                    <th>Hours</th>
+                    <th>Owner</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let investment of listOnMarketInvestment;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{investment.amount}}</td>
+                    <td>{{getFormatDate(investment.payDate)}}</td>
+                    <td>{{getFormatDate(investment.saleDate)}}</td>
+                    <td>{{getFormatHours(investment.saleDate)}}</td>
+                    <td>{{getBuyer(investment.idOwner)}}</td>
+                    <th>
+                      <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+          <mat-divider></mat-divider>
+          <button (click)="emptyMarket()" class="mt-2 btn btn-infos pink-text float-end">
+            <i *ngIf="!waitResponseBtn" class="fa fa-ban pink-text" style="margin-right: 5px;"></i>
+            <app-spinner *ngIf="waitResponseBtn" style="margin-right: 5px;"></app-spinner>
+            Empty the market
+          </button>
+
+          <button (click)="checkInvestmentList()" class="mt-2 btn btn-infos green-text float-end">
+            <i *ngIf="!waitResponseSecondBtn" class="fa fa-check green-text" style="margin-right: 5px;"></i>
+            <app-spinner *ngIf="waitResponseSecondBtn" style="margin-right: 5px;"></app-spinner>
+            Update Investments status
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

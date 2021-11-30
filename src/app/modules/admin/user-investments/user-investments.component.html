@@ -1,0 +1,103 @@
+<div class="mb-3">
+    <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Purchases ( {{listPurchasedInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> List of investments purchased </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table class="table">
+            <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Amount</th>
+                  <th>Plan</th>
+                  <th>Date of purchase</th>
+                  <th>Date of sale</th>
+                  <th>Hours</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let investment of listPurchasedInvestment;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{investment.amount}}</td>
+                <td>{{investment.plan}}</td>
+                <td>{{getFormatDate(investment.payDate)}}</td>
+                <td>{{getFormatDate(investment.saleDate)}}</td>
+                <td>{{getFormatHours(investment.saleDate)}}</td>
+                <td> 
+                  <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
+                </td>
+              </tr>             
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Sales ( {{listSaleInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> List of investments for sale </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table class="table">
+            <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Amount</th>
+                  <th>Plan</th>
+                  <th>Date of purchase</th>
+                  <th>Hours</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let investment of listSaleInvestment;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{investment.amount}}</td>
+                <td>{{investment.plan}}</td>
+                <td>{{getFormatDate(investment.payDate)}}</td>
+                <td>{{getFormatHours(investment.saleDate)}}</td>
+                <td>
+                  <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
+                </td>
+              </tr>             
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title> History ( {{listHistoryInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> Investments purchased history </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Amount</th>
+                <th>Date of purchase</th>
+                <th>Date of sale</th>
+                <th>Hours</th>
+                <th>Buyer</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let investment of listHistoryInvestment;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{investment.amount}}</td>
+                <td>{{getFormatDate(investment.payDate)}}</td>
+                <td>{{getFormatDate(investment.saleDate)}}</td>
+                <td>{{getFormatHours(investment.saleDate)}}</td>
+                <td>{{getBuyer(investment.idBuyer)}}</td>
+              </tr>             
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+</div>
+  <mat-divider></mat-divider>
+  <button (click)="openDialog()" class="mt-2 btn btn-infos text-white float-end"><i class="fa fa-plus"></i>Assign new investment</button>

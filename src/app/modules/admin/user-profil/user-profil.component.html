@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-4">
+        <img src="./../../../../../assets/img/user_image.jpg" class="responsive-img" alt="...">
+    </div>
+    <div class="col-8">
+        <ng-container *ngIf="user!=null">
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Full Name</span>
+                    <span class="col-7">{{user.fullName}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Email Adress</span>
+                    <span class="col-7">{{user.email}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Id</span>
+                    <span class="col-7">{{user.id}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Bonus</span>
+                    <span class="col-7">{{user.bonus}} MMC</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">                    
+                    <span class="col-5">Password</span>
+                    <span class="col-7">{{user.password}} </span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Country</span>
+                    <span class="col-7">{{user.country}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">City</span>
+                    <span class="col-7">{{user.city}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Phone</span>
+                    <span class="col-7">{{user.phone}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">SponsorShip ID</span>
+                    <span class="col-7">{{user.mySponsorShipId.toString()}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Parent SponshorShip ID</span>
+                    <span class="col-7">{{user.parentSponsorShipId.toString()}}</span></div>
+            </div>
+            <div class="input-field col-12">
+                <div class="row">
+                    <span class="col-5">Account Status</span>
+                    <span class="col-3">
+                        <span [ngClass]="{'red-text':user.status!='active', 'green-text':user.status=='active'}">
+                            {{user.status=='active'?'ACTIVE':'DESACTIVE'}}
+                        </span>
+                    </span>
+                    <div class="col-3">
+                        <!-- <button [ngClass]="{'b-danger': user.user.status=='active',
+                      'b-success' : user.user.status!='active'}" (click)="changeStatus(user)"
+                          class="btn btn-sm btn-danger">
+                          <i *ngIf="!user.waitResponse" class="fa fa-power-off"></i>
+                          
+                        </button> -->
+
+                        <button (click)="changeAccountStatus()" [ngClass]="{'btn-success':user.status!='active', 'btn-danger':user.status=='active'}" class="btn">
+                            <span *ngIf="!waitForChangeStateAccount">{{user.status=='active'?'DESACTIVE':'ACTIVE'}}</span>
+                            <app-spinner *ngIf="waitForChangeStateAccount"></app-spinner>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
