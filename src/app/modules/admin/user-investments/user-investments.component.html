@@ -2,8 +2,8 @@
     <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title> Purchases ( {{listPurchasedInvestment.length}} )</mat-panel-title>
-            <mat-panel-description> List of investments purchased </mat-panel-description>
+            <mat-panel-title> Initiated ( {{listInitiatedInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> List of investments Initiated </mat-panel-description>
           </mat-expansion-panel-header>
           <table class="table">
             <thead>
@@ -23,9 +23,9 @@
                 <td>{{i+1}}</td>
                 <td>{{investment.amount}}</td>
                 <td>{{investment.plan}}</td>
-                <td>{{getFormatDate(investment.payDate)}}</td>
-                <td>{{getFormatDate(investment.saleDate)}}</td>
-                <td>{{getFormatHours(investment.saleDate)}}</td>
+                <td>{{getFormatDate(investment.paymentDate)}}</td>
+                <!-- <td>{{getFormatDate(investment.saleDate)}}</td>
+                <td>{{getFormatHours(investment.saleDate)}}</td> -->
                 <td> 
                   <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
                 </td>
@@ -37,8 +37,8 @@
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
-            <mat-panel-title> Sales ( {{listSaleInvestment.length}} )</mat-panel-title>
-            <mat-panel-description> List of investments for sale </mat-panel-description>
+            <mat-panel-title> Waiting ( {{listWaitingPaymentDateInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> List of investments for Waiting </mat-panel-description>
           </mat-expansion-panel-header>
           <table class="table">
             <thead>
@@ -53,7 +53,7 @@
             </thead>
     
             <tbody>
-              <tr *ngFor="let investment of listSaleInvestment;let i=index">
+              <tr *ngFor="let investment of listWaitingPaymentDateInvestment;let i=index">
                 <td>{{i+1}}</td>
                 <td>{{investment.amount}}</td>
                 <td>{{investment.plan}}</td>
