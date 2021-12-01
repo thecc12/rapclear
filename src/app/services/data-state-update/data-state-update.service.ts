@@ -26,7 +26,7 @@ export class DataStateUpdateService {
     this.updateInvestmentMarket();
     this.updateAccountToBlocque();
     // this.updateInvestmentNotPaid();
-    // console.log("Test update")
+    console.log("Test update")
     // })
     this.eventService.registerNewUserEvent.subscribe((user: User) => {
       if (!user) { return; }
@@ -99,7 +99,7 @@ export class DataStateUpdateService {
       this.findAndUpdate('toupdate/investment/market', (id: EntityID) => {
           this.deleteToUpdate(`toupdate/investment/market/${id.toString()}`);
 
-          // this.investmentService.changeInvestmentStatus(id);
+          this.investmentService.changeInvestmentStatus(id);
       });
   }
 
@@ -126,12 +126,13 @@ export class DataStateUpdateService {
       this.firebaseApi
       .getFirebaseDatabase()
       .ref('investments')
-      .orderByChild('state')
-      .equalTo(InvestmentState.ARCHIVED)
+      .orderByChild('investmentState')
+      .equalTo(InvestmentState.ON_WAITING_PAYMENT_DATE)
       .once('value', (snapshot) => {
         let data = snapshot.val();
         let toupdate = {};
         // tslint:disable-next-line:forin
+        console.log("Data ",data)
         for (let key in data) {
           let investment: Investment = new Investment();
           investment.hydrate(data[key]);
@@ -140,6 +141,7 @@ export class DataStateUpdateService {
           // if (after >= now)
           toupdate[investment.id.toString().toString()] = {dateMax: investment.paymentDate};
         }
+        console.log("toupdated ",toupdate)
         this.firebaseApi.set('toupdate/investment/market', toupdate)
         .then((result: ResultStatut) => resolve(result))
         .catch((error: ResultStatut) => {
