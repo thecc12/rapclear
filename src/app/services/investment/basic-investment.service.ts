@@ -41,10 +41,10 @@ export class BasicInvestmentService {
         private configAppService: ConfigAppService,
         private router: Router
         ) {
-            this.eventService.loginEvent.subscribe((log) => {
-              if (!log) { return; }
+            // this.eventService.loginEvent.subscribe((log) => {
+            //   if (!log) { return; }
               this.newInvestmentHandler();
-            });
+            // });
         }
 
     changeInvestmentStatus(idInvestment: EntityID) {
@@ -106,6 +106,7 @@ export class BasicInvestmentService {
         .getFirebaseDatabase()
         .ref('investments')
         .on('child_added', (snapshot) => {
+            console.log('child_added ',snapshot.val())
             let investment: Investment = new Investment();
             investment.hydrate(snapshot.val());
             if (!this.investments.has(investment.id.toString())) {
@@ -125,17 +126,24 @@ export class BasicInvestmentService {
             });
         });
     }
+    getNextStatust(investmentStatus:InvestmentState):InvestmentState
+    {
+        if(investmentStatus==InvestmentState.INITIATE) return InvestmentState.ON_WAITING_PAYMENT_DATE;
+        if(investmentStatus==InvestmentState.ON_WAITING_PAYMENT_DATE) return InvestmentState.READY_TO_PAY;
+        if(investmentStatus==InvestmentState.READY_TO_PAY) return InvestmentState.PAYED;
+        if(investmentStatus==InvestmentState.PAYED) return InvestmentState.ARCHIVED;
+        return InvestmentState.INITIATE;
 
-    changeStatusMarket(investment: Investment): Promise<ResultStatut> {
+    }
+    changeStatusMarket(investment: Investment,nstatus:InvestmentState): Promise<ResultStatut> {
         return new Promise<ResultStatut>((resolve, reject) => {
-            // tslint:disable-next-line:max-line-length
-            let nstatus = InvestmentState.INITIATE == investment.investmentState ? InvestmentState.ON_WAITING_PAYMENT_DATE : InvestmentState.INITIATE;
             // console.log("new status",nstatus,investment.state)
             this.firebaseApi.updates([{
                 link: `investments/${investment.id.toString()}/investmentState`,
                 data: nstatus
               }])
               .then((result) => {
+                console.log("Result ",investment,investment.id.toString(),this.investmentList.getValue().get(investment.id.toString()))
                 this.investmentList.getValue().get(investment.id.toString()).investmentState = nstatus;
                 resolve(result);
               })

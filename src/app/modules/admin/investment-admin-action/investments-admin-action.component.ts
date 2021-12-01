@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Investment } from '../../../entity/investment';
+import { Investment, InvestmentState } from '../../../entity/investment';
 import { DataStateUpdateService } from '../../../services/data-state-update/data-state-update.service';
 import { ResultStatut } from '../../../services/firebase/resultstatut';
 import { BasicInvestmentService } from '../../../services/investment/basic-investment.service';
@@ -15,7 +15,7 @@ import { UserTransferInvestmentComponent } from '../user-transfer-investment/use
   templateUrl: './investments-admin-action.component.html',
   styleUrls: ['./investments-admin-action.component.css']
 })
-export class InvestmentsAdminActionComponent implements OnInit {
+export class InvestmentsAdminActionComponent implements OnInit,OnChanges {
   @Input() investment: Investment = new Investment();
   selectedInvestmentId: String = '';
 
@@ -32,16 +32,20 @@ export class InvestmentsAdminActionComponent implements OnInit {
     private dataUpdateService: DataStateUpdateService,
     private dialog: BsModalService
   ) { }
-
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes ",changes)
   }
 
+  ngOnInit(): void {
+
+  }
+  
   RefuseInvestment(investment: Investment) {
     if (this.waitResponse || this.waitResponseSecond || this.waitResponseThird || this.waitResponseFour) { return; }
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment)
+    this.basicInvestmentService.changeStatusMarket(investment,InvestmentState.REFUSE)
     .then((result: ResultStatut) => {
       this.waitResponse = false;
       this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);
@@ -60,7 +64,7 @@ export class InvestmentsAdminActionComponent implements OnInit {
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment)
+    this.basicInvestmentService.changeStatusMarket(investment,this.basicInvestmentService.getNextStatust(investment.investmentState))
     .then((result: ResultStatut) => {
       this.waitResponse = false;
       this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);
@@ -79,7 +83,7 @@ export class InvestmentsAdminActionComponent implements OnInit {
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment)
+    this.basicInvestmentService.changeStatusMarket(investment,this.basicInvestmentService.getNextStatust(investment.investmentState))
     .then((result: ResultStatut) => {
       this.waitResponse = false;
       this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);
@@ -98,7 +102,7 @@ export class InvestmentsAdminActionComponent implements OnInit {
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment)
+    this.basicInvestmentService.changeStatusMarket(investment,this.basicInvestmentService.getNextStatust(investment.investmentState))
     .then((result: ResultStatut) => {
       this.waitResponse = false;
       this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);

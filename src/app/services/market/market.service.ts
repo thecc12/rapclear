@@ -27,7 +27,8 @@ export class MarketService {
       //cette requete ne doit ce faire que si le marché est ouvert
       this.firebaseApi.getFirebaseDatabase()
         .ref('investments')
-        .on('value', (snapshot) => this.newInvestmentFromMarket(snapshot)),
+        .on('value', (snapshot) => this.newInvestmentFromMarket(snapshot));
+
         this.firebaseApi.getFirebaseDatabase()
           .ref('investments')
           .on('child_changed', (snapshot) => this.updateInvestmentFromMarket(snapshot));
@@ -156,7 +157,7 @@ export class MarketService {
       ivm.hydrate(oplist[ikey]);
       investmentList.push(ivm);
     }
-
+    
     investmentList.sort((a: Investment, b: Investment) => a.amount > b.amount ? 0 : 1);
 
     investmentList.forEach((investment: Investment) => {

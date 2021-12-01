@@ -77,7 +77,12 @@ export class InvestmentsPanelComponent implements OnInit {
       }
     });
 
-    merge(this.marketService.getAllInitiatedInvestment(), this.marketService.getAllWaitingPaymentDateInvestment())
+    merge(
+      this.marketService.getAllInitiatedInvestment(),
+      this.marketService.getAllWaitingPaymentDateInvestment(),
+      this.marketService.getAllReadyToPayInvestment(),
+      this.marketService.getAllPayedInvestment()
+    )
     .subscribe((investment: Investment) => {
       if (!this.listAllInvestmentCheck.has(investment.id.toString().toString())) {
         this.listAllInvestmentCheck.set(investment.id.toString().toString(), true);

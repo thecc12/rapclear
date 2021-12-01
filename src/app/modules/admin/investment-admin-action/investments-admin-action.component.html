@@ -1,26 +1,26 @@
  
-<button title="Refuse Investment" *ngIf="investment.state=='initiate'" (click)="refuseInvestment(investment)" class="btn btn-danger hand">
+<button title="Refuse Investment" *ngIf="investment.investment=='initiate'" (click)="refuseInvestment(investment)" class="btn btn-danger hand">
     <b>
         <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>
     </b>
 </button> 
 
-<button title="Confirm Investment / Put on waiting payment date" *ngIf="investment.state=='initiate'" (click)="confirmInvestment(investment)" class="btn btn-secondary hand">
+<button title="Confirm Investment / Put on waiting payment date" *ngIf="investment.investmentState=='initiate'" (click)="confirmInvestment(investment)" class="btn btn-secondary hand">
     <b>
         <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>
     </b>
 </button>
 
-<button title="Put on ready to pay" *ngIf="investment.state=='on_waiting_payment_date'" (click)="readyToPayInvestment(investment)" class="btn btn-info hand">
+<button title="Put on ready to pay" *ngIf="investment.investmentState=='on_waiting_payment_date'" (click)="readyToPayInvestment(investment)" class="btn btn-info hand">
     <b>
         <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>
     </b>
 </button>
 
-<button title="Put on Payed" *ngIf="investment.state=='ready_to_pay'" (click)="payInvestment(investment)" class="btn btn-success hand">
+<button title="Put on Payed" *ngIf="investment.investmentState=='ready_to_pay'" (click)="payInvestment(investment)" class="btn btn-success hand">
     <b>
         <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>

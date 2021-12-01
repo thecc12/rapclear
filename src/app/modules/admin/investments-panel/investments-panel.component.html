@@ -75,7 +75,7 @@
               </table>
             </mat-expansion-panel>
 
-            <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title> On Wating Payment Date ( {{listWaitingPaymentDateInvestment.length}} )
                 </mat-panel-title>
@@ -109,11 +109,11 @@
                 </tbody>
               </table>
 
-            </mat-expansion-panel> -->
+            </mat-expansion-panel>
 
-            <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
-                <mat-panel-title> On Wating Payment ( {{listWaitingPaymentInvestment.length}} )</mat-panel-title>
+                <mat-panel-title> Ready to pay ( {{listReadyToPayInvestment.length}} )</mat-panel-title>
                 <mat-panel-description> Investments on the market </mat-panel-description>
               </mat-expansion-panel-header>
               <table class="table">
@@ -130,7 +130,7 @@
                 </thead>
 
                 <tbody>
-                  <tr *ngFor="let investment of listWaitingPaymentInvestment;let i=index">
+                  <tr *ngFor="let investment of listReadyToPayInvestment;let i=index">
                     <td>{{i+1}}</td>
                     <td>{{investment.amount}}</td>
                     <td>{{getFormatDate(investment.payDate)}}</td>
@@ -144,9 +144,9 @@
                 </tbody>
               </table>
 
-            </mat-expansion-panel> -->
+            </mat-expansion-panel>
 
-            <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title> Payed Investments ( {{listPayedInvestment.length}} )</mat-panel-title>
                 <mat-panel-description> Investments on the market </mat-panel-description>
@@ -179,7 +179,7 @@
                 </tbody>
               </table>
 
-            </mat-expansion-panel> -->
+            </mat-expansion-panel>
           </mat-accordion>
           <mat-divider></mat-divider>
 
