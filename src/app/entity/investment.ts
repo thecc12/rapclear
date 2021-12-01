@@ -24,6 +24,9 @@ export const gainConfig = {
     '10': 35,
     '20': 70,
     '30': 110,
+    'parentBonnus':10,
+    "grandParentBonnus":5,
+    "bigGrandParentBonnus":3
 };
 
 export class InvestmentGain extends Entity {

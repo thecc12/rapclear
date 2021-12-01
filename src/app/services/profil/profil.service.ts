@@ -14,6 +14,9 @@ import { MembershipService } from '../opperations/Membership.service';
 import { UserHistoryService } from '../user-history/user-history.service';
 import { UserService } from '../user/user.service';
 
+import * as ConfigApp from "./../../entity/investment"
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,8 +35,7 @@ export class ProfilService {
     private firebaseApi: FirebaseApi,
     private userService: UserService,
     private memberShipService: MembershipService,
-    private historyService: UserHistoryService,
-    private investmentService: InvestmentService
+    private historyService: UserHistoryService
   ) {
     // this.recombineHistory();
     // this.reCalculateBonus();
@@ -140,21 +142,45 @@ export class ProfilService {
 
    addParentBonus(user: User, investmentAmount) {
     return new Promise<ResultStatut>((resolve, reject) => {
-      if (user.parentSponsorShipId.toString() != '') {
-        this.userService.getUserBySponsorId(user.parentSponsorShipId)
-        .then((result: ResultStatut) => {
-          result.result.bonus = this.memberShipService.membership(investmentAmount, result.result.bonus);
+      let updates:{link:string,data:any}[]=[];
 
-          return this.firebaseApi.updates([
-                {
-                    link: `users/${result.result.id.toString()}/bonus`,
-                    data: result.result.bonus
-                }
-            ]);
-        })
+      Promise.all([
+        user.parentSponsorShipId.toString() != ''?this.userService.getUserBySponsorId(user.parentSponsorShipId):Promise.resolve(new ResultStatut()),
+        user.grandParentSponsorShipId.toString() != ''?this.userService.getUserBySponsorId(user.grandParentSponsorShipId):Promise.resolve(new ResultStatut()),
+        user.bigGrandParentSponsorShipId.toString() != ''?this.userService.getUserBySponsorId(user.bigGrandParentSponsorShipId):Promise.resolve(new ResultStatut())
+      ])
+      .then((results:ResultStatut[])=>{
+        let users:User[] = results.map((result:ResultStatut)=>result.result);
+        if(users[0]!=null){
+          users[0].bonus = this.memberShipService.membership(investmentAmount,users[0].bonus,ConfigApp.gainConfig.parentBonnus);
+          updates.push(
+            {
+              link: `users/${users[0].id.toString()}/bonus`,
+              data: users[0].bonus
+          })
+        }
+        if(users[1]!=null) 
+        {
+          users[1].bonus = this.memberShipService.membership(investmentAmount,users[1].bonus,ConfigApp.gainConfig.grandParentBonnus);
+          updates.push(
+            {
+              link: `users/${users[1].id.toString()}/bonus`,
+              data: users[1].bonus
+          })
+        }
+        if(users[2]!=null) 
+        {
+          users[2].bonus = this.memberShipService.membership(investmentAmount,users[2].bonus,ConfigApp.gainConfig.bigGrandParentBonnus);
+          updates.push(
+            {
+              link: `users/${users[2].id.toString()}/bonus`,
+              data: users[2].bonus
+          })
+        } 
+        return this.firebaseApi.updates(updates);       
+      })
         .then((result: ResultStatut) => resolve(result))
         .catch((error: ResultStatut) => resolve(new ResultStatut));
-      } else { resolve(new ResultStatut()); }
     });
    }
 

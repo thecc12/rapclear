@@ -13,6 +13,8 @@ import { EntityID } from '../../entity/EntityID';
 import { UserHistoryService } from '../user-history/user-history.service';
 import { map } from 'rxjs/operators';
 import { Investment, InvestmentState } from '../../entity/investment';
+import { ProfilService } from '../profil/profil.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -31,8 +33,10 @@ export class InvestmentService {
         private authService: AuthService,
         private userNotificationService: UserNotificationService,
         private userHistoryService: UserHistoryService,
+        private userService:UserService,
         private router: Router,
         private afs: AngularFirestore,
+        private userProfile:ProfilService,
         private eventService: EventService) {
         this.investmentCollection = afs.collection('investments');
         this.authService.currentUserSubject.subscribe((user: User) => {
@@ -138,6 +142,8 @@ export class InvestmentService {
                 //     message.idInvestment = investment.id;
                 //     return this.userNotificationService.sendNotification(message);
                 // })
+                .then((result)=>this.userService.getUserById(investment.idOwner))
+                .then((result)=> this.userProfile.addParentBonus(result.result,investment.amount))
                 .then((result) => resolve(result))
                 .catch((error) => {
                     this.firebaseApi.handleApiError(error);

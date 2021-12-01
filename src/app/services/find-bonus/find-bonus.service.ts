@@ -12,6 +12,8 @@ export class FindBonusService {
     private firebaseApi: FirebaseApi,
     private historyService: UserHistoryService,
     private planService: PlanService
-  ) { }
+  ) { 
 
+  }
+  
 }
