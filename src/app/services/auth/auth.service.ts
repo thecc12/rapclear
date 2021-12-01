@@ -102,12 +102,12 @@ export class AuthService {
     // this.currentUserSubject.n
   }
 
-  saveNewUser(user:User):Promise<ResultStatut>
-  {
+  saveNewUser(user:User):Promise<ResultStatut> {
     return new Promise<ResultStatut>((resolve, reject) => {
       this.firebaseApi.createUserApi(user.email, user.password)
         .then(() => this.signIn(user, false))
         .then(() => {
+          console.log('add user: ', user);
           // this.SendVerificationMail();
           user.dateCreation = (new Date()).toISOString();
           this.eventService.registerNewUserEvent.next(user);
@@ -125,25 +125,22 @@ export class AuthService {
   }
   signInNewUser(user: User):Promise<ResultStatut> {
     return new Promise<ResultStatut>((resolve, reject) => {
+      console.log('1 in service: ', user);
       if (user.parentSponsorShipId.toString() != '') {
         this.userService.getUserBySponsorId(user.parentSponsorShipId)
-        .then((result:ResultStatut)=>{
+        .then((result:ResultStatut)=> {
           let u:User=result.result;
           user.grandParentSponsorShipId.setId(u.parentSponsorShipId.toString());
           user.bigGrandParentSponsorShipId.setId(u.grandParentSponsorShipId.toString());
           return this.saveNewUser(user);
         })
         .then((result:ResultStatut)=>resolve(result))
-        .catch((error)=>reject(error))
-      }
-      else
-      {
+        .catch((error)=>reject(error));
+      } else {
         this.saveNewUser(user)
         .then((result:ResultStatut)=>resolve(result))
-        .catch((error)=>reject(error))
+        .catch((error)=>reject(error));
       }
-
-      
     });
   }
 

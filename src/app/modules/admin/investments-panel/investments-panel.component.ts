@@ -19,11 +19,17 @@ export class InvestmentsPanelComponent implements OnInit {
   listAllInvestment: Investment[] = [];
   listAllInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
-  listOnMarketInvestment: Investment[] = [];
-  listOnMarketInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+  listInitiatedInvestment: Investment[] = [];
+  listInitiatedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
-  listNotOnMarketInvestment: Investment[] = [];
-  listNotOnMarketInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+  listPayedInvestment: Investment[] = [];
+  listPayedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+
+  listWaitingPaymentDateInvestment: Investment[] = [];
+  listWaitingPaymentDateInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+
+  listReadyToPayInvestment: Investment[] = [];
+  listReadyToPayInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
 
 
@@ -43,21 +49,35 @@ export class InvestmentsPanelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.marketService.getAllInvestmentInMarket().subscribe((investment: Investment) => {
-      if (!this.listOnMarketInvestmentCheck.has(investment.id.toString().toString())) {
-        this.listOnMarketInvestmentCheck.set(investment.id.toString().toString(), true);
-        this.listOnMarketInvestment.push(investment);
+    this.marketService.getAllInitiatedInvestment().subscribe((investment: Investment) => {
+      if (!this.listInitiatedInvestmentCheck.has(investment.id.toString().toString())) {
+        this.listInitiatedInvestmentCheck.set(investment.id.toString().toString(), true);
+        this.listInitiatedInvestment.push(investment);
       }
     });
 
-    this.marketService.getAllInvestmentNotInMarket().subscribe((investment: Investment) => {
-      if (!this.listNotOnMarketInvestmentCheck.has(investment.id.toString().toString())) {
-        this.listNotOnMarketInvestmentCheck.set(investment.id.toString().toString(), true);
-        this.listNotOnMarketInvestment.push(investment);
+    this.marketService.getAllWaitingPaymentDateInvestment().subscribe((investment: Investment) => {
+      if (!this.listWaitingPaymentDateInvestmentCheck.has(investment.id.toString().toString())) {
+        this.listWaitingPaymentDateInvestmentCheck.set(investment.id.toString().toString(), true);
+        this.listWaitingPaymentDateInvestment.push(investment);
       }
     });
 
-    merge(this.marketService.getAllInvestmentInMarket(), this.marketService.getAllInvestmentNotInMarket())
+    this.marketService.getAllReadyToPayInvestment().subscribe((investment: Investment) => {
+      if (!this.listReadyToPayInvestmentCheck.has(investment.id.toString().toString())) {
+        this.listReadyToPayInvestmentCheck.set(investment.id.toString().toString(), true);
+        this.listReadyToPayInvestment.push(investment);
+      }
+    });
+
+    this.marketService.getAllPayedInvestment().subscribe((investment: Investment) => {
+      if (!this.listPayedInvestmentCheck.has(investment.id.toString().toString())) {
+        this.listPayedInvestmentCheck.set(investment.id.toString().toString(), true);
+        this.listPayedInvestment.push(investment);
+      }
+    });
+
+    merge(this.marketService.getAllInitiatedInvestment(), this.marketService.getAllWaitingPaymentDateInvestment())
     .subscribe((investment: Investment) => {
       if (!this.listAllInvestmentCheck.has(investment.id.toString().toString())) {
         this.listAllInvestmentCheck.set(investment.id.toString().toString(), true);

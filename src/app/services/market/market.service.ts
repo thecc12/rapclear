@@ -87,40 +87,55 @@ export class MarketService {
     return this.getMyOrderedInvestment(idOwner);
   }
 
-  getAllInvestmentInMarket() {
+  getAllPayedInvestment() {
+    return this.getOrderMarket().pipe(
+      filter((p: Investment) => p.investmentState == InvestmentState.PAYED),
+    );
+  }
+  getAllReadyToPayInvestment() {
     return this.getOrderMarket().pipe(
       filter((p: Investment) => p.investmentState == InvestmentState.READY_TO_PAY),
     );
   }
-  getOtherOrderedInvestmentOnMarket() {
-    return this.getAllInvestmentInMarket().pipe(
+  getAllWaitingPaymentDateInvestment() {
+    return this.getOrderMarket().pipe(
+      filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE),
+    );
+  }
+  getAllInitiatedInvestment() {
+    return this.getOrderMarket().pipe(
+      filter((p: Investment) => p.investmentState == InvestmentState.INITIATE),
+    );
+  }
+  getOtherOrderedInitiatedInvestment() {
+    return this.getAllInitiatedInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() != this.authService.currentUserSubject.getValue().id.toString())
     );
   }
 
-  getMyOrderedInvestmentOnMarket(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
-    return this.getAllInvestmentInMarket().pipe(
+  getMyOrderedInitiatedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
+    return this.getAllInitiatedInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
     );
   }
 
-  getUserOrderedInvestmentOnMarket(idOwner: EntityID) {
-    return this.getMyOrderedInvestmentOnMarket(idOwner);
+  getUserOrderedInitiatedInvestment(idOwner: EntityID) {
+    return this.getMyOrderedInitiatedInvestment(idOwner);
   }
-  getAllInvestmentNotInMarket() {
-    return this.getOrderMarket().pipe(
-      filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE)
-    );
-  }
-  getMyOrderdInvestmentNotInMarket(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
+  // getAllInvestmentNotInMarket() {
+  //   return this.getOrderMarket().pipe(
+  //     filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE)
+  //   );
+  // }
+  getMyOrderdPayedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
     return this.getOrderMarket().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
       filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE)
     );
   }
-  getUserOrderdInvestmentNotInMarket(idOwner: EntityID) {
-    return this.getMyOrderdInvestmentNotInMarket(idOwner);
-  }
+  // getUserOrderdInvestmentNotInMarket(idOwner: EntityID) {
+  //   return this.getMyOrderdInvestmentNotInMarket(idOwner);
+  // }
 
   updateInvestmentFromMarket(investments: any) {
     let investment: Investment = new Investment();

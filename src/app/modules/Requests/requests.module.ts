@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { RequestWatingComponent } from './request-wating/request-wating.component';
+import { RequestWaitingComponent } from './request-waiting/request-waiting.component';
 import { RequestsRoutingModule } from './requests-routing.module';
 import { AddRequestComponent } from './add-request/add-request.component';
 import { RequestRejectedComponent } from './request-rejected/request-rejected.component';
@@ -25,7 +25,7 @@ import { ProgressIndeterminateModule } from '../components/progress-indeterminat
     ProgressIndeterminateModule
   ],
   declarations: [
-    RequestWatingComponent,
+    RequestWaitingComponent,
     AddRequestComponent,
     RequestRejectedComponent,
     RequestValidedComponent,

@@ -426,7 +426,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getInitiateInvestments() {
-    this.myInvestment.getMyOrderdInvestmentNotInMarket().subscribe((investment: Investment) => {
+    this.myInvestment.getMyOrderedInitiatedInvestment().subscribe((investment: Investment) => {
       // console.log("Arrived")
       if (!this.listPurchaseInvestments.has(investment.id.toString().toString())) {
         this.listPurchaseInvestments.set(investment.id.toString().toString(), true);

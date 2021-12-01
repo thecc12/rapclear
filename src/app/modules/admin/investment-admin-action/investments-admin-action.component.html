@@ -1,36 +1,50 @@
  
-<span title="Remove from the market" *ngIf="investment.state=='on_market'" (click)="changeStatusInvestment(investment)" class="green-text hand">
+<button title="Refuse Investment" *ngIf="investment.state=='initiate'" (click)="refuseInvestment(investment)" class="btn btn-danger hand">
     <b>
         <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>
     </b>
-</span>
+</button> 
 
-<span title="Put on the market" *ngIf="investment.state=='not_on_market'" (click)="changeStatusInvestment(investment)" class="red-text hand">
+<button title="Confirm Investment / Put on waiting payment date" *ngIf="investment.state=='initiate'" (click)="confirmInvestment(investment)" class="btn btn-secondary hand">
     <b>
         <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>
     </b>
-</span>
+</button>
 
-<span  title="Transfer to a buyer" (click)="transferInvestment(investment)" class="blue-text" >
+<button title="Put on ready to pay" *ngIf="investment.state=='on_waiting_payment_date'" (click)="readyToPayInvestment(investment)" class="btn btn-info hand">
+    <b>
+        <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
+        <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>
+    </b>
+</button>
+
+<button title="Put on Payed" *ngIf="investment.state=='ready_to_pay'" (click)="payInvestment(investment)" class="btn btn-success hand">
+    <b>
+        <i *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="fa fa-shopping-cart"></i>
+        <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>
+    </b>
+</button>
+
+<!-- <button  title="Transfer to a buyer" (click)="transferInvestment(investment)" class="blue-text" >
     <b>
         <i  class="fas fa-paper-plane" *ngIf="selectedInvestmentId!=investment.id.toString() || !waitResponseThird "></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponseThird " style="margin-right: 5px;"></app-spinner>
     </b>  
-</span>
+</button>
 
-<span  title="Split the investment" (click)="splitInvestment(investment)" class="orange-text" >
+<button  title="Split the investment" (click)="splitInvestment(investment)" class="orange-text" >
     <b>
         <i  class="fas fa-cut" *ngIf="selectedInvestmentId!=investment.id.toString() || !waitResponseFour "></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponseFour " style="margin-right: 5px;"></app-spinner>
     </b>  
-</span>
+</button> -->
 
-<span  title="Remove the investment from the system" (click)="deleteInvestment(investment)" class="pink-text" >
+<button  title="Remove the investment from the system" (click)="deleteInvestment(investment)" class="btn btn-danger" >
     <b>
         <i *ngIf="selectedInvestmentId!=investment.id.toString() || !waitResponseSecond " class="fas fa-trash-alt"></i>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponseSecond " style="margin-right: 5px;"></app-spinner>
     </b>  
-</span>
+</button>
             

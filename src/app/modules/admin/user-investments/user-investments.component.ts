@@ -21,11 +21,11 @@ export class UserInvestmentsComponent implements OnInit, OnChanges {
   @Input() user: User = null;
   userObservable: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
-  listPurchasedInvestment: Investment[] = [];
-  listPurchasedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+  listInitiatedInvestment: Investment[] = [];
+  listInitiatedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
-  listSaleInvestment: Investment[] = [];
-  listSaleInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+  listWaitingPaymentDateInvestment: Investment[] = [];
+  listWaitingPaymentDateInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
   listHistoryInvestment: Investment[] = [];
   listHistoryInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
@@ -37,21 +37,21 @@ export class UserInvestmentsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.userObservable.subscribe((user: User) => {
       if (!user) { return; }
-      this.listPurchasedInvestment = new Array(),
-      this.listPurchasedInvestmentCheck.clear();
-      this.marketService.getUserOrderdInvestmentNotInMarket(user.id).forEach((investment: Investment) => {
-        if (!this.listPurchasedInvestmentCheck.has(investment.id.toString().toString())) {
-          this.listPurchasedInvestmentCheck.set(investment.id.toString().toString(), true);
-          this.listPurchasedInvestment.push(investment);
+      this.listInitiatedInvestment = new Array(),
+      this.listInitiatedInvestmentCheck.clear();
+      this.marketService.getUserOrderedInitiatedInvestment(user.id).forEach((investment: Investment) => {
+        if (!this.listInitiatedInvestmentCheck.has(investment.id.toString().toString())) {
+          this.listInitiatedInvestmentCheck.set(investment.id.toString().toString(), true);
+          this.listInitiatedInvestment.push(investment);
         }
       })
 
-      this.listSaleInvestment = new Array(),
-      this.listSaleInvestmentCheck.clear();
-      this.marketService.getUserOrderedInvestmentOnMarket(user.id).forEach((investment: Investment) => {
-        if (!this.listSaleInvestmentCheck.has(investment.id.toString().toString())) {
-          this.listSaleInvestmentCheck.set(investment.id.toString().toString(), true);
-          this.listSaleInvestment.push(investment);
+      this.listWaitingPaymentDateInvestment = new Array(),
+      this.listWaitingPaymentDateInvestmentCheck.clear();
+      this.marketService.getUserOrderedInvestment(user.id).forEach((investment: Investment) => {
+        if (!this.listWaitingPaymentDateInvestmentCheck.has(investment.id.toString().toString())) {
+          this.listWaitingPaymentDateInvestmentCheck.set(investment.id.toString().toString(), true);
+          this.listWaitingPaymentDateInvestment.push(investment);
         }
       });
 

@@ -5,7 +5,7 @@ import { RequestPanelComponent } from './request-panel/request-panel.component';
 import { RequestRejectedComponent } from './request-rejected/request-rejected.component';
 import { RequestValidedComponent } from './request-valided/request-valided.component';
 
-import { RequestWatingComponent } from './request-wating/request-wating.component';
+import { RequestWaitingComponent } from './request-waiting/request-waiting.component';
 
 const routes: Routes = [
   {
@@ -23,8 +23,8 @@ const routes: Routes = [
     }
   },
   {
-    path: 'request-wating',
-    component: RequestWatingComponent,
+    path: 'request-waiting',
+    component: RequestWaitingComponent,
     data: {
       title: 'valided-request'
     }
