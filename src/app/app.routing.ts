@@ -86,10 +86,10 @@ export const routes: Routes = [
         loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
         canActivate: [AdminerGuard],
       },
-      // {
-      //   path: 'familly',
-      //   loadChildren: () => import('./modules/familly/familly.module').then(m => m.FamillyModule)
-      // },
+      {
+        path: 'referral',
+        loadChildren: () => import('./modules/familly/familly.module').then(m => m.FamillyModule)
+      },
       {
         path: 'requests',
         loadChildren: () => import('./modules/requests/requests.module').then(m => m.RequestsModule)

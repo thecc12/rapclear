@@ -1,0 +1,56 @@
+<main class="main d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card-group">
+                    <div class="card p-4" style="border-radius: 15px;">
+                        <div class="card-header">
+                            Note:
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="requestForm" (ngSubmit)="submit()">
+                                <h1>Request</h1>
+                                <p class="text-muted">Send request to administrator</p>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="subject" formControlName="subject"
+                                        placeholder="Enter Subject request" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.subject.errors }">
+
+                                    <div *ngIf="submitted && f.subject.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.subject.errors.required">Field is required</div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <textarea id="content" type="content" formControlName="content"
+                                        placeholder="Enter Your content" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></textarea>
+
+                                    <div *ngIf="submitted && f.content.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.content.errors.required">Content is required</div>
+                                    </div>
+                                </div>
+                                <div class="row">Add image if necessary <br>
+                                    <div class="col-12">
+                                        <div class="input-group mb-4">
+                                            <input type="file" name="imageUrl" id="imageUrl" ngModel accept="image/*"
+                                                class="form-control ml-4" #fileUploader formControlName="imageUrl"
+                                                (change)="showPreview($event)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <app-progress-indeterminate *ngIf="waitingSubmit">
+                                        </app-progress-indeterminate>
+                                        <button type="submit" class="submit loginmodal-submit btn btn-success px-4"
+                                            value="Submit" *ngIf="!waitingSubmit">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

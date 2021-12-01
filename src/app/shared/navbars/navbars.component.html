@@ -19,7 +19,7 @@
         <a class="nav-link button" routerLink="/user/profil" style="color: white !important;"><b>Profil</b> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link button" routerLink="/user/familly" style="color: white !important;"><b>Referals</b> <span class="sr-only">(current)</span></a>
+        <a class="nav-link button" routerLink="/user/referral" style="color: white !important;"><b>Referals</b> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link button" routerLink="/user/history" style="color: white !important;"><b>History</b> <span class="sr-only">(current)</span></a>
@@ -33,7 +33,8 @@
           <!-- <a class="dropdown-item" href="#" style="color: rgb(18, 16, 13);"><b>Settings</b></a> -->
           <a class="dropdown-item" routerLink="/user/admin"><b>Panel</b></a>
           <a class="dropdown-item" routerLink="/user/admin/user-panel"><b>Users Panel</b></a>
-          <a class="dropdown-item" routerLink="/user/admin/investments-panel"><b>Investment panel</b></a>
+          <a class="dropdown-item" routerLink="/user/admin/investments-panel"><b>Invest panel</b></a>
+          <a class="dropdown-item" routerLink="/user/requests/request-panel"><b>Requests panel</b></a>
           <a class="dropdown-item" routerLink="/user/admin/setting-panel"><b>Setting panel</b></a>
         </div>
       </li>
@@ -44,7 +45,7 @@
         <div id="your-dropdown" class="dropdown-menu" aria-labelledby="link-dropdown" *dropdownMenu style="background: linear-gradient(rgb(10, 51, 114), white) !important;">
           <!-- <a class="dropdown-item" routerLink="/user/profil" style="color: rgb(7, 6, 5);"><b>Profil</b></a> -->
           <!-- <a class="dropdown-item" href="#" style="color: rgb(18, 16, 13);"><b>Settings</b></a> -->
-          <a class="dropdown-item" routerLink="/user/requests"><b>Requests</b></a>
+          <a class="dropdown-item" routerLink="/user/requests/add-request"><b>Requests</b></a>
           <a class="dropdown-item" (click)="logOut()"><b>Log Out</b></a>
         </div>
       </li>

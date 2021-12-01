@@ -329,7 +329,7 @@ export class DashboardComponent implements OnInit {
     },
     { // brandDanger
       backgroundColor: 'transparent',
-      borderColor: getStyle('--danger'),
+      borderColor: getStyle('--warning'),
       pointHoverBackgroundColor: '#fff',
       borderWidth: 1,
       borderDash: [8, 5]

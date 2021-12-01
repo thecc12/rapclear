@@ -1,0 +1,55 @@
+<br>
+<button class="btn btn-warning" routerLink="/user/admin"> Back</button>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-header linear-gradient">
+                    <h3 class="text-center mx-4 mb-2">Requests Panel</h3>
+                </div>
+                <div class="card-body linear-gradient2">
+                    <div class="row">
+                        <div class="col-4">
+                            <div [routerLink]="['/user/requests/request-wating']">
+                                <div class="btn btn-block btn-secondary text-center">
+                                    <div class="col-12 mb-3">
+                                        <i class="fa fa-copy"></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="text-description">Request on wating</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div [routerLink]="['/user/requests/request-valided']">
+                                <div class="btn btn-block btn-success text-center text-center">
+                                    <div class="col-12 mb-3">
+                                        <i class="fa fa-file "></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="text-description">Request Accepted</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div [routerLink]="['/user/requests/request-rejected']">
+                                <div class="btn btn-block btn-danger text-center text-center">
+                                    <div class="col-12 mb-3">
+                                        <i class="fas fa-file"></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="text-description">Request Rejected</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
