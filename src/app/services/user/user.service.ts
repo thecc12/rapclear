@@ -60,15 +60,21 @@ export class UserService {
   getUserById(id: EntityID, getOnline: boolean = false): Promise<ResultStatut> {
     // console.log("id ",id)
     return new Promise<any>((resolve, reject) => {
-      if (getOnline == false && this.listUser.has(id.toString())) {
+      // if (getOnline == false && this.listUser.has(id.toString())) {
+      //   result.result = this.listUser.get(id.toString());
+      //   return resolve(result);
+      // }
+      if(this.listUser.has(id.toString()))
+      {
         let result: ResultStatut = new ResultStatut();
-        result.result = this.listUser.get(id.toString());
+
+        let user:User=this.listUser.get(id.toString())
+        result.result=user;
         return resolve(result);
       }
       this.firebaseApi.fetchOnce(`users/${id.toString()}`)
         .then((result: ResultStatut) => {
           let user: User = new User();
-          console.log('result, ', result);
           if (result.result == null || result.result == undefined) {
             result.message = 'User not found';
             result.apiCode = ResultStatut.INVALID_ARGUMENT_ERROR;
@@ -88,8 +94,18 @@ export class UserService {
     });
   }
 
+
+
   getUserBySponsorId(sponsorID: SponsorID): Promise<ResultStatut> {
     return new Promise<ResultStatut>((resolve, reject) => {
+      let user:User=Array.from(this.listUser.values()).find((user:User)=>user.mySponsorShipId.toString()==sponsorID.toString());
+      if(user)
+      {
+        this.listUser.set(user.id.toString(),user);
+        let result=new ResultStatut();
+        result.result=user;
+        return resolve(result);
+      }
       this.firebaseApi
         .getFirebaseDatabase()
         .ref('users')
@@ -108,6 +124,7 @@ export class UserService {
             let user: User = new User();
             user.hydrate(data.val()[okey]);
             result.result = user;
+            this.listUser.set(user.id.toString(),user);
             return resolve(result);
           }
         });

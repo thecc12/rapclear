@@ -102,23 +102,9 @@ export class AuthService {
     // this.currentUserSubject.n
   }
 
-  signInNewUser(user: User) {
+  saveNewUser(user:User):Promise<ResultStatut>
+  {
     return new Promise<ResultStatut>((resolve, reject) => {
-      if (user.parentSponsorShipId.toString() != '') {
-        this.firebaseApi
-          .getFirebaseDatabase()
-          .ref('users')
-          .orderByChild('mySponsorShipId')
-          .equalTo(user.mySponsorShipId.toString())
-          .once('value', (data) => {
-            if (!data) {
-              let result: ResultStatut = new ResultStatut();
-              result.apiCode = FireBaseConstant.DATABASE_UNKNOW_ERROR,
-                result.message = 'Could not find the referral user';
-              return reject(result);
-            }
-          });
-      }
       this.firebaseApi.createUserApi(user.email, user.password)
         .then(() => this.signIn(user, false))
         .then(() => {
@@ -135,6 +121,29 @@ export class AuthService {
           this.firebaseApi.handleApiError(e);
           reject(e);
         });
+    });
+  }
+  signInNewUser(user: User):Promise<ResultStatut> {
+    return new Promise<ResultStatut>((resolve, reject) => {
+      if (user.parentSponsorShipId.toString() != '') {
+        this.userService.getUserBySponsorId(user.parentSponsorShipId)
+        .then((result:ResultStatut)=>{
+          let u:User=result.result;
+          user.grandParentSponsorShipId.setId(u.parentSponsorShipId.toString());
+          user.bigGrandParentSponsorShipId.setId(u.grandParentSponsorShipId.toString());
+          return this.saveNewUser(user);
+        })
+        .then((result:ResultStatut)=>resolve(result))
+        .catch((error)=>reject(error))
+      }
+      else
+      {
+        this.saveNewUser(user)
+        .then((result:ResultStatut)=>resolve(result))
+        .catch((error)=>reject(error))
+      }
+
+      
     });
   }
 
