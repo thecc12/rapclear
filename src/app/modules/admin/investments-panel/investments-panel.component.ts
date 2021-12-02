@@ -31,6 +31,9 @@ export class InvestmentsPanelComponent implements OnInit {
   listReadyToPayInvestment: Investment[] = [];
   listReadyToPayInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
+  listRejectedInvestment: Investment[] = [];
+  listRejectedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+
 
 
   waitResponseSecondBtn: boolean = false;
@@ -77,11 +80,19 @@ export class InvestmentsPanelComponent implements OnInit {
       }
     });
 
+    this.marketService.getAllRejectedInvestment().subscribe((investment: Investment) => {
+      if (!this.listRejectedInvestmentCheck.has(investment.id.toString().toString())) {
+        this.listRejectedInvestmentCheck.set(investment.id.toString().toString(), true);
+        this.listRejectedInvestment.push(investment);
+      }
+    });
+
     merge(
       this.marketService.getAllInitiatedInvestment(),
       this.marketService.getAllWaitingPaymentDateInvestment(),
       this.marketService.getAllReadyToPayInvestment(),
-      this.marketService.getAllPayedInvestment()
+      this.marketService.getAllPayedInvestment(),
+      this.marketService.getAllRejectedInvestment()
     )
     .subscribe((investment: Investment) => {
       if (!this.listAllInvestmentCheck.has(investment.id.toString().toString())) {

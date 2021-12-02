@@ -15,7 +15,7 @@ import { UserTransferInvestmentComponent } from '../user-transfer-investment/use
   templateUrl: './investments-admin-action.component.html',
   styleUrls: ['./investments-admin-action.component.css']
 })
-export class InvestmentsAdminActionComponent implements OnInit,OnChanges {
+export class InvestmentsAdminActionComponent implements OnInit, OnChanges {
   @Input() investment: Investment = new Investment();
   selectedInvestmentId: String = '';
 
@@ -33,22 +33,22 @@ export class InvestmentsAdminActionComponent implements OnInit,OnChanges {
     private dialog: BsModalService
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes ",changes)
+    console.log("changes ", changes)
   }
 
   ngOnInit(): void {
 
   }
-  
-  RefuseInvestment(investment: Investment) {
+
+  refuseInvestment(investment: Investment) {
     if (this.waitResponse || this.waitResponseSecond || this.waitResponseThird || this.waitResponseFour) { return; }
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment,InvestmentState.REFUSE)
+    this.basicInvestmentService.changeStatusMarket(investment, InvestmentState.REFUSE)
     .then((result: ResultStatut) => {
       this.waitResponse = false;
-      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);
+      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now \<b>Rejected\</b>`, 200);
       this.selectedInvestmentId = '';
     })
     .catch((error: ResultStatut) => {
@@ -64,10 +64,10 @@ export class InvestmentsAdminActionComponent implements OnInit,OnChanges {
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment,this.basicInvestmentService.getNextStatust(investment.investmentState))
+    this.basicInvestmentService.changeStatusMarket(investment, this.basicInvestmentService.getNextStatust(investment.investmentState))
     .then((result: ResultStatut) => {
       this.waitResponse = false;
-      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);
+      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now \<b>On Waiting Payment Date\</b>`, 200);
       this.selectedInvestmentId = '';
     })
     .catch((error: ResultStatut) => {
@@ -83,10 +83,10 @@ export class InvestmentsAdminActionComponent implements OnInit,OnChanges {
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment,this.basicInvestmentService.getNextStatust(investment.investmentState))
+    this.basicInvestmentService.changeStatusMarket(investment, this.basicInvestmentService.getNextStatust(investment.investmentState))
     .then((result: ResultStatut) => {
       this.waitResponse = false;
-      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);
+      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now \<b>Payed\</b>`, 200);
       this.selectedInvestmentId = '';
     })
     .catch((error: ResultStatut) => {
@@ -102,10 +102,10 @@ export class InvestmentsAdminActionComponent implements OnInit,OnChanges {
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment,this.basicInvestmentService.getNextStatust(investment.investmentState))
+    this.basicInvestmentService.changeStatusMarket(investment, this.basicInvestmentService.getNextStatust(investment.investmentState))
     .then((result: ResultStatut) => {
       this.waitResponse = false;
-      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now '${investment.investmentState}'`, 200);
+      this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now \<b>Ready to Pay\</b>`, 200);
       this.selectedInvestmentId = '';
     })
     .catch((error: ResultStatut) => {

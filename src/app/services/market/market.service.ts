@@ -93,6 +93,13 @@ export class MarketService {
       filter((p: Investment) => p.investmentState == InvestmentState.PAYED),
     );
   }
+
+  getAllRejectedInvestment() {
+    return this.getOrderMarket().pipe(
+      filter((p: Investment) => p.investmentState == InvestmentState.REFUSE),
+    );
+  }
+
   getAllReadyToPayInvestment() {
     return this.getOrderMarket().pipe(
       filter((p: Investment) => p.investmentState == InvestmentState.READY_TO_PAY),
