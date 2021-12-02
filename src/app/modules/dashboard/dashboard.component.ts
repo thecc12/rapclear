@@ -6,7 +6,7 @@ import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { NotificationService } from '../../services/notification/notification.service';
 import { MarketService } from '../../services/market/market.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { Investment } from '../../entity/investment';
+import { Investment, InvestmentState } from '../../entity/investment';
 import { ConfigAppService } from '../../services/config-app/config-app.service';
 import { EventService } from '../../services/event/event.service';
 import { ResultStatut } from '../../services/firebase/resultstatut';
@@ -19,7 +19,6 @@ import { User } from '../../entity/user';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('showSaleBonus') public showSaleBonus: ModalDirective;
-  bonus: number = 0;
   nextBonus: number = 0;
   saleBonus: boolean = false;
   private updateSubscription: Subscription;
@@ -41,6 +40,10 @@ export class DashboardComponent implements OnInit {
 
   radioModel: string = 'Month';
 
+  bonus: number = 0;
+  initiatedInvestAmount:number = 0;
+  onWaitingPayementDateInvestAmount:number = 0;
+  readyToPayInvestAmount:number = 0;
 
   // lineChart1
   public lineChart1Data: Array<any> = [
@@ -543,5 +546,27 @@ export class DashboardComponent implements OnInit {
     //   this.numPurchaseInvestment=0;
     //   this.numSaleInvestment=0;
     // })
+    this.authService.currentUserSubject.subscribe((user)=>{
+      this.bonus=user.bonus;
+    })
+    this.myInvestment.investments.subscribe((mapInvest:Map<String,Investment>)=>{
+      this.initiatedInvestAmount = 0;
+      this.onWaitingPayementDateInvestAmount = 0;
+      this.readyToPayInvestAmount = 0;
+      Array.from(mapInvest.values()).forEach((invest:Investment)=>{
+        switch(invest.investmentState)
+        {
+          case InvestmentState.INITIATE:
+            this.initiatedInvestAmount++;
+            break;
+          case InvestmentState.ON_WAITING_PAYMENT_DATE:
+            this.onWaitingPayementDateInvestAmount++;
+            break;
+          case InvestmentState.READY_TO_PAY:
+            this.readyToPayInvestAmount++;
+            break;
+        }
+      })
+    })
   }
 }
