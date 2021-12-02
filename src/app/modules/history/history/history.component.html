@@ -10,7 +10,7 @@
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
-                <th><b>Amount</b></th>
+                <th><b>Amount</b></th> 
                 <th><b>Date</b></th>
                 <th><b>status</b></th>
               </tr>
@@ -18,8 +18,8 @@
             <tbody>
               <tr *ngFor="let history of investments">
                 <td><b>{{history.amount}}</b></td>
-                <td><b>{{history.saleDate}}</b></td>
-                <td><b><span class="badge badge-info">Paid</span></b></td>
+                <td><b>{{history.paymentDate}}</b></td>
+                <td><b><span class="badge badge-info">{{getStatusLabel(history)}}</span></b></td>
               </tr>
             </tbody>
           </table>

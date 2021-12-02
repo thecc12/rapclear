@@ -553,7 +553,7 @@ export class DashboardComponent implements OnInit {
       this.initiatedInvestAmount = 0;
       this.onWaitingPayementDateInvestAmount = 0;
       this.readyToPayInvestAmount = 0;
-      Array.from(mapInvest.values()).forEach((invest:Investment)=>{
+      Array.from(mapInvest.values()).filter((invest:Investment)=>invest.idOwner.toString()==this.authService.currentUserSubject.getValue().id.toString()).forEach((invest:Investment)=>{
         switch(invest.investmentState)
         {
           case InvestmentState.INITIATE:

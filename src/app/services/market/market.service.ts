@@ -77,6 +77,13 @@ export class MarketService {
     );
   }
 
+  getMyOrderedInvestmentByState(idOwner: EntityID = this.authService.currentUserSubject.getValue().id,state:InvestmentState) {
+    return this.getOrderMarket().pipe(
+      filter((p: Investment) =>  {
+        return p.idOwner.toString() == idOwner.toString() && p.investmentState==state;
+      }),
+    );
+  }
   getMyOrderedInvestment(idOwner: EntityID = this.authService.currentUserSubject.getValue().id) {
     return this.getOrderMarket().pipe(
       filter((p: Investment) =>  {

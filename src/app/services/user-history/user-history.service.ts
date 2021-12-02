@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, merge } from 'rxjs';
 import { EntityID } from '../../entity/EntityID';
-import { Investment } from '../../entity/investment';
+import { Investment, InvestmentState } from '../../entity/investment';
 import { User } from '../../entity/user';
 import { AuthService } from '../auth/auth.service';
 import { EventService } from '../event/event.service';
 import { FirebaseApi } from '../firebase/FirebaseApi';
 import { ResultStatut } from '../firebase/resultstatut';
+import { MarketService } from '../market/market.service';
 import { PlanService } from '../opperations/plan.service';
 
 @Injectable({
@@ -22,7 +23,8 @@ export class UserHistoryService {
     private authService: AuthService,
     private eventService: EventService,
     private firebaseApi: FirebaseApi,
-    private planService: PlanService
+    private planService: PlanService,
+    private marketService:MarketService
     ) {
       this.authService.currentUserSubject.subscribe((user: User) => {
         this.currentUser = user;
@@ -81,19 +83,17 @@ export class UserHistoryService {
     }
     getInvestmentsHistoryFromApi(user: User) {
       //console.log(user)
-        this.firebaseApi.fetch(`history/${user.id.toString()}`)
-        .then((result: ResultStatut) => {
-          //console.log("History ",result.result)
-          this.historyList = [];
-          if (!result.result) { return; }
-          // tslint:disable-next-line:forin
-          for (let key in result.result) {
-            let investment = new Investment();
-            investment.hydrate(result.result[key]);
-            this.historyList.push(investment);
-          }
-          this.history.next(this.historyList);
+      this.historyList=[];
+      this.history.next(this.historyList);
+        merge(
+          this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.PAYED),
+          this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.REFUSE)
+        )
+         .subscribe((investment: Investment) => {
+              this.historyList.push(investment);
+              this.history.next(this.historyList)
         });
+        
     }
     findInvestment(investmentId: EntityID): Promise<ResultStatut> {
         return new Promise<ResultStatut>((resolve, reject) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Investment } from '../../../entity/investment';
+import { Investment, InvestmentState } from '../../../entity/investment';
 import { NotificationService } from '../../../services/notification/notification.service';
 import { UserHistoryService } from '../../../services/user-history/user-history.service';
 
@@ -40,5 +40,11 @@ export class HistoryComponent implements OnInit {
 
   showNotification(from, align, colortype, icon, text) {
     this.notification.showNotification(from, align, colortype, icon, text);
+  }
+  getStatusLabel(history:Investment):String
+  {
+    if(history.investmentState==InvestmentState.PAYED) return "payed";
+    if(history.investmentState==InvestmentState.REFUSE) return "rejected";
+    return ""
   }
 }
