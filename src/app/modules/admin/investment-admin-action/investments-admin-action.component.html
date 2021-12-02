@@ -6,7 +6,7 @@
     </b>
 </button> 
 
-<button title="Confirm Investment / Put on waiting payment date" *ngIf="investment.investmentState=='initiate'" (click)="confirmInvestment(investment)" class="btn btn-success hand">
+<button title="Confirm Investment" *ngIf="investment.investmentState=='initiate'" (click)="confirmInvestment(investment)" class="btn btn-success hand">
     <b>
         <div *ngIf="selectedInvestmentId!=investment.id.toString() && !waitResponse" class="text-white">Confirm</div>
         <app-spinner *ngIf="selectedInvestmentId==investment.id.toString() && waitResponse" style="margin-right: 5px;"></app-spinner>

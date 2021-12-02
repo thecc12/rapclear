@@ -11,21 +11,23 @@
                   <th>#</th>
                   <th>Amount</th>
                   <th>Plan</th>
-                  <th>Date of purchase</th>
-                  <th>Date of sale</th>
-                  <th>Hours</th>
+                  <th>Invest Date</th>
+                  <th>Invest Hours</th>
+                  <th>Payment Date</th>
+                  <th>Owner</th>
                   <th>Action</th>
               </tr>
             </thead>
     
             <tbody>
-              <tr *ngFor="let investment of listPurchasedInvestment;let i=index">
+              <tr *ngFor="let investment of listInitiatedInvestment;let i=index">
                 <td>{{i+1}}</td>
                 <td>{{investment.amount}}</td>
                 <td>{{investment.plan}}</td>
+                <td>{{getFormatDate(investment.investmentDate)}}</td>
+                <td>{{getFormatHours(investment.investmentDate)}}</td>
                 <td>{{getFormatDate(investment.paymentDate)}}</td>
-                <!-- <td>{{getFormatDate(investment.saleDate)}}</td>
-                <td>{{getFormatHours(investment.saleDate)}}</td> -->
+                <td>{{getBuyer(investment.idOwner)}}</td>
                 <td> 
                   <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
                 </td>
@@ -37,8 +39,8 @@
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
-            <mat-panel-title> Waiting ( {{listWaitingPaymentDateInvestment.length}} )</mat-panel-title>
-            <mat-panel-description> List of investments for Waiting </mat-panel-description>
+            <mat-panel-title> Waiting Payment Date ( {{listWaitingPaymentDateInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> Investments on Waiting Payment Date </mat-panel-description>
           </mat-expansion-panel-header>
           <table class="table">
             <thead>
@@ -46,8 +48,10 @@
                   <th>#</th>
                   <th>Amount</th>
                   <th>Plan</th>
-                  <th>Date of purchase</th>
-                  <th>Hours</th>
+                  <th>Invest Date</th>
+                  <th>Invest Hours</th>
+                  <th>Payment Date</th>
+                  <th>Owner</th>
                   <th>Action</th>
               </tr>
             </thead>
@@ -57,8 +61,85 @@
                 <td>{{i+1}}</td>
                 <td>{{investment.amount}}</td>
                 <td>{{investment.plan}}</td>
-                <td>{{getFormatDate(investment.payDate)}}</td>
-                <td>{{getFormatHours(investment.saleDate)}}</td>
+                <td>{{getFormatDate(investment.investmentDate)}}</td>
+                <td>{{getFormatHours(investment.investmentDate)}}</td>
+                <td>{{getFormatDate(investment.paymentDate)}}</td>
+                <td>{{getBuyer(investment.idOwner)}}</td>
+                <td>
+                  <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
+                </td>
+              </tr>             
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+
+<!-- ///// -->
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Ready To Pay ( {{listReadyToPayInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> Investments on Ready To Pay </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table class="table">
+            <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Amount</th>
+                  <th>Plan</th>
+                  <th>Invest Date</th>
+                  <th>Invest Hours</th>
+                  <th>Payment Date</th>
+                  <th>Owner</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let investment of listReadyToPayInvestment;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{investment.amount}}</td>
+                <td>{{investment.plan}}</td>
+                <td>{{getFormatDate(investment.investmentDate)}}</td>
+                <td>{{getFormatHours(investment.investmentDate)}}</td>
+                <td>{{getFormatDate(investment.paymentDate)}}</td>
+                <td>{{getBuyer(investment.idOwner)}}</td>
+                <td>
+                  <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
+                </td>
+              </tr>             
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Payed Investments ( {{listPayedInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> Payed Investments  </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table class="table">
+            <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Amount</th>
+                  <th>Plan</th>
+                  <th>Invest Date</th>
+                  <th>Invest Hours</th>
+                  <th>Payment Date</th>
+                  <th>Owner</th>
+                  <th>Action</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let investment of listPayedInvestment;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{investment.amount}}</td>
+                <td>{{investment.plan}}</td>
+                <td>{{getFormatDate(investment.investmentDate)}}</td>
+                <td>{{getFormatHours(investment.investmentDate)}}</td>
+                <td>{{getFormatDate(investment.paymentDate)}}</td>
+                <td>{{getBuyer(investment.idOwner)}}</td>
                 <td>
                   <app-investments-admin-action [investment]="investment"></app-investments-admin-action>
                 </td>
@@ -70,8 +151,8 @@
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
-            <mat-panel-title> History ( {{listHistoryInvestment.length}} )</mat-panel-title>
-            <mat-panel-description> Investments purchased history </mat-panel-description>
+            <mat-panel-title> Rejectd Investments ( {{listRejectedInvestment.length}} )</mat-panel-title>
+            <mat-panel-description> Rejectd Investments </mat-panel-description>
           </mat-expansion-panel-header>
           <table class="table">
             <thead>
@@ -86,7 +167,7 @@
             </thead>
     
             <tbody>
-              <tr *ngFor="let investment of listHistoryInvestment;let i=index">
+              <tr *ngFor="let investment of listRejectedInvestment;let i=index">
                 <td>{{i+1}}</td>
                 <td>{{investment.amount}}</td>
                 <td>{{getFormatDate(investment.payDate)}}</td>

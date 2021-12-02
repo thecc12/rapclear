@@ -24,16 +24,23 @@ export class UserInvestmentsComponent implements OnInit, OnChanges {
   listInitiatedInvestment: Investment[] = [];
   listInitiatedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
+  listPayedInvestment: Investment[] = [];
+  listPayedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+
   listWaitingPaymentDateInvestment: Investment[] = [];
   listWaitingPaymentDateInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
-  listHistoryInvestment: Investment[] = [];
-  listHistoryInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+  listReadyToPayInvestment: Investment[] = [];
+  listReadyToPayInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+
+  listRejectedInvestment: Investment[] = [];
+  listRejectedInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
+
   constructor(private marketService: MarketService,
     private historyService: UserHistoryService,
     private userService: UserService,
     public dialog: BsModalService) { }
-  
+
   ngOnInit(): void {
     this.userObservable.subscribe((user: User) => {
       if (!user) { return; }
@@ -44,61 +51,83 @@ export class UserInvestmentsComponent implements OnInit, OnChanges {
           this.listInitiatedInvestmentCheck.set(investment.id.toString().toString(), true);
           this.listInitiatedInvestment.push(investment);
         }
-      })
+      });
 
       this.listWaitingPaymentDateInvestment = new Array(),
       this.listWaitingPaymentDateInvestmentCheck.clear();
-      this.marketService.getUserOrderedInvestment(user.id).forEach((investment: Investment) => {
+      this.marketService.getUserOrderedWaitingPaymentDateInvestment(user.id).forEach((investment: Investment) => {
         if (!this.listWaitingPaymentDateInvestmentCheck.has(investment.id.toString().toString())) {
           this.listWaitingPaymentDateInvestmentCheck.set(investment.id.toString().toString(), true);
           this.listWaitingPaymentDateInvestment.push(investment);
         }
       });
 
-      this.listHistoryInvestment = new Array(),
-      this.historyService.getUserInvestmentHistory(user.id)
-      .then((result: ResultStatut) => this.listHistoryInvestment = result.result)
-    })
+//////////
+
+      this.listReadyToPayInvestment = new Array(),
+      this.listReadyToPayInvestmentCheck.clear();
+      this.marketService.getUserOrderedReadyToPayInvestment(user.id).forEach((investment: Investment) => {
+        if (!this.listReadyToPayInvestmentCheck.has(investment.id.toString().toString())) {
+          this.listReadyToPayInvestmentCheck.set(investment.id.toString().toString(), true);
+          this.listReadyToPayInvestment.push(investment);
+        }
+      });
+
+      // this.listRejectedInvestment = new Array(),
+      // this.listRejectedInvestmentCheck.clear();
+      // this.marketService.getUserOrderedRejectedInvestment(user.id).forEach((investment: Investment) => {
+      //   if (!this.listRejectedInvestmentCheck.has(investment.id.toString().toString())) {
+      //     this.listRejectedInvestmentCheck.set(investment.id.toString().toString(), true);
+      //     this.listRejectedInvestment.push(investment);
+      //   }
+      // });
+
+      this.listPayedInvestment = new Array(),
+      this.listPayedInvestmentCheck.clear();
+      this.marketService.getUserOrderedPayedInvestment(user.id).forEach((investment: Investment) => {
+        if (!this.listPayedInvestmentCheck.has(investment.id.toString().toString())) {
+          this.listPayedInvestmentCheck.set(investment.id.toString().toString(), true);
+          this.listPayedInvestment.push(investment);
+        }
+      });
+
+      // this.listHistoryInvestment = new Array(),
+      // this.historyService.getUserInvestmentHistory(user.id)
+      // .then((result: ResultStatut) => this.listHistoryInvestment = result.result)
+    });
   }
-  getFormatDate(date: string): string
-  {
-    return new Date(date).toLocaleDateString()
+  getFormatDate(date: string): string {
+    return new Date(date).toLocaleDateString();
   }
-  getFormatHours(date: string): string
-  {
+  getFormatHours(date: string): string {
     if (date == '') { return date; }
-    let stringDate = "";
+    let stringDate = '';
     try
     {
-      let d = new Date(date)
+      let d = new Date(date);
       if (d.getHours() < 10) { stringDate = `0${d.getHours()}H:`; }
       else { stringDate = `${d.getHours()}H:`; }
 
       if (d.getMinutes() < 10) stringDate += `0${d.getMinutes()} Min`;
       else stringDate += `${d.getMinutes()} Min`;
-    }
-    catch (err)
-    {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
     
     return stringDate;
   }
-  getBuyer(id: EntityID)
-  {
+  getBuyer(id: EntityID) {
     if (this.userService.listUser.has(id.toString())) {
       return this.userService.listUser.get(id.toString()).email; }
     return '';
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.user && changes.user.currentValue != null)
-    {
+    if (changes.user && changes.user.currentValue != null) {
       this.userObservable.next(this.user);
     }
   }
-  tranferInvestment(investment: Investment)
-  {
+  tranferInvestment(investment: Investment) {
     this.dialog.show(UserTransferInvestmentComponent,
       {
         initialState: {
@@ -106,10 +135,9 @@ export class UserInvestmentsComponent implements OnInit, OnChanges {
           investment
         }
       }
-      )
+      );
   }
-  openDialog()
-  {
+  openDialog() {
     const dialogRef = this.dialog.show(UserAddInvestmentComponent, {
       initialState: {
         user: this.user

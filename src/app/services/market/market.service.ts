@@ -128,7 +128,7 @@ export class MarketService {
     );
   }
 
-  getMyOrderedInitiatedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
+  getMyOrderedInitiatedInvestment(idOwner: EntityID) {
     return this.getAllInitiatedInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
     );
@@ -137,12 +137,52 @@ export class MarketService {
   getUserOrderedInitiatedInvestment(idOwner: EntityID) {
     return this.getMyOrderedInitiatedInvestment(idOwner);
   }
+
+  getMyOrderedWaitingPaymentDateInvestment(idOwner: EntityID) {
+    return this.getAllWaitingPaymentDateInvestment().pipe(
+      filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
+    );
+  }
+
+  getUserOrderedWaitingPaymentDateInvestment(idOwner: EntityID) {
+    return this.getMyOrderedWaitingPaymentDateInvestment(idOwner);
+  }
+
+  getMyOrderedReadyToPayInvestment(idOwner: EntityID) {
+    return this.getAllReadyToPayInvestment().pipe(
+      filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
+    );
+  }
+
+  getUserOrderedReadyToPayInvestment(idOwner: EntityID) {
+    return this.getMyOrderedReadyToPayInvestment(idOwner);
+  }
+
+  getMyOrderedPayedInvestment(idOwner: EntityID) {
+    return this.getAllPayedInvestment().pipe(
+      filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
+    );
+  }
+
+  getUserOrderedPayedInvestment(idOwner: EntityID) {
+    return this.getMyOrderedPayedInvestment(idOwner);
+  }
+
+  getMyOrderedRejectedInvestment(idOwner: EntityID) {
+    return this.getAllRejectedInvestment().pipe(
+      filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
+    );
+  }
+
+  getUserOrderedRejectedInvestment(idOwner: EntityID) {
+    return this.getMyOrderedRejectedInvestment(idOwner);
+  }
   // getAllInvestmentNotInMarket() {
   //   return this.getOrderMarket().pipe(
   //     filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE)
   //   );
   // }
-  getMyOrderdPayedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
+  getMyOrderdPayedInvestment(idOwner: EntityID) {
     return this.getOrderMarket().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
       filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE)

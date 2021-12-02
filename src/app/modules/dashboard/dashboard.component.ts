@@ -429,7 +429,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getInitiateInvestments() {
-    this.myInvestment.getMyOrderedInitiatedInvestment().subscribe((investment: Investment) => {
+    // tslint:disable-next-line:max-line-length
+    this.myInvestment.getMyOrderedInitiatedInvestment(this.authService.currentUserSubject.getValue().id).subscribe((investment: Investment) => {
       // console.log("Arrived")
       if (!this.listPurchaseInvestments.has(investment.id.toString().toString())) {
         this.listPurchaseInvestments.set(investment.id.toString().toString(), true);

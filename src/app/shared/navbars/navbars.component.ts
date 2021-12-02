@@ -76,12 +76,12 @@ export class NavbarsComponent implements OnInit, AfterViewChecked {
     this.fullName = this.authService.currentUserSubject.getValue().fullName;
     if (this.authService.currentUserSubject.getValue().email == 'admin@admin.com') {
       this.isAdmin = true;
-    }
-    if (localStorage.getItem('email') == 'admin@admin.com') {
+    } else if (localStorage.getItem('email') == 'admin@admin.com') {
       this.isAdmin = true;
-    }
-    if (this.authService.currentUserSubject.getValue().email == 'pundayusufu619@gmail.com') {
+    } else if (this.authService.currentUserSubject.getValue().email == 'pundayusufu619@gmail.com') {
       this.isManager = true;
+    } else {
+      this.isManager = false;
     }
   }
   // this.myfunc();}
