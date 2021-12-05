@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddInvestmentComponent } from './add-investment/add-investment.component';
+import { ConfirmedInvestmentComponent } from './confirmed-investment/confirmed-investment.component';
+import { InitiatedInvestmentComponent } from './initiated-investment/initiated-investment.component';
 import { ListsInvestmentComponent } from './lists-investment/lists-investment.component';
 
 
@@ -20,12 +22,26 @@ const routes: Routes = [
     }
   },
   {
-    path: 'list',
-    // component: ListsInvestmentComponent,
+    path: 'initiated',
+    component: InitiatedInvestmentComponent,
     data: {
-      title: 'List of investment'
-    },
-  }
+      title: 'initiated Investment'
+    }
+  },
+  {
+    path: 'confirmed',
+    component: ConfirmedInvestmentComponent,
+    data: {
+      title: 'Confirmed Investment'
+    }
+  },
+  // {
+  //   path: 'list',
+  //   // component: ListsInvestmentComponent,
+  //   data: {
+  //     title: 'List of investment'
+  //   },
+  // }
 ];
 
 @NgModule({

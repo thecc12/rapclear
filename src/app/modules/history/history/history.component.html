@@ -15,11 +15,32 @@
                 <th><b>status</b></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="waitData">
+              <tr>
+                <td colspan="3">
+                  <div class="d-flex justify-content-center">
+                    <app-spinner></app-spinner>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!waitData">
+              <tr *ngIf="investments.length==0">
+                <td colspan="3">
+                  <div class="d-flex justify-content-center">
+                    No data found
+                  </div>
+                </td>
+              </tr>
               <tr *ngFor="let history of investments">
-                <td><b>{{history.amount}}</b></td>
-                <td><b>{{history.paymentDate}}</b></td>
-                <td><b><span class="badge badge-info">{{getStatusLabel(history)}}</span></b></td>
+                <td><b>{{history.amount}} BTC</b></td>
+                <td><b>{{history.investmentDate}}</b></td>
+                <td *ngIf="history.investmentState=='refuse'"><b><span class="badge badge-danger"> Rejected </span></b></td>
+                <td *ngIf="history.investmentState=='payed'"><b><span class="badge badge-success"> Payed </span></b></td>
+                <td *ngIf="history.investmentState=='on_waiting_payment_date'"><b><span class="badge badge-info"> Working </span></b></td>
+                <td *ngIf="history.investmentState=='initiate'"><b><span class="badge badge-secondary"> Initiated </span></b></td>
+                <td *ngIf="history.investmentState=='ready_to_pay'"><b><span class="badge badge-warning"> Ready </span></b></td>
+                <!-- <td><b><span class="badge badge-info">{{getStatusLabel(history)}}</span></b></td> -->
               </tr>
             </tbody>
           </table>

@@ -10,12 +10,14 @@ import { UserHistoryService } from '../../../services/user-history/user-history.
 })
 
 export class HistoryComponent implements OnInit {
+  waitData=true;
   investments: Investment[] = [];
   listHistoryInvestments: Map<string, boolean> = new Map<string, boolean>();
   numHistoryInvestment: number = 0;
 
   constructor(private notification: NotificationService,
     private history: UserHistoryService) {
+      this.waitData=true;
   }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class HistoryComponent implements OnInit {
           nInvestment.hydrate(p.toString());
           // this.listHistoryInvestments.set(nInvestment.id.toString().toString(), true);
           nInvestment.paymentDate = (new Date(nInvestment.paymentDate)).toLocaleDateString();
+          this.waitData=false;
           return nInvestment;
         });
     });

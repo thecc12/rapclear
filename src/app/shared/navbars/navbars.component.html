@@ -15,6 +15,17 @@
       <li class="nav-item">
         <a class="nav-link button" routerLink="/user/dashboard" style="color: white !important;"><b>Dashboard</b> <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item dropdown" dropdown>
+        <a id="link-dropdown" class="nav-link dropdown-toggle" href dropdownToggle (click)="false"
+          aria-controls="your-dropdown"  style="color: white !important;"><b>Investment</b>
+        </a>
+        <div id="your-dropdown" class="dropdown-menu" aria-labelledby="link-dropdown" *dropdownMenu style="background: linear-gradient(rgb(10, 51, 114), white) !important;">
+          <!-- <a class="dropdown-item" routerLink="/user/profil" style="color: rgb(7, 6, 5);"><b>Profil</b></a> -->
+          <!-- <a class="dropdown-item" href="#" style="color: rgb(18, 16, 13);"><b>Settings</b></a> -->
+          <a class="dropdown-item" routerLink="/user/investment/initiated"><b>Initiated</b></a>
+          <a class="dropdown-item" routerLink="/user/investment/confirmed"><b>Confirmed</b></a>
+        </div>
+      </li>
       <li class="nav-item">
         <a class="nav-link button" routerLink="/user/profil" style="color: white !important;"><b>Profil</b> <span class="sr-only">(current)</span></a>
       </li>
@@ -35,7 +46,7 @@
           <a class="dropdown-item" routerLink="/user/admin/user-panel"><b>Users Panel</b></a>
           <a class="dropdown-item" routerLink="/user/admin/investments-panel"><b>Invest panel</b></a>
           <a class="dropdown-item" routerLink="/user/requests/request-panel"><b>Requests panel</b></a>
-          <a class="dropdown-item" routerLink="/user/admin/setting-panel"><b>Setting panel</b></a>
+          <!-- <a class="dropdown-item" routerLink="/user/admin/setting-panel"><b>Setting panel</b></a> -->
         </div>
       </li>
       <li class="nav-item dropdown" dropdown>

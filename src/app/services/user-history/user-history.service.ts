@@ -87,7 +87,10 @@ export class UserHistoryService {
       this.history.next(this.historyList);
         merge(
           this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.PAYED),
-          this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.REFUSE)
+          this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.REFUSE),
+          this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.INITIATE),
+          this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.ON_WAITING_PAYMENT_DATE),
+          this.marketService.getMyOrderedInvestmentByState(user.id,InvestmentState.READY_TO_PAY)
         )
          .subscribe((investment: Investment) => {
               this.historyList.push(investment);

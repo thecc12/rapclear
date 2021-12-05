@@ -7,13 +7,15 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { HistoryRoutingModule } from './history-routing.module';
+import { SpinnerModule } from '../components/spinner/spinner.module';
 
 @NgModule({
   imports: [
     HistoryRoutingModule,
     CommonModule,
     AlertModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    SpinnerModule
   ],
   declarations: [
     HistoryComponent,

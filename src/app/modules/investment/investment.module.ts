@@ -19,6 +19,11 @@ import { ListsInvestmentComponent } from './lists-investment/lists-investment.co
 import { SpinnerComponent } from '../components/spinner/spinner.component';
 import { BasicInvestmentService } from '../../services/investment/basic-investment.service';
 import { SpinnerModule } from '../components/spinner/spinner.module';
+import { InitiatedInvestmentComponent } from './initiated-investment/initiated-investment.component';
+import { ConfirmedInvestmentComponent } from './confirmed-investment/confirmed-investment.component';
+import { ChartsModule } from 'ng2-charts';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   imports: [
@@ -28,11 +33,16 @@ import { SpinnerModule } from '../components/spinner/spinner.module';
     InvestmentRoutingModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),
-    SpinnerModule
+    SpinnerModule,
+    ChartsModule,
+    BsDropdownModule,
+    ButtonsModule.forRoot()
   ],
   declarations: [
     AddInvestmentComponent,
     ListsInvestmentComponent,
+    InitiatedInvestmentComponent,
+    ConfirmedInvestmentComponent
   ],
   providers: [
     BasicInvestmentService],

@@ -33,6 +33,7 @@ import { ListsInvestmentComponent } from './investment/lists-investment/lists-in
 import { UserInvestmentsListComponent } from './user-investments-list/user-investments-list.component';
 import { UserInvestmentsComponent } from './user-investments/user-investments.component';
 import { TabsModule } from '../tabs/tabs.module';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { TabsModule } from '../tabs/tabs.module';
     MatListModule,
     MatIconModule,
     MatCardModule,
+    ChartsModule,
     MatInputModule,
     MatGridListModule,
     MatFormFieldModule,
