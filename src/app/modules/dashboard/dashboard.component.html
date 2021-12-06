@@ -2,49 +2,49 @@
   <div class="row">
 
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-primary">
-        <div class="card-body pb-0">
-         
-          <div class="text-value"><b> {{initiatedInvestAmount}}</b> Investment</div>
-          <div>Initiated investment</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart"
-          [datasets]="lineChart2Data"
-          [labels]="lineChart2Labels"
-          [options]="lineChart2Options"
-          [colors]="lineChart2Colours"
-          [legend]="lineChart2Legend"
-          [chartType]="lineChart2Type"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-facebook">
-        <div class="card-body pb-0">
-         
-          <div class="text-value"><b> {{onWaitingPayementDateInvestAmount}}</b> Investment</div>
-          <div>On waiting payement date investment</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart"
-          [datasets]="lineChart2Data"
-          [labels]="lineChart2Labels"
-          [options]="lineChart2Options"
-          [colors]="lineChart2Colours"
-          [legend]="lineChart2Legend"
-          [chartType]="lineChart2Type"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-secondary">
         <div class="card-body pb-0">
          
-          <div class="text-value"><b> {{readyToPayInvestAmount}} </b> Investment</div>
-          <div>Ready to pay investment</div>
+          <div class="text-value" style="color: rgb(139, 105, 30);"><b> {{initiatedInvestAmount}}</b> Investment</div>
+          <div style="color: rgb(0, 0, 0);">Initiated investment</div>
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+          <canvas baseChart class="chart"
+          [datasets]="lineChart2Data"
+          [labels]="lineChart2Labels"
+          [options]="lineChart2Options"
+          [colors]="lineChart2Colours"
+          [legend]="lineChart2Legend"
+          [chartType]="lineChart2Type"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-info">
+        <div class="card-body pb-0">
+         
+          <div class="text-value" style="color: rgb(255, 255, 255);"><b> {{onWaitingPayementDateInvestAmount}}</b> Investment</div>
+          <div style="color: rgb(255, 255, 255);">On waiting payement date investment</div>
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+          <canvas baseChart class="chart"
+          [datasets]="lineChart2Data"
+          [labels]="lineChart2Labels"
+          [options]="lineChart2Options"
+          [colors]="lineChart2Colours"
+          [legend]="lineChart2Legend"
+          [chartType]="lineChart2Type"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body pb-0">
+         
+          <div class="text-value" style="color: rgb(255, 253, 249);"><b> {{readyToPayInvestAmount}} </b> Investment</div>
+          <div style="color: rgb(255, 255, 255);">Ready to pay investment</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
           <canvas baseChart class="chart"
@@ -64,11 +64,8 @@
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-warning">
         <div class="card-body pb-0">
-          <button type="button" class="btn btn-transparent p-0 float-right">
-            <i class="icon-location-pin"></i>
-          </button>
-          <div class="text-value"><b> {{bonus}} BTC</b></div>
-          <div>Bonus Balance</div>
+          <div class="text-value" style="color: rgb(139, 105, 30);"><b> {{bonus}} BTC</b></div>
+          <div style="color: rgb(0, 0, 0);">Bonus Balance</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
           <canvas baseChart class="chart" [datasets]="lineChart2Data" [labels]="lineChart2Labels"
