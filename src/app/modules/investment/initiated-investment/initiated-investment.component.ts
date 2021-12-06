@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { Investment } from '../../../entity/investment';
+import { MarketService } from '../../../services/market/market.service';
 
 @Component({
   selector: 'app-initiated-investment',
@@ -77,7 +79,11 @@ export class InitiatedInvestmentComponent implements OnInit {
   public mainChartData2: Array<number> = [];
   public mainChartData3: Array<number> = [];
 
+  initiatedInvestment:Investment[]=[];
+  initiatedInvestmentCheck:Map<String,boolean>=new Map<String,boolean>();
 
+  public constructor(private marketService:MarketService)
+  {}
   public random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -89,5 +95,19 @@ export class InitiatedInvestmentComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+
+    this.marketService.getMyOrderedInitiatedInvestment()
+    .subscribe((value:Investment)=>{
+      if(this.initiatedInvestmentCheck.has(value.id.toString()))
+      {
+        let pos=this.initiatedInvestment.findIndex((invest)=>invest.id.toString()==value.id.toString());
+        if(pos>-1)this.initiatedInvestment[pos]=value;
+      }
+      else
+      {
+        this.initiatedInvestment.push(value);
+        this.initiatedInvestmentCheck.set(value.id.toString(),true);
+      }
+    })
   }
 }

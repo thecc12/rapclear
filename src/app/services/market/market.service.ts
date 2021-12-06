@@ -128,7 +128,7 @@ export class MarketService {
     );
   }
 
-  getMyOrderedInitiatedInvestment(idOwner: EntityID) {
+  getMyOrderedInitiatedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
     return this.getAllInitiatedInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
     );
@@ -138,7 +138,7 @@ export class MarketService {
     return this.getMyOrderedInitiatedInvestment(idOwner);
   }
 
-  getMyOrderedWaitingPaymentDateInvestment(idOwner: EntityID) {
+  getMyOrderedWaitingPaymentDateInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
     return this.getAllWaitingPaymentDateInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
     );

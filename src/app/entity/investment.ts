@@ -75,6 +75,11 @@ export class Investment extends Entity {
         }
     }
 
+    getDateOf(dateString):Date
+    {
+        return new Date(dateString);
+    }
+
     toString(): Record<string | number, any> {
         let r = {};
         for (const k of Object.keys(this)) {
