@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <title>MoMo</title>
+
+    <meta name="author" content="themesflat.com">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.css">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+
+    <!-- Responsive -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/responsive.css">
+
+    <!-- Colors -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/colors/color1.css" id="colors">
+
+    <!-- Animation Style -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/animate.css">
+
+    <!-- Favicon and touch icons  -->
+    <link href="icon/apple-touch-icon-48-precomposed.png" rel="apple-touch-icon-precomposed" sizes="48x48">
+    <link href="icon/apple-touch-icon-32-precomposed.png" rel="apple-touch-icon-precomposed">
+    <link href="images/logo_m.png" rel="shortcut icon">
+
+    <style>
+        section {
+            /* height: 100vh;  */
+            /* box-sizing: border-box; */
+            /* display: flex; */
+            /* align-items: center; */
+            /* justify-content: center; */
+            /* text-align: center;  */
+            /* flex-direction: column; */
+            /* padding: 2vw; */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* font-size: 4vw;  */
+        }
+
+        section:first-of-type {
+            text-transform: uppercase;
+            /* font-size: 7vw; */
+        }
+
+        scroll-container {
+            display: block;
+            width: 350px;
+            height: 200px;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        section:first-of-type,
+        section.pop {
+            color: #fff;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+        }
+
+        section:nth-of-type(even) {
+            background: #fff;
+        }
+
+        section:nth-of-type(1) {
+            background-image: url(./images/5.jpeg);
+            /* background-repeat: no-repeat */
+        }
+
+        /* section:nth-of-type(2) {
+            background-image: url(./images/1503.jpg);
+        } */
+
+        section:nth-of-type(2) {
+            background-image: url(./images/1503.jpg);
+        }
+
+        section:nth-of-type(3) {
+            background-image: url(./images/6.jpeg);
+        }
+
+        section:nth-of-type(4) {
+            background-image: url(./images/4.jpeg);
+        }
+
+
+        /* TOP BANNER */
+
+        /* For mobile phones: */
+        @media only screen and (max-width: 414px) and (orientation : portrait) {
+            .tp-banner-container {
+                background-size: cover;
+                width: 1500px;
+                height: 100%;
+            }
+        }
+
+        @media only screen and (max-width: 736px) and (orientation : landscape) {
+            .tp-banner-container {
+                background-size: cover !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+            }
+        }
+
+        /* For tablets: */
+        @media only screen and (min-width: 533px) and (orientation : portrait) {
+            .tp-banner-container {
+                background-size: cover !important;
+            }
+        }
+
+        @media only screen and (min-width: 800px) and (orientation : landscape) {
+            .tp-banner-container {
+                background-size: cover !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+            }
+        }
+
+        /* For desktop: */
+        @media only screen and (min-width: 1024px) and (min-height: 768px) {
+            .tp-banner-container {
+                background-size: cover !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+            }
+        }
+
+        @media only screen and (min-width: 1280px) and (min-height: 720px) {
+            .tp-banner {
+                background-size: cover;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        @media only screen and (min-width: 1440px) and (min-height: 900px) {
+            .tp-banner {
+                background-size: cover;
+            }
+        }
+
+        @media only screen and (min-width: 1920px) and (min-height: 1080px) {
+            .tp-banner {
+                background-size: cover;
+            }
+        }
+
+        @media only screen and (min-width: 1920px) and (min-height: 1200px) {
+            .tp-banner {
+                background-size: cover;
+            }
+        }
+    </style>
+    <!--[if lt IE 9]>
+        <script src="javascript/html5shiv.js"></script>
+        <script src="javascript/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="header_sticky" style="background-color: rgb(216, 215, 215);">
+    <!-- Preloader -->
+    <section class="loading-overlay">
+        <div class="Loading-Page">
+            <h2 class="loader">Loading</h2>
+        </div>
+    </section>
+    <!-- Boxed -->
+    <div class="boxed">
+        <header id="header" class="header clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="header-wrap clearfix">
+                        <div class="col-md-4">
+                            <div id="logo" class="logo">
+                                <a href="#" rel="home">
+                                    <img src="images/logo.png" alt="image">
+                                </a>
+                            </div>
+                            <div class="btn-menu">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="col-md-8 pos-static">
+                            <div class="nav-wrap has-megamenu pull-right">
+                                <nav id="mainnav" class="mainnav">
+                                    <ul class="menu">
+                                        <li><a href="index.html#home" class="scrollto wow fadeInUp delay-5s ">Home</a>
+                                        </li>
+                                        <li><a href="index.html#about">About</a></li>
+                                        <li><a href="index.html#marketTimes">Market Times</a></li>
+                                        <li><a href="index.html#questions">Question?</a></li>
+                                        <span></span>
+                                        <span></span>
+                                        <li><a href="https://app.momo-coin.store/#/login"><span class="h5"
+                                                    style="color: #ed993f!important;"><strong>Sign in</strong></span></a>
+                                        </li>
+                                        </li>
+                                        <li class="has-mega-menu">
+                                            <a class="has-mega"
+                                                href="https://app.momo-coin.store/#/register"><span class="h5"
+                                                    style="color: #ed993f!important;"><strong>Join now</strong></span></a>
+                                        </li>
+                                    </ul><!-- /.menu -->
+                                </nav><!-- /.mainnav -->
+                            </div><!-- /.nav-wrap -->
+                        </div>
+                    </div><!-- /.header-inner -->
+                </div><!-- /.row -->
+            </div>
+        </header><!-- /.header -->
+
+        <!-- Slider -->
+        <div class="tp-banner-container" id="home">
+            <div class="tp-banner">
+                <ul>
+                    <li data-transition="random-static" data-slotamount="7" data-masterspeed="1000"
+                        data-saveperformance="on">
+                        <img src="images/slides/1.jpg" alt="slider-image" />
+                        <div class="tp-caption sfl title-slide center" data-x="40" data-y="100" data-speed="1000"
+                            data-start="1000" data-easing="Power3.easeInOut">
+                            Welcome to Mobile Money <br>Coin
+                        </div>
+                        <div class="tp-caption sfr desc-slide center" data-x="40" data-y="240" data-speed="1000"
+                            data-start="1500" data-easing="Power3.easeInOut">
+                            A digital investment <br>company
+                        </div>
+                        <div style="background: #ed993f !important"
+                            class="tp-caption sfl flat-button-slider bg-button-slider-32bfc0" data-x="40" data-y="370"
+                            data-speed="1000" data-start="2000" data-easing="Power3.easeInOut"><a
+                                href="https://app.momo-coin.store/#/login">Sign in</a> &nbsp;&nbsp;&nbsp;&nbsp;<i
+                                class="fa fa-chevron-right"></i></div>
+
+                        <div class="tp-caption sfr flat-button-slider" data-x="225" data-y="370" data-speed="1000"
+                            data-start="2000" data-easing="Power3.easeInOut"><a
+                                href="https://app.momo-coin.store/#/register">Join now</a>&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                class="fa fa-chevron-right"></i></div>
+                    </li>
+
+                    <li data-transition="random-static" data-slotamount="7" data-masterspeed="1000"
+                        data-saveperformance="on">
+                        <img src="images/1.jpeg" alt="slider-image" />
+                        <div class="tp-caption sfl title-slide center" data-x="40" data-y="100" data-speed="1000"
+                            data-start="1000" data-easing="Power3.easeInOut">
+                            Invest your money <br>safely
+                        </div>
+                        <div class="tp-caption sfr desc-slide center" data-x="40" data-y="240" data-speed="1000"
+                            data-start="1500" data-easing="Power3.easeInOut">
+                            We make your work and you earn the benefits<br>
+                        </div>
+                        <div style="background: #ed993f !important"
+                            class="tp-caption sfl flat-button-slider bg-button-slider-32bfc0" data-x="40" data-y="370"
+                            data-speed="1000" data-start="2000" data-easing="Power3.easeInOut"><a
+                                href="https://app.momo-coin.store/#/login">Sign in</a>&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                class="fa fa-chevron-right"></i></div>
+
+                        <div class="tp-caption sfr flat-button-slider" data-x="225" data-y="370" data-speed="1000"
+                            data-start="2000" data-easing="Power3.easeInOut"><a
+                                href="https://app.momo-coin.store/#/register">Join now</a>&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                class="fa fa-chevron-right"></i></div>
+                    </li>
+
+                    <li data-transition="slidedown" data-slotamount="7" data-masterspeed="1000"
+                        data-saveperformance="on">
+                        <img src="images/6.jpeg" alt="slider-image" />
+                        <div class="tp-caption sfl title-slide center" data-x="40" data-y="100" data-speed="1000"
+                            data-start="1000" data-easing="Power3.easeInOut">
+                            Create your account <br>for free
+                        </div>
+                        <div class="tp-caption sfr desc-slide center" data-x="40" data-y="240" data-speed="1000"
+                            data-start="1500" data-easing="Power3.easeInOut">
+                            Access our platform and earn <br>money
+                        </div>
+                        <div style="background: #ed993f !important"
+                            class="tp-caption sfl flat-button-slider bg-button-slider-32bfc0" data-x="40" data-y="370"
+                            data-speed="1000" data-start="2000" data-easing="Power3.easeInOut"><a
+                                href="https://app.momo-coin.store/#/login">Sign in</a>&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                class="fa fa-chevron-right"></i></div>
+
+                        <div class="tp-caption sfr flat-button-slider" data-x="225" data-y="370" data-speed="1000"
+                            data-start="2000" data-easing="Power3.easeInOut"><a
+                                href="https://app.momo-coin.store/#/register">Join now</a>&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                class="fa fa-chevron-right"></i></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flat-row mail-chimp" style="background-color: #ed993f!important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="text">
+                            <h3>Want to stay connected?</h3>
+                            <p>Download the application now and get easier access to MobileMoney Coin.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="subscribe">
+                            <a href="./apk/MoMo-coin_1_1.apk.zip">
+                                <input type="button" class="submit" value="Download">
+                                <input type="button" class="submit" value="For android system" disabled
+                                    style="background-color: white; color: black;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container -->
+        </div>
+
+
+            <!-- Section for ABOUT -->
+        <section class="main-content page-single page-about" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="post-wrap">
+                            <div class="about-content-text">
+                                <h4 class="about-content-title">About MoMo-Coin</h4>
+
+                                <p><strong>The participatory fundraising revolution.</strong></p>
+
+                                <p>MoMo-coin is a system of participatory fundraising through MTN Mobile Money and ORANGE Money in all areas of Central Africa for the purpose of investing in the stock market and making profits together.
+                                     The use of Orange Money and MTN Mobile Money in Africa is the most convenient way to invest and make profits with your phone wherever you are.</p>
+
+                                <p>Join now and make money with us by choosing your periodical plan between 5, 10 and 20 days with investment capitals ranging from 2000 FCFA to 500 000 FCFA.
+                                    Our stock market is open from Monday to Sunday, between 7 AM to 10 noon and 7 PM to 10PM.</p>
+
+                                <p><b> 1 <b style="color: #ed993f;"> MCoin </b>= 1 FCFA</b></p>
+
+                                <p></p>
+                            </div>
+
+                            <div class="about-content-text item-column clearfix">
+                                <div class="item-two-column">
+                                    <h4 class="about-content-title">WHY CHOOSE US ? </h4>
+                                    <p>Our clients tell us we are unique for a variety of important reasons including:
+                                    </p>
+                                    <ul class="flat-list style1">
+                                        <li>We are PASSIONATE about the stock market</li>
+                                        <li>We are CREATIVE</li>
+                                        <li>QUALITY COMMITMENT</li>
+                                        <li>The benefits generated are shared</li>
+                                        <li>Trades are made by a EXPERIENCED and EXPERT team</li>
+                                    </ul>
+                                </div>
+
+                                <div class="item-two-column">
+                                    <div class="empty-space height40"></div>
+                                    <div class="flat-tabs v1" data-effect="fadeIn">
+                                        <ul class="menu-tab">
+                                            <li class="active"><a href="#">Quality</a></li>
+                                            <li><a href="#">Service</a></li>
+                                            <li><a href="#">Results</a></li>
+                                        </ul><!-- /.menu-tab -->
+                                        <div class="content-tab">
+                                            <div class="content-inner">
+                                                <img src="images/5.jpeg" alt="images">
+                                            </div>
+                                            <div class="content-inner">
+                                                <img src="images/5.jpeg" alt="images">
+
+                                            </div>
+                                            <div class="content-inner">
+                                                <img src="images/5.jpeg" alt="images">
+
+                                            </div>
+                                        </div><!-- /.content-tab -->
+                                    </div><!-- /.roll-tabs -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section>
+
+
+        <!--SECTION  Offer -->
+        <section class="flat-row what-we-do offer" id="services"  style="background-color: #b3b3b3;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="iconbox center circle lagre center-circle-style1">                    
+                            <div class="box-header">
+                                <i class="fa fa-money"></i>                     
+                                <div class="box-title"><a href="https://app.momo-coin.store/#/register">Investment Gains</a></div>
+                            </div>
+                            <div class="box-content">
+                                Invest money by buying our shares and benefit from a percentage of earnings
+                                according to your package.
+                            </div>
+                            <a href="https://app.momo-coin.store/#/register" class="box-redmore">Start now</a>
+                        </div><!-- /.iconbox -->                    
+                    </div><!-- /.col-md-4 -->
+    
+    
+                    <div class="col-md-4">
+                        <div class="iconbox center circle lagre center-circle-style1">                    
+                            <div class="box-header">
+                                <i class="fa fa-rocket"></i>               
+                                <div class="box-title"><a href="https://app.momo-coin.store/#/register">Sponsorship
+                                    Gains</a></div>
+                            </div>
+                            <div class="box-content">
+                                Share your referral code and earn 10% on all stock purchases by your
+                                affiliates.
+                            </div>
+                            <a href="https://app.momo-coin.store/#/register" class="box-redmore">Start now</a>
+                        </div><!-- /.iconbox -->
+                    </div><!-- /.col-md-4 -->
+    
+                    <div class="col-md-4">
+                        <div class="iconbox center circle lagre center-circle-style1">                    
+                            <div class="box-header">
+                                <i class="fa fa-gift"></i>                       
+                                <div class="box-title"><a href="https://app.momo-coin.store/#/register">Bonus Gains</a></div>
+                            </div>
+                            <div class="box-content">
+                                Earn bonuses based on your sales and the number of people you refer during the month.
+                            </div>
+                            <a href="https://app.momo-coin.store/#/register" class="box-redmore">Start now</a>
+                        </div><!-- /.iconbox -->
+                    </div><!-- /.col-md-4 -->   
+                </div>
+            </div><!-- /.container -->
+        </section>
+
+        <!-- div WHAT WE OFFER -->
+        <div class="flat-row about" id="about" style="background-image: url('./images/50.jpeg'); color: white;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title-section style3">
+                            <h1 class="title" style="color: white;">WHAT WE OFFER</h1>
+                        </div>
+                    </div><!-- /.col-md-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="iconbox  left square">
+                            <div class="box-header">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <div class="box-title" style="color: white;">5 days =>
+                                        20%</div>
+                            </div>
+                            <div class="box-content">
+                                You get 20% of your investment back after 5 days.
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="iconbox  left square">
+                            <div class="box-header">
+                                <i class="fa fa-line-chart"></i>
+                                <div class="box-title" style="color: white;">10 days =>
+                                        45%</div>
+                            </div>
+                            <div class="box-content">
+                                You get 45% of your investment back after 10 days.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="iconbox  left square">
+                            <div class="box-header">
+                                <i class="fa fa-bank"></i>
+                                <div class="box-title" style="color: white;">20 days =>
+                                        110%</div>
+                            </div>
+                            <div class="box-content">
+                                You get 110% of your investment back after 20 days.
+                            </div>
+
+                        </div><!-- /.iconbox -->
+                    </div>
+                </div>
+            </div><!-- /.container -->
+        </div>
+
+        <!-- SECTION market time -->
+        <div class="flat-row" id="marketTimes" style="background-image: url('./images/1503.jpg');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title-section style2 style3">
+                            <h1 class="title" style="color: black;"><b><u> MARKET TIMES</u></b></h1>
+                        </div>
+                        <div class="loaders">
+                            <div class="container">
+                                <div class="row loaders_container">
+                                    <div class="col-lg-2 col-md-4 col-sm-6 loader_col">
+
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 col-sm-6 loader_col">
+                                    </div>
+                                    <div class="col-lg-2 col-md-5 col-sm-7 loader_col"
+                                        style="color: white; text-align: center !important;">
+                                        <span class="h3" style="color: black;"><b> 7 to 10 AM</b></span></td>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 col-sm-6 loader_col"
+                                        style="color: white; text-align: center !important;">
+                                        <span class="h3" style="color: black;"><b> 7 to 10 PM</b></span></td>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 col-sm-6 loader_col">
+
+                                    </div>
+                                </div><br>
+                                <marquee direction="left" style="border-radius: 20%;background-color: black; color: white;"><b> The market is open every day at the same time.</b></marquee>
+                            </div>
+                        </div>
+                    </div><!-- /.col-md-12 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Our statistics -->
+        <div class="flat-row" style="background-image: url('./images/50.jpeg');">
+            <div class="container" style="color: rgb(255, 255, 255);">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title-section style3">
+                            <h1 class="title" style="color: rgb(255, 255, 255);">SOME STATISTICS
+                            </h1>
+                        </div>
+                    </div><!-- /.col-md-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="flat-skillbar style1"  style="color: rgb(255, 255, 255);">
+                            <div  style="color: rgb(255, 255, 255);" class="flat-progress-circle" data-width="20" data-size="170" data-percent="91"
+                                data-waypoint-active="yes">
+                                <div class="inner-circle">
+                                    <span><span></span>%</span>
+                                </div>
+                            </div>
+                            <div class="title" style="color: white;">
+                                Happy Clients
+                            </div>
+                        </div>
+                    </div> <br>
+                    <div class="col-md-3">
+                        <div class="flat-counter color-theme">
+                            <div class="content-counter" style="color: rgb(255, 255, 255);">
+                                <div class="count-circle">
+                                    <span class="count-circle-sub">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                </div>
+                                <div class="numb-count" style="color: rgb(255, 255, 255);" data-to="34" data-speed="5000" data-waypoint-active="yes">34
+                                </div>
+                                <div class="name-count" style="color: rgb(255, 255, 255);">Shareholder</div>
+                            </div>
+                        </div><!-- /.flat-counter -->
+                    </div>
+                    <div class="col-md-3">
+                        <div class="flat-counter color-theme">
+                            <div class="content-counter">
+                                <div class="count-circle">
+                                    <span class="count-circle-sub">
+                                        <i class="fa fa-download"></i>
+                                    </span>
+                                </div>
+                                <div class="numb-count" data-to="21" style="color: rgb(255, 255, 255);" data-speed="5000" data-waypoint-active="yes">21
+                                </div>
+                                <div class="name-count" style="color: rgb(255, 255, 255);">Download</div>
+                            </div>
+                        </div><!-- /.flat-counter -->
+                    </div>
+                    <div class="col-md-3">
+                        <div class="flat-skillbar style1">
+                            <div class="flat-progress-circle" data-width="20" data-size="170" data-percent="85"
+                                data-waypoint-active="yes">
+                                <div class="inner-circle">
+                                    <span><span></span>%</span>
+                                </div>
+                            </div>
+                            <div class="title" style="color: white;">
+                                Re-investors
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.flat-row -->
+
+        <!-- Questions -->
+        <section class="main-content page-single page-about" id="questions">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title-section style3">
+                            <h1 class="title" style="background-color: blanchedalmond;">QUESTIONS ?
+                            </h1>
+                        </div>
+                    </div><!-- /.col-md-12 -->
+                </div>
+                <div class="row">
+                    <div class="page-content">
+                        <div class="post-wrap">
+                            <div class="flat-accordion style">
+                                <div class="flat-toggle">
+                                    <h6 class="toggle-title dep">How many account can i have?</h6>
+                                    <div class="toggle-content">
+                                        <p>Each user is entitled to as many accounts as they have a mobile money wallet.</p>
+                                    </div>
+                                </div><!-- /toggle -->
+
+                                <div class="flat-toggle">
+                                    <h6 class="toggle-title dep">How many bids can i make?</h6>
+                                    <div class="toggle-content">
+                                        <p>Your account allows you to bid on as many packs as you wish.</p>
+                                    </div>
+                                </div><!-- /toggle -->
+
+                                <div class="flat-toggle">
+                                    <h6 class="toggle-title dep">What do I gain by buying your stocks?</h6>
+                                    <div class="toggle-content">
+                                        <p>When you buy a stock pack, depending on the plan you choose, you will receive a percentage on top of your investment.
+                                            <br>20% in 5 days
+                                            <br>45% in 10 days
+                                            <br>110% in 20 days
+                                        </p>
+                                    </div>
+                                </div><!-- /toggle -->
+
+                                <div class="flat-toggle">
+                                    <h6 class="toggle-title dep">What happens if I pay and the seller fails to approve me on time?</h6>
+                                    <div class="toggle-content">
+                                        <p>Make a report to the administration with the necessary screenshots to attest to the transaction. The management will take steps to verify the transaction at the operator's premises and take the necessary measures.</p>
+                                    </div>
+                                </div><!-- /toggle -->
+
+                                <div class="flat-toggle">
+                                    <h6 class="toggle-title dep">What happens if I bid and fail to pay?</h6>
+                                    <div class="toggle-content">
+                                        <p>You have 5 hours to make the payment. If you do not, your account will be automatically blocked in the system with all your coins.</p>
+                                    </div>
+                                </div><!-- /toggle -->
+
+                                <div class="flat-toggle">
+                                    <h6 class="toggle-title dep">How to contact a manager?</h6>
+                                    <div class="toggle-content">
+                                        <p>Once you have registered you will have access to the social networking groups. In each group there are managers who address your concerns.
+                                            <br> You also have a manager contact email address.</p>
+                                    </div>
+                                </div><!-- /toggle -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-sidebar">
+                        <div class="sidebar">
+                            <div class="brochure" style="background-color: white !important;">
+                                <h3>Our Brochure</h3>
+                                <p>See our financial brochure for an easy-to-read guide to all the plans on offer.</p>
+                                <p class="flat-button radius"><a href="./pdf/Momocoin.pdf"><i class="fa fa-file-pdf-o"></i> Brochure .PDF</a></p>
+                                <p class="flat-button radius"><a href="./apk/MoMo-coin_1_1.apk.zip"><i class="fa fa-android"></i> AndroidApp .APK</a></p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section>
+
+        <!-- wan to stay connected -->
+        <div class="flat-row mail-chimp" style="background-color: #ed993f!important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="text">
+                            <h3>Want to stay connected?</h3>
+                            <p>Download the application now and get easier access to MobileMoney Coin.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="subscribe">
+                            <a href="./apk/MoMo-coin_1_1.apk.zip">
+                                <input type="button" class="submit" value="Download">
+                                <input type="button" class="submit" value="For android system" disabled
+                                    style="background-color: white; color: black;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container -->
+        </div>
+
+        <!-- Good to know -->
+        <section class="flat-row" id="goodToKnow" style="color: white !important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" style="background-color: black !important;">
+                        <div class="title-section">
+                            <h1 class="title" style="color: white !important; background-color: black;">Good to know
+                            </h1>
+                        </div>
+
+                        <div class="flat-testimonials" data-item="1" data-nav="false" data-dots="false"
+                            data-auto="false">
+                            <div class="testimonials">
+                                <div class="avatar">
+                                    <img src="images/testimonial/6.png" alt="images">
+                                </div>
+                                <div class="message">
+                                    <div class="name"><span style="color: white !important; background-color: black;">
+                                            Claude Michelet</span></div>
+                                    <div class="position" style="color: white !important; background-color: black;">May
+                                        1994</div>
+                                    <blockquote class="whisper"
+                                        style="color: white !important; background-color: black;">"The individual is
+                                        made to take his freedom, to invest
+                                        it, to rise, to accomplish himself according to his ideas and his capacity to
+                                        criticize."</blockquote>
+                                </div>
+                            </div>
+
+                            <div class="testimonials">
+                            </div>
+                        </div><!-- /.flat-testimonials-->
+                    </div><!-- /.col-md-6 -->
+                </div>
+            </div><!-- /.container -->
+        </section>
+
+
+        <!-- Footer -->
+        <!-- <footer class="footer" style="background-color: black !important;">
+        <div class="footer-widgets">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-md-3"> 
+                        <div class="widget widget_text widget_info">
+                            <div class="textwidget">                                     
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="col-md-3">  
+                        <div class="widget widget-recent-post">
+                            <h5 class="widget-title">Recent Posts </h5>
+                            <ul>
+                                <li class="clearfix">
+                                    <div class="thumb images-hover">
+                                        <div class="overlay"></div>
+                                        <a href="#"><img src="images/blog/f1.jpg" alt="image"></a>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="title"><a href="#">Within the construction </a></h3>
+                                        <div class="meta">By Admin / 02 March 2016</div>
+                                        <div class="sumary">Lorem ipsum dolor sit amet, consectetur</div>
+                                    </div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="thumb images-hover">
+                                        <div class="overlay"></div>
+                                        <a href="#"><img src="images/blog/f2.jpg" alt="image"></a>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="title"><a href="#">Prepare a room painting</a></h3>
+                                        <div class="meta">By Admin / 02 March 2016</div>
+                                        <div class="sumary">Lorem ipsum dolor sit amet, consectetur</div>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                       <div class="widget widget_tweets">
+                            <h2 class="widget-title">Twitter</h2>
+                            <ul>
+                                <li><a class="author" href="#">@Arch</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis est sem.</li>
+                                <li><a class="author" href="#">@Arch</a> Donec sed congue elit. Suspendisse sed tincidunt libero <a href="#">http://bit.ly/58788998</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="widget widget_instagram">
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+    </footer> -->
+
+        <!-- Bottom -->
+        <div class="bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="copyright pull-left">
+                            <p>© Copyright <a href="#"><strong> momo-coin</strong></a> 2021. All Rights Reserved.
+                            </p>
+                        </div>
+                    </div><!-- /.col-md-6 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div>
+
+        <!-- Go Top -->
+        <a class="go-top">
+            <i class="fa fa-angle-up" style="color: #c6863d;"></i>
+        </a>
+
+    </div>
+
+    <!-- Javascript -->
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script src="javascript//jquery-3.2.1.min.js"></script>
+    <script src="styles/bootstrap4/popper.js"></script>
+    <script src="styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="javascript//custom.js"></script>
+
+
+
+    <script type="text/javascript" src="javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery.easing.js"></script>
+    <script type="text/javascript" src="javascript/imagesloaded.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery-waypoints.js"></script>
+    <script type="text/javascript" src="javascript/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery.cookie.js"></script>
+    <script type="text/javascript" src="javascript/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="javascript/parallax.js"></script>
+    <script type="text/javascript" src="javascript/smoothscroll.js"></script>
+    <script type="text/javascript" src="javascript/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="javascript/owl.carousel.js"></script>
+    <script type="text/javascript" src="javascript/jquery-validate.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="javascript/gmap3.min.js"></script>
+    <script type="text/javascript" src="javascript/main.js"></script>
+
+
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="javascript/jquery.easing.js"></script>
+    <script type="text/javascript" src="javascript/jquery-countTo.js"></script>
+    <script type="text/javascript" src="javascript/jquery-waypoints.js"></script>
+    <script type="text/javascript" src="javascript/jquery.easypiechart.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery.fitvids.js"></script>
+
+    <!-- Revolution Slider -->
+    <script type="text/javascript" src="javascript/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="javascript/slider.js"></script>
+
+
+    <!-- jQuery -->
+    <!-- SmoothScroll -->
+    <script type="text/javascript" src="assets/smoothscroll/smoothscroll.js"></script>
+    <!-- Bootstrap -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="js/waypoints.min.js"></script>
+    <!-- classie.js -->
+    <script src="js/classie.js"></script>
+    <!-- FlexSlider -->
+    <script src="assets/flexslider/jquery.flexslider.js"></script>
+    <!-- Modernizr -->
+    <script src="js/modernizr.js"></script>
+    <!-- Text Rotator -->
+    <script src="assets/textrotator/jquery.simple-text-rotator.js"></script>
+    <!-- Lightbox.js -->
+    <script src="assets/lightbox/js/lightbox.min.js"></script>
+    <!-- Google Maps -->
+    <!-- Theme JavaScript Core -->
+    <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
