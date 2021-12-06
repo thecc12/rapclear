@@ -48,11 +48,11 @@ export class DashboardComponent implements OnInit {
   // lineChart1
   public lineChart1Data: Array<any> = [
     {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Series A'
+      data: [15, 25, 36, 45, 60, 80, 91],
+      label: 'Golden'
     }
   ];
-  public lineChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChart1Labels: Array<any> = ['August', 'September', 'October', 'November', 'December'];
   public lineChart1Options: any = {
     tooltips: {
       enabled: false,
@@ -106,11 +106,11 @@ export class DashboardComponent implements OnInit {
   // lineChart2
   public lineChart2Data: Array<any> = [
     {
-      data: [1, 18, 9, 17, 34, 22, 11],
-      label: 'Series A'
+      data: [10, 15, 20, 17, 34],
+      label: 'Golden'
     }
   ];
-  public lineChart2Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChart2Labels: Array<any> = ['August', 'September', 'October', 'November', 'December'];
   public lineChart2Options: any = {
     tooltips: {
       enabled: false,
@@ -167,7 +167,7 @@ export class DashboardComponent implements OnInit {
   public lineChart3Data: Array<any> = [
     {
       data: [78, 81, 80, 45, 34, 12, 40],
-      label: 'Series A'
+      label: 'Golden'
     }
   ];
   public lineChart3Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
@@ -213,7 +213,7 @@ export class DashboardComponent implements OnInit {
   public barChart1Data: Array<any> = [
     {
       data: [78, 81, 80, 45, 34, 12, 40, 78, 81, 80, 45, 34, 12, 40, 12, 40],
-      label: 'Series A',
+      label: 'Golden',
       barPercentage: 0.6,
     }
   ];
@@ -357,13 +357,13 @@ export class DashboardComponent implements OnInit {
   ];
   public brandBoxChartData3: Array<any> = [
     {
-      data: [78, 81, 80, 45, 34, 12, 40],
+      data: [11, 15, 18, 23, 55, 60, 78],
       label: 'LinkedIn'
     }
   ];
   public brandBoxChartData4: Array<any> = [
     {
-      data: [35, 23, 56, 22, 97, 23, 64],
+      data: [23, 60, 56, 35, 97, 64, 97],
       label: 'Google+'
     }
   ];
