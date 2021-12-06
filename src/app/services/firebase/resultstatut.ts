@@ -17,6 +17,9 @@ export class ResultStatut extends Entity {
   static INVALID_ARGUMENT_ERROR = -3;
   // tslint:disable-next-line:member-ordering
   static SUCCESS = 0;
+  static UPLOAD_PAUSED=10;
+  static UPLOAD_RUNNING=11;
+  
   constructor(code = ResultStatut.SUCCESS, message = 'success', description = '', result = null) {
     super();
     this.code = code;

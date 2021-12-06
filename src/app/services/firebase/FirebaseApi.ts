@@ -66,6 +66,10 @@ export class FirebaseApi {
   getFirebaseDatabase() {
     return this.db;
   }
+  getFirebaseFile()
+  {
+    return firebase.storage()
+  }
 
   add(url: string, value: any): Promise<ResultStatut> {
     let action = new ResultStatut();
