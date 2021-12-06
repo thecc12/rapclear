@@ -1,21 +1,14 @@
 <div class="animated fadeIn">
     <div class="row">
-      <div class="col-sm-6 col-lg-3">
+      <div *ngIf="readyToPayInvestment.length==0 && onWaitingPayementInvestment.length==0">
+        <h4><span class="text-white">No investment to show</span></h4>
+      </div>
+      <div *ngFor="let invest of readyToPayInvestment" class="col-sm-6 col-lg-3">
         <div class="card text-white bg-primary">
           <div class="card-body pb-0">
-            <!-- <div class="btn-group float-right" dropdown>
-              <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
-                <i class="icon-settings"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div> -->
-            <div class="text-value">20500 BTC</div>
-            <div>Payment Date: </div>
+            
+            <div class="text-value">{{invest.amount}} BTC</div>
+            <div>Payment Date: {{invest.getDateOf(invest.paymentDate) | date:'dd/MM/yyyy HH:mm a'}}</div>
             <div>Members online</div>
           </div>
           <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
@@ -29,21 +22,11 @@
           </div>
         </div>
       </div><!--/.col-->
-      <div class="col-sm-6 col-lg-3">
+      <div *ngFor="let invest of onWaitingPayementInvestment" class="col-sm-6 col-lg-3">
         <div class="card text-white bg-warning">
           <div class="card-body pb-0">
-            <!-- <div class="btn-group float-right" dropdown>
-              <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
-                <i class="icon-settings"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div> -->
-            <div class="text-value" style="color: rgb(139, 105, 30);">9.823 BTC</div>
-            <div style="color: rgb(0, 0, 0);">Payment Date: </div>
+            <div class="text-value" style="color: rgb(139, 105, 30);">{{invest.amount}} BTC</div>
+            <div style="color: rgb(0, 0, 0);">Payment Date: {{invest.getDateOf(invest.paymentDate) | date:'dd/MM/yyyy HH:mm a'}}</div>
             <div style="color: rgb(0, 0, 0);">Members online</div>
           </div>
           <div class="chart-wrapper mt-3" style="height:70px;">

@@ -148,7 +148,7 @@ export class MarketService {
     return this.getMyOrderedWaitingPaymentDateInvestment(idOwner);
   }
 
-  getMyOrderedReadyToPayInvestment(idOwner: EntityID) {
+  getMyOrderedReadyToPayInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
     return this.getAllReadyToPayInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
     );
@@ -158,7 +158,7 @@ export class MarketService {
     return this.getMyOrderedReadyToPayInvestment(idOwner);
   }
 
-  getMyOrderedPayedInvestment(idOwner: EntityID) {
+  getMyOrderedPayedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
     return this.getAllPayedInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
     );
@@ -168,7 +168,7 @@ export class MarketService {
     return this.getMyOrderedPayedInvestment(idOwner);
   }
 
-  getMyOrderedRejectedInvestment(idOwner: EntityID) {
+  getMyOrderedRejectedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
     return this.getAllRejectedInvestment().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
     );
@@ -182,7 +182,7 @@ export class MarketService {
   //     filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE)
   //   );
   // }
-  getMyOrderdPayedInvestment(idOwner: EntityID) {
+  getMyOrderdPayedInvestment(idOwner: EntityID= this.authService.currentUserSubject.getValue().id) {
     return this.getOrderMarket().pipe(
       filter((p: Investment) => p.idOwner.toString() == idOwner.toString()),
       filter((p: Investment) => p.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE)
