@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.sponsorId = localStorage.getItem('referal');
     this.registerForm = this.formBuilder.group({
-      'name': new FormControl('', [Validators.required]),
+      'fullName': new FormControl('', [Validators.required]),
       'user_agree': new FormControl(false, [Validators.requiredTrue]),
       'country': new FormControl('', [Validators.required]),
       'city': new FormControl('', [Validators.required]),
@@ -65,16 +65,18 @@ export class RegisterComponent implements OnInit {
   setFormData(): User {
 
       let user: User = new User();
-      user.fullName = this.registerForm.value.name;
+      user.hydrate(this.registerForm.value)
+      // user.fullName = this.registerForm.value.name;
       user.email = this.sanitizeService.emailSanitize(this.registerForm.value.email);
-      user.password = this.registerForm.value.password;
-      user.country = this.registerForm.value.country;
-      user.city = this.registerForm.value.city;
-      user.phone = `${this.registerForm.value.phone}`;
+      // user.password = this.registerForm.value.password;
+      // user.country = this.registerForm.value.country;
+      // user.city = this.registerForm.value.city;
+      // user.phone = `${this.registerForm.value.phone}`;
       user.mySponsorShipId.setId(SponsorID.generateId(user).toString());
       if (this.sponsorId) { user.parentSponsorShipId.setId(this.sponsorId); }
       user.network = this.registerForm.value.network;
       user.user_agree = true;
+      console.log("user ",user)
       return user;
   }
 
@@ -103,6 +105,7 @@ export class RegisterComponent implements OnInit {
       })
       .catch((error) => {
         this.waitingRegistration = false;
+        console.log("Error ",error);
         // tslint:disable-next-line:max-line-length
         this.notification.showNotification('top', 'center', 'danger', 'pe-7s-close-circle', '\<b>Sorry !\</b>\<br>' + error.message);
         this.submitted = false;

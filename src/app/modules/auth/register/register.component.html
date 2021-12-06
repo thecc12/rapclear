@@ -17,11 +17,11 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" id="name" formControlName="name"
-                      [ngClass]="{ 'is-invalid': submitted && f.name.errors }" class="form-control"
+                    <input type="text" id="fullName" formControlName="fullName"
+                      [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" class="form-control"
                       placeholder="Full Name" autocomplete="username" required>
-                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback text-danger">
-                      <div *ngIf="f.name.errors.required">Full name is required</div>
+                    <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback text-danger">
+                      <div *ngIf="f.fullName.errors.required">Full name is required</div>
                     </div>
                   </div>
                   <div class="input-group mb-3">

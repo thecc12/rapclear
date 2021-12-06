@@ -33,8 +33,8 @@ export class User extends Entity {
                 if (key == 'id') { this.id.setId(entity.id); }
                 else if (key == 'mySponsorShipId') this.mySponsorShipId.setId(entity.mySponsorShipId); 
                 else if (key == 'parentSponsorShipId') this.parentSponsorShipId.setId(entity.parentSponsorShipId); 
-                else if (key == 'grandparentSponsorShipId') this.grandParentSponsorShipId.setId(entity.grandparentSponsorShipId); 
-                else if (key == 'biggrandparentSponsorShipId') this.bigGrandParentSponsorShipId.setId(entity.biggrandparentSponsorShipId); 
+                else if (key == 'grandParentSponsorShipId') this.grandParentSponsorShipId.setId(entity.grandparentSponsorShipId); 
+                else if (key == 'bigGrandParentSponsorShipId') this.bigGrandParentSponsorShipId.setId(entity.biggrandparentSponsorShipId); 
                 else { Reflect.set(this, key, entity[key]); }
             }
         }
@@ -46,8 +46,8 @@ export class User extends Entity {
             if (k == 'id') { r[k] = this.id.toString(); }
             else if (k == 'mySponsorShipId')  r[k] = this.mySponsorShipId.toString();
             else if (k == 'parentSponsorShipId') r[k] = this.parentSponsorShipId.toString();
-            else if (k == 'grandparentSponsorShipId') r[k] = this.grandParentSponsorShipId.toString();
-            else if (k == 'biggrandparentSponsorShipId') r[k] = this.bigGrandParentSponsorShipId.toString();
+            else if (k == 'grandParentSponsorShipId') r[k] = this.grandParentSponsorShipId.toString();
+            else if (k == 'bigGrandParentSponsorShipId') r[k] = this.bigGrandParentSponsorShipId.toString();
             else { r[k] = Reflect.get(this, k); }
         }
         return r;

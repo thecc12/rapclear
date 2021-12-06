@@ -57,7 +57,7 @@ export class AuthService {
         .then(result => {
           // userN.password="";
           this.setLocaStorageDatas();
-          userN.fullName = result.result.user.name;
+          //userN.fullName = result.result.user.name;
           userN.email = result.result.user.email;
           userN.photoUrl = result.result.user.photoUrl || '';
           userN.id.setId(result.result.user.uid);
@@ -126,7 +126,7 @@ export class AuthService {
   signInNewUser(user: User):Promise<ResultStatut> {
     return new Promise<ResultStatut>((resolve, reject) => {
       console.log('1 in service: ', user);
-      if (user.parentSponsorShipId.toString() != '') {
+      if (user.parentSponsorShipId.toString().length>0) {
         this.userService.getUserBySponsorId(user.parentSponsorShipId)
         .then((result:ResultStatut)=> {
           let u:User=result.result;

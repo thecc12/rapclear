@@ -13,6 +13,6 @@ export class Request extends Entity {
     content: string = ''; // contenu textuel de la requette
     // tslint:disable-next-line:max-line-length
     status: RequestState = RequestState.ON_WAITIN; // statu de la requette ( ON_WAITIN lorsque le user soumet, VALIDED lorsque vérifié et approuvé par l'admin, REJECTED lorsque vérifié et refusé par l'admin )
-    photoUrl: string = ''; // lien vers Image de capture
+    imgUrl: string = ''; // lien vers Image de capture
 
 }
