@@ -3,6 +3,7 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { Investment } from '../../../entity/investment';
 import { MarketService } from '../../../services/market/market.service';
+import { EventService } from '../../../services/event/event.service';
 
 @Component({
   selector: 'app-initiated-investment',
@@ -10,6 +11,7 @@ import { MarketService } from '../../../services/market/market.service';
   styleUrls: ['./initiated-investment.component.scss']
 })
 export class InitiatedInvestmentComponent implements OnInit {
+  waitData = true;
 
   radioModel: string = 'Month';
   // lineChart2
@@ -82,8 +84,12 @@ export class InitiatedInvestmentComponent implements OnInit {
   initiatedInvestment:Investment[]=[];
   initiatedInvestmentCheck:Map<String,boolean>=new Map<String,boolean>();
 
-  public constructor(private marketService:MarketService)
-  {}
+  public constructor(private marketService:MarketService,
+    
+    private eventService: EventService)
+  {
+    this.waitData = true;
+  }
   public random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -95,16 +101,22 @@ export class InitiatedInvestmentComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+    this.eventService.newInvestmentArrivedEvent.subscribe((result) => {
+      if(result){ this.waitData = false}});
+
 
     this.marketService.getMyOrderedInitiatedInvestment()
     .subscribe((value:Investment)=>{
+      this.waitData = false;
       if(this.initiatedInvestmentCheck.has(value.id.toString()))
       {
+        this.waitData = false;
         let pos=this.initiatedInvestment.findIndex((invest)=>invest.id.toString()==value.id.toString());
         if(pos>-1)this.initiatedInvestment[pos]=value;
       }
       else
       {
+        this.waitData = false;
         this.initiatedInvestment.push(value);
         this.initiatedInvestmentCheck.set(value.id.toString(),true);
       }

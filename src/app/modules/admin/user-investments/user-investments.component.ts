@@ -111,7 +111,7 @@ export class UserInvestmentsComponent implements OnInit, OnChanges {
       if (d.getMinutes() < 10) stringDate += `0${d.getMinutes()} Min`;
       else stringDate += `${d.getMinutes()} Min`;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     
     return stringDate;

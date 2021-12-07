@@ -64,7 +64,7 @@ export class MarketService {
   getNumberOfInvestment(idUser: EntityID): Number {
     let nbinvestment = 0;
     for (let investment of Array.from(this.listInvestment.values())) {
-      console.log(investment.idOwner.toString(), idUser.toString());
+      // console.log(investment.idOwner.toString(), idUser.toString());
       // tslint:disable-next-line:triple-equals
       if (investment.idOwner.toString() == idUser.toString()) { nbinvestment++; }
     }

@@ -46,7 +46,7 @@ export class AddInvestmentComponent implements OnInit {
       let theDate = new Date(Date.now());
       // this.theDate = this.datePipe.transform(this.theDate, 'yyyy-MM-dd');
       this.date = theDate.getFullYear()+'-'+(theDate.getMonth()+1)+'-'+theDate.getDate(); 
-      console.log('today: ', this.date);
+      // console.log('today: ', this.date);
     }
 
   ngOnInit() {
@@ -68,7 +68,7 @@ export class AddInvestmentComponent implements OnInit {
     let idOwner: EntityID = new EntityID();
     // idOwner.setId(this.form.value.idOwner);
     idOwner.setId(localStorage.getItem('userId'));
-    console.log('investment: ', this.form);
+    // console.log('investment: ', this.form);
 
     this.userService.getUserById(idOwner)
     .then((result: ResultStatut) => {

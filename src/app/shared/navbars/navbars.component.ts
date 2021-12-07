@@ -72,11 +72,10 @@ export class NavbarsComponent implements OnInit, AfterViewChecked {
     private firebaseApi: FirebaseApi,
     private notification: NotificationService,
     private packService: BasicInvestmentService) {
+    this.isAdmin = true;
     this.isAdmin = this.authService.isAdminer;
     this.fullName = this.authService.currentUserSubject.getValue().fullName;
     if (this.authService.currentUserSubject.getValue().email == 'admin@admin.com') {
-      this.isAdmin = true;
-    } else if (localStorage.getItem('email') == 'admin@admin.com') {
       this.isAdmin = true;
     } else if (this.authService.currentUserSubject.getValue().email == 'pundayusufu619@gmail.com') {
       this.isManager = true;
@@ -91,6 +90,13 @@ export class NavbarsComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
+    if (this.authService.currentUserSubject.getValue().email == 'admin@admin.com') {
+      this.isAdmin = true;
+    }else if (this.authService.currentUserSubject.getValue().email == 'pundayusufu619@gmail.com') {
+      this.isManager = true;
+    } else {
+      this.isManager = false;
+    }
     this.fullName = this.authService.currentUserSubject.getValue().fullName;
     this.authService.currentUserSubject.subscribe((user: User) => {
       if (!user) { return this.userName = user.name; }

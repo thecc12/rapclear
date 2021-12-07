@@ -1,5 +1,10 @@
 <div class="animated fadeIn">
-  <div class="row">
+  <div *ngIf="waitData">
+        <div class="d-flex justify-content-center">
+          <app-spinner style="background-color: bisque; border-radius: 15px;"></app-spinner>
+        </div>
+  </div>
+  <div *ngIf="!waitData" class="row">
     <div *ngIf="initiatedInvestment.length==0">
       <h4><span class="text-white">No investment to show</span></h4>
     </div>
@@ -9,9 +14,11 @@
           <!-- <button type="button" class="btn btn-transparent p-0 float-right">
             <i class="icon-location-pin"></i>
           </button> -->
-          <div class="text-value" style="color: rgb(139, 105, 30);">{{invest.amount}} BTC</div>
-          <div style="color: rgb(0, 0, 0);">Payment Date: {{invest.getDateOf(invest.paymentDate) | date:'dd/MM/yyyy HH:mm a'}}</div>
-          <div style="color: rgb(0, 0, 0);">Wating Confirmation</div>
+          <div class="text-value" style="color: rgb(139, 105, 30);">{{invest.amount}} TCC</div>
+          <div style="color: rgb(0, 0, 0);">Plan: {{invest.plan}}</div>
+          <div style="color: rgb(0, 0, 0);">Payment: {{invest.nextAmount}} TCC</div>
+          <div style="color: rgb(0, 0, 0);">Payment Date: {{invest.getDateOf(invest.paymentDate) | date:'dd/MM/yyyy'}}</div>
+          <div style="color: rgb(0, 0, 0);">Status: Wating Confirmation</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
           <canvas baseChart class="chart"

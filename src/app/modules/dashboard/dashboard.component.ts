@@ -19,6 +19,7 @@ import { User } from '../../entity/user';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('showSaleBonus') public showSaleBonus: ModalDirective;
+  waitData = true;
   nextBonus: number = 0;
   saleBonus: boolean = false;
   private updateSubscription: Subscription;
@@ -166,7 +167,7 @@ export class DashboardComponent implements OnInit {
   // lineChart3
   public lineChart3Data: Array<any> = [
     {
-      data: [78, 81, 80, 45, 34, 12, 40],
+      data: [45, 34, 12, 40, 78, 81, 80],
       label: 'Golden'
     }
   ];
@@ -424,6 +425,7 @@ export class DashboardComponent implements OnInit {
     private basicInvestmentService:BasicInvestmentService,
     private configAppService:ConfigAppService,
     private profilService: ProfilService) {
+      this.waitData = true
     this.getInitiateInvestments();
     this.getConfirmInvestments();
   }
@@ -500,6 +502,8 @@ export class DashboardComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.eventService.newInvestmentArrivedEvent.subscribe((result) => {
+      if (result){ this.waitData = false}});
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));
@@ -514,7 +518,7 @@ export class DashboardComponent implements OnInit {
       });
 
     this.authService.currentUserSubject.subscribe((user: User) => {
-      console.log("min ",this.minBonus);
+      // console.log("min ",this.minBonus);
       this.bonus = user.bonus;
       if(user.bonus >= this.configAppService.bonus.getValue().minBonus) {
         this.saleBonus = true;

@@ -62,7 +62,7 @@ export class SponsorService {
         if (tab[3]) {
             this.haveRef = true;
             localStorage.setItem('referal', tab[3]);
-            console.log('tab: ', tab[3]);
+            // console.log('tab: ', tab[3]);
             return tab[3];
         } else {
             // localStorage.setItem('referal', 'Referal: Automatic completion');

@@ -107,7 +107,7 @@ export class AuthService {
       this.firebaseApi.createUserApi(user.email, user.password)
         .then(() => this.signIn(user, false))
         .then(() => {
-          console.log('add user: ', user);
+          // console.log('add user: ', user);
           // this.SendVerificationMail();
           user.dateCreation = (new Date()).toISOString();
           this.eventService.registerNewUserEvent.next(user);
@@ -125,7 +125,7 @@ export class AuthService {
   }
   signInNewUser(user: User):Promise<ResultStatut> {
     return new Promise<ResultStatut>((resolve, reject) => {
-      console.log('1 in service: ', user);
+      // console.log('1 in service: ', user);
       if (user.parentSponsorShipId.toString().length>0) {
         this.userService.getUserBySponsorId(user.parentSponsorShipId)
         .then((result:ResultStatut)=> {
