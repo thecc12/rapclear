@@ -11,6 +11,9 @@ import { RequestValidedComponent } from './request-valided/request-valided.compo
 import { RequestPanelComponent } from './request-panel/request-panel.component';
 import { CommonModule } from '@angular/common';
 import { ProgressIndeterminateModule } from '../components/progress-indeterminate/progress-indeterminate.module';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { SpinnerModule } from '../components/spinner/spinner.module';
 
 @NgModule({
   imports: [
@@ -19,10 +22,13 @@ import { ProgressIndeterminateModule } from '../components/progress-indeterminat
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
+    AlertModule.forRoot(),
+    ModalModule.forRoot(),
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    ProgressIndeterminateModule
+    SpinnerModule,
+    ProgressIndeterminateModule,
   ],
   declarations: [
     RequestWaitingComponent,

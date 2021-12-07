@@ -39,11 +39,11 @@
               </div>
               <div class="col-md-6">
                 <label><b>My Referral ID</b></label>
-                <div class="input-group mb-3" (click)="copyMessage(id);idCopied()" popover="Id copied">
+                <div class="input-group mb-3" (click)="copyMessage(mySponsorShipId);idCopied()" popover="Id copied">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Copy link</span>
                   </div>
-                  <input type="text" id="referral" placeholder="{{id}}" class="form-control"
+                  <input type="text" id="referral" placeholder="{{mySponsorShipId}}" class="form-control"
                     value="{{mySponsorShipId}}" disabled>
                 </div>
               </div>

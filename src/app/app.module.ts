@@ -58,7 +58,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { SpinnerComponent } from './modules/components/spinner/spinner.component';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 // configure Bugsnag asap
 Bugsnag.start({ apiKey: '2737b9ab0303671f752970255de0f652' });
@@ -99,7 +100,8 @@ if (true) { enableProdMode(); } // true en prod et false en dev
     RouterModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
 
   ],
   declarations: [
@@ -112,6 +114,7 @@ if (true) { enableProdMode(); } // true en prod et false en dev
     NavbarsComponent,
   ],
   providers: [
+    AngularFireStorage,
     AngularFirestore,
     AngularFireDatabase, {
     provide: LocationStrategy,
