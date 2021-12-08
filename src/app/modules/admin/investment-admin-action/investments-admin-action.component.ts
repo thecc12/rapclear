@@ -33,7 +33,7 @@ export class InvestmentsAdminActionComponent implements OnInit, OnChanges {
     private dialog: BsModalService
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes ", changes)
+    // console.log("changes ", changes)
   }
 
   ngOnInit(): void {

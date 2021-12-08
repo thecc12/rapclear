@@ -49,4 +49,46 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-header linear-gradient">
+                    <h3 class="text-center mx-4 mb-2">Requests on waiting</h3>
+                </div>
+                <div class="card-body linear-gradient2">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th><b>No</b></th>
+                                <th><b>user</b></th>
+                                <th><b>Date</b></th>
+                                <th><b>Subject</b></th>
+                                <th><b>Content</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr (click)="myModal.show()" *ngFor="let request of listValidedRequest;let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{getBuyer(request.idOwner)}}</td>
+                                <td>{{getFormatDate(request.paymentDate)}}</td>
+                                <td>{{request.subject}}</td>
+                                <td>{{request.content}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination pull-right">
+                            <li class="page-item"><a class="page-link">Prev</a></li>
+                            <li class="page-item active">
+                                <a class="page-link">1</a>
+                            </li>
+                            <li class="page-item"><a class="page-link">2</a></li>
+                            <li class="page-item"><a class="page-link">3</a></li>
+                            <li class="page-item"><a class="page-link">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

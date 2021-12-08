@@ -7,12 +7,14 @@ import {  Request,  RequestState } from '../../entity/request';
 import { User } from '../../entity/user';
 import { AuthService } from '../auth/auth.service';
 import { EventService } from '../event/event.service';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { FireBaseConstant } from '../firebase/firebase-constant';
 import { FirebaseApi } from '../firebase/FirebaseApi';
 import { ResultStatut } from '../firebase/resultstatut';
 import { NotificationService } from '../notification/notification.service';
 import { UserNotificationService } from '../user-notification/user-notification.service';
 import { UserService } from '../user/user.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +26,7 @@ export class BasicRequestService {
     currentUser: User;
 
     constructor(private firebaseApi: FirebaseApi,
+        private db: AngularFireDatabase,
         private eventService: EventService,
         private authService: AuthService,
         private userNotificationService: UserNotificationService,
@@ -36,6 +39,15 @@ export class BasicRequestService {
               this.newRequestHandler();
             // });
         }
+
+
+          remouveRequest(key) {
+            return this.db.object('/requests/' + key).remove();
+          }
+
+        saveRequest (product) {
+            return this.db.list('/requests').push(product);
+          }
 
         approuveRequestStatus(idRequest: EntityID) {
             let nstatus = RequestState.VALIDED;

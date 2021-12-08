@@ -36,7 +36,7 @@ export class AddRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.requestForm = this.formLog.group({
-      'subject': ['', [Validators.required]],
+      'object': ['', [Validators.required]],
       'content': ['', [Validators.required]],
       'imageUrl': ['']
     });
@@ -71,8 +71,8 @@ export class AddRequestComponent implements OnInit {
     if (this.requestForm.valid) {
       this.requestData.idOwner = this.authService.currentUser.id;
       this.requestData.requestContent = this.requestForm.value.content;
-      this.requestData.requestSubject = this.requestForm.value.subject;
-      this.requestData.requestSubject = this.requestForm.value.subject;
+      this.requestData.requestSubject = this.requestForm.value.object;
+      this.requestData.imgUrl = this.requestForm.value.imageUrl;
       if (this.requestForm.value.imageUrl) {
         console.log("dans if");
         var filePath = `requests/${this.authService.currentUser.id.toString()}/${this.requestData.id}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
@@ -86,7 +86,7 @@ export class AddRequestComponent implements OnInit {
               this.requestData.imgUrl = url;
               console.log('form urlImg: ', this.requestForm.value.imageUrl);
               this.requestService.addRequest(this.requestData);
-              this.service.insertImageDetails(formValue);
+              this.service.insertImageDetails(this.requestData);
               this.waitingSubmit = false;
               this.isSubmitted = false;
             });

@@ -106,7 +106,7 @@ export class InvestmentsPanelComponent implements OnInit {
           this.listAllInvestment.push(investment);
         }
       });
-    console.log('qsdsdqsd: : : : ', this.listPayedInvestment.length);
+    // console.log('qsdsdqsd: : : : ', this.listPayedInvestment.length);
   }
 
 
@@ -126,11 +126,11 @@ export class InvestmentsPanelComponent implements OnInit {
 
   // events
   public chartClicked(e: any): void {
-    console.log(e);
+    // console.log(e);
   }
 
   public chartHovered(e: any): void {
-    console.log(e);
+    // console.log(e);
   }
 
   ngOnInit(): void {

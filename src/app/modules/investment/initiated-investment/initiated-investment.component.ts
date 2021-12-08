@@ -102,11 +102,11 @@ export class InitiatedInvestmentComponent implements OnInit {
       this.mainChartData3.push(65);
     }
     this.eventService.newInvestmentArrivedEvent.subscribe((result) => {
-      if(result){ this.waitData = false}});
+      if (result){ this.waitData = false}});
 
 
     this.marketService.getMyOrderedInitiatedInvestment()
-    .subscribe((value:Investment)=>{
+    .subscribe((value: Investment)=>{
       this.waitData = false;
       if(this.initiatedInvestmentCheck.has(value.id.toString()))
       {
