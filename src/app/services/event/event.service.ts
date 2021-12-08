@@ -16,6 +16,7 @@ export class EventService {
   shouldPaidInvestmentEvent = new BehaviorSubject<Investment>(null);
   investmentPaidEvent = new BehaviorSubject<Investment>(null);
   newInvestmentArrivedEvent = new BehaviorSubject<boolean>(false);
+  newRequestArrivedEvent = new BehaviorSubject<boolean>(false);
   newBugEvent = new BehaviorSubject<Bug>(null);
   syncFamilyEvent = new BehaviorSubject<boolean> (true);
 }

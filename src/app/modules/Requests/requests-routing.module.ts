@@ -4,8 +4,8 @@ import { AddRequestComponent } from './add-request/add-request.component';
 import { RequestPanelComponent } from './request-panel/request-panel.component';
 import { RequestRejectedComponent } from './request-rejected/request-rejected.component';
 import { RequestValidedComponent } from './request-valided/request-valided.component';
+import { RequestInitiatedComponent } from './request-initiated/request-initiated.component';
 
-import { RequestWaitingComponent } from './request-waiting/request-waiting.component';
 
 const routes: Routes = [
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'request-waiting',
-    component: RequestWaitingComponent,
+    component: RequestInitiatedComponent,
     data: {
       title: 'valided-request'
     }

@@ -13,6 +13,11 @@ import { EventService } from '../../../services/event/event.service';
 })
 export class ConfirmedInvestmentComponent implements OnInit {
   waitData = true;
+  readyToPayInvestment: Investment[] = [];
+  readyToPayInvestmentCheck: Map<String, boolean> = new Map<String, boolean>();
+
+  onWaitingPayementInvestment: Investment[] = [];
+  onWaitingPayementInvestmentCheck: Map<String, boolean> = new Map<String, boolean>();
 
 
   // lineChart1
@@ -325,12 +330,7 @@ export class ConfirmedInvestmentComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  readyToPayInvestment: Investment[] = [];
-  readyToPayInvestmentCheck: Map<String, boolean> = new Map<String, boolean>();
 
-  onWaitingPayementInvestment: Investment[] = [];
-  onWaitingPayementInvestmentCheck: Map<String, boolean> = new Map<String, boolean>();
-  
   public constructor(private marketService: MarketService,
     private eventService: EventService)
   {
@@ -351,24 +351,23 @@ export class ConfirmedInvestmentComponent implements OnInit {
     .subscribe((value: Investment) => {
       this.waitData = false;
       if (this.readyToPayInvestmentCheck.has(value.id.toString()))
-      {
+      { console.log('in if')
         let pos = this.readyToPayInvestment.findIndex((invest) => invest.id.toString() == value.id.toString());
-        if (pos > -1) {this.readyToPayInvestment[pos] = value; }
-      }
-      else
+        if (pos > -1) {this.readyToPayInvestment[pos] = value; console.log('in if if')}
+      } else
       {
         this.readyToPayInvestment.push(value);
         this.readyToPayInvestmentCheck.set(value.id.toString(), true);
       }
-    })
+    });
 
     this.marketService.getMyOrderedWaitingPaymentDateInvestment()
     .subscribe((value: Investment) => {
       this.waitData = false;
       if (this.onWaitingPayementInvestmentCheck.has(value.id.toString()))
-      {
+      {console.log('in if 2')
         let pos = this.onWaitingPayementInvestment.findIndex((invest) => invest.id.toString() == value.id.toString());
-        if (pos > -1)this.onWaitingPayementInvestment[pos] = value;
+        if (pos > -1) {this.onWaitingPayementInvestment[pos] = value; console.log('in if if 2')}
       }
       else
       {

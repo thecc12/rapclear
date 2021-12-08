@@ -34,6 +34,7 @@ import { UserInvestmentsListComponent } from './user-investments-list/user-inves
 import { UserInvestmentsComponent } from './user-investments/user-investments.component';
 import { TabsModule } from '../tabs/tabs.module';
 import { ChartsModule } from 'ng2-charts';
+import { RequestsAdminActionComponent } from './request-admin-action/requests-admin-action.component';
 
 @NgModule({
   imports: [
@@ -83,6 +84,7 @@ import { ChartsModule } from 'ng2-charts';
     AdminRangeTimerpickerComponent,
     GainComponent,
     GainInputComponent,
+    RequestsAdminActionComponent
   ],
   exports: [
   ],

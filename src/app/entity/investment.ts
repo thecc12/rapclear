@@ -5,8 +5,6 @@ export const MIN_RETREIVAL_BONUS = 15000;
 
 
 export enum InvestmentState {
-    // ON_MARKET = 'on_market',
-    // NOT_ON_MARKET = 'not_on_market',
 
     INITIATE = 'initiate',
     REFUSE = 'refuse',
