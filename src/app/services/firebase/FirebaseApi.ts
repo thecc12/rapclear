@@ -20,7 +20,7 @@ export class FirebaseApi {
   constructor(private eventService: EventService) {
 
     if (isDevMode()) {
-      console.log('Dev Mode');
+      // console.log('Dev Mode');
       FirebaseApi.firebaseConfig = {
         /////// dev database access
 
@@ -34,7 +34,7 @@ export class FirebaseApi {
         measurementId: 'G-WNC9YPMBZ1'
       };
     } else {
-      console.log('Prod Mode');
+      // console.log('Prod Mode');
       FirebaseApi.firebaseConfig = {
         /////// real database acces
 
@@ -212,7 +212,7 @@ export class FirebaseApi {
         })
         .catch((error) => {
           // Bugsnag.notify(error)
-          console.log('Error ', error)
+          // console.log('Error ', error)
           result.code = ResultStatut.UNKNOW_ERROR;
           result.apiCode = error.code;
           result.message = 'error';
@@ -304,7 +304,7 @@ export class FirebaseApi {
         let bug = new Bug(result);
         // this.eventService.newBugEvent.next(bug);
         //Bugsnag.notify(bug.error)
-        console.log("Result error ",result)
+        // console.log("Result error ",result)
         result.message = 'Unknow error. Please contact administrator';
         break;
     }

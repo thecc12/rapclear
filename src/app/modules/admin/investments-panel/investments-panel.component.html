@@ -17,7 +17,12 @@
                 Investment statistics Doughnut Chart
               </div>
               <div class="card-body">
-                <div class="chart-wrapper">
+                <div *ngIf="waitData" class="chart-wrapper">
+                      <div class="d-flex justify-content-center">
+                        <app-spinner></app-spinner>
+                      </div>
+                </div>
+                <div *ngIf="!waitData" class="chart-wrapper">
                   <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels"
                     [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
                     (chartClick)="chartClicked($event)"></canvas>
@@ -29,7 +34,12 @@
                 Investment statistics Polar Area Chart
               </div>
               <div class="card-body">
-                <div class="chart-wrapper">
+                <div *ngIf="waitData" class="chart-wrapper">
+                      <div class="d-flex justify-content-center">
+                        <app-spinner></app-spinner>
+                      </div>
+                </div>
+                <div *ngIf="!waitData" class="chart-wrapper">
                   <canvas baseChart class="chart" [data]="polarAreaChartData" [labels]="polarAreaChartLabels"
                     [legend]="polarAreaLegend" [chartType]="polarAreaChartType" (chartHover)="chartHovered($event)"
                     (chartClick)="chartClicked($event)"></canvas>
@@ -48,7 +58,12 @@
           <h3 class="text-center mx-4 mb-2">Investment Panel</h3>
         </div>
         <div class="card-body linear-gradient2">
-          <mat-accordion>
+          <div *ngIf="waitData" class="chart-wrapper">
+                <div class="d-flex justify-content-center">
+                  <app-spinner></app-spinner>
+                </div>
+          </div>
+          <mat-accordion *ngIf="!waitData" >
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title> All Investments ( {{listAllInvestment.length}} )</mat-panel-title>
@@ -70,7 +85,7 @@
                 <tbody>
                   <tr *ngFor="let investment of listAllInvestment;let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{investment.amount}}</td>
+                    <td>{{investment.amount}} FCFA</td>
                     <td>{{investment.plan}}</td>
                     <td>{{getFormatDate(investment.investmentDate)}}</td>
                     <td>{{getFormatHours(investment.investmentDate)}}</td>
@@ -93,7 +108,7 @@
                     <th>Amount</th>
                     <th>Plan</th>
                     <th>Invest Date</th>
-                    <th>Invest Hours</th>
+                    <th>Transaction ID</th>
                     <th>Payment Date</th>
                     <th>Owner</th>
                     <th>Action</th>
@@ -103,10 +118,10 @@
                 <tbody>
                   <tr *ngFor="let investment of listInitiatedInvestment;let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{investment.amount}}</td>
+                    <td>{{investment.amount}} FCFA</td>
                     <td>{{investment.plan}}</td>
                     <td>{{getFormatDate(investment.investmentDate)}}</td>
-                    <td>{{getFormatHours(investment.investmentDate)}}</td>
+                    <td>{{investment.transactionId}}</td>
                     <td>{{getFormatDate(investment.paymentDate)}}</td>
                     <td>{{getBuyer(investment.idOwner)}}</td>
                     <td>
@@ -127,10 +142,10 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Amount</th>
+                    <th>Next Amount</th>
                     <th>Plan</th>
                     <th>Invest Date</th>
-                    <th>Invest Hours</th>
+                    <th>Transaction ID</th>
                     <th>Payment Date</th>
                     <th>Owner</th>
                     <th>Action</th>
@@ -140,10 +155,10 @@
                 <tbody>
                   <tr *ngFor="let investment of listWaitingPaymentDateInvestment;let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{investment.amount}}</td>
+                    <td>{{investment.nextAmount}} FCFA</td>
                     <td>{{investment.plan}}</td>
                     <td>{{getFormatDate(investment.investmentDate)}}</td>
-                    <td>{{getFormatHours(investment.investmentDate)}}</td>
+                    <td>{{investment.transactionId}}</td>
                     <td>{{getFormatDate(investment.paymentDate)}}</td>
                     <td>{{getBuyer(investment.idOwner)}}</td>
                     <th>
@@ -164,10 +179,10 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Amount</th>
+                    <th>Next Amount</th>
                     <th>Plan</th>
                     <th>Invest Date</th>
-                    <th>Invest Hours</th>
+                    <th>Transaction ID</th>
                     <th>Payment Date</th>
                     <th>Owner</th>
                     <th>Action</th>
@@ -177,10 +192,10 @@
                 <tbody>
                   <tr *ngFor="let investment of listReadyToPayInvestment;let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{investment.amount}}</td>
+                    <td>{{investment.nextAmount}} FCFA</td>
                     <td>{{investment.plan}}</td>
                     <td>{{getFormatDate(investment.investmentDate)}}</td>
-                    <td>{{getFormatHours(investment.investmentDate)}}</td>
+                    <td>{{investment.transactionId}}</td>
                     <td>{{getFormatDate(investment.paymentDate)}}</td>
                     <td>{{getBuyer(investment.idOwner)}}</td>
                     <th>
@@ -201,10 +216,10 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Amount</th>
+                    <th>Next Amount</th>
                     <th>Plan</th>
                     <th>Invest Date</th>
-                    <th>Invest Hours</th>
+                    <th>Transaction ID</th>
                     <th>Payment Date</th>
                     <th>Owner</th>
                     <th>Action</th>
@@ -214,10 +229,10 @@
                 <tbody>
                   <tr *ngFor="let investment of listPayedInvestment;let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{investment.amount}}</td>
+                    <td>{{investment.nextAmount}} FCFA</td>
                     <td>{{investment.plan}}</td>
                     <td>{{getFormatDate(investment.investmentDate)}}</td>
-                    <td>{{getFormatHours(investment.investmentDate)}}</td>
+                    <td>{{investment.transactionId}}</td>
                     <td>{{getFormatDate(investment.paymentDate)}}</td>
                     <td>{{getBuyer(investment.idOwner)}}</td>
                     <th>
@@ -241,7 +256,7 @@
                     <th>Amount</th>
                     <th>Plan</th>
                     <th>Invest Date</th>
-                    <th>Invest Hours</th>
+                    <th>Transaction ID</th>
                     <th>Payment Date</th>
                     <th>Owner</th>
                     <th>Action</th>
@@ -251,10 +266,10 @@
                 <tbody>
                   <tr *ngFor="let investment of listRejectedInvestment;let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{investment.amount}}</td>
+                    <td>{{investment.amount}} FCFA</td>
                     <td>{{investment.plan}}</td>
                     <td>{{getFormatDate(investment.investmentDate)}}</td>
-                    <td>{{getFormatHours(investment.investmentDate)}}</td>
+                    <td>{{investment.transactionId}}</td>
                     <td>{{getFormatDate(investment.paymentDate)}}</td>
                     <td>{{getBuyer(investment.idOwner)}}</td>
                     <th>

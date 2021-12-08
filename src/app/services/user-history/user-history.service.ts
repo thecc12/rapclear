@@ -40,7 +40,7 @@ export class UserHistoryService {
       });
     }
     getUserInvestmentByIdBuyer(idBuyer: EntityID) {
-      console.log('idBuer ', idBuyer.toString());
+      // console.log('idBuer ', idBuyer.toString());
       return new Promise<ResultStatut>((resolve, reject) => {
         this.firebaseApi.fetchOnce('history')
           .then((result) => {
@@ -57,7 +57,7 @@ export class UserHistoryService {
                 // tslint:disable-next-line:triple-equals
               }
             }
-            console.log('Result buyer ', rs.result);
+            // console.log('Result buyer ', rs.result);
             resolve(rs);
           })
           .catch((error: ResultStatut) => reject(error));

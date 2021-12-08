@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
       if (this.sponsorId) { user.parentSponsorShipId.setId(this.sponsorId); }
       user.network = this.registerForm.value.network;
       user.user_agree = true;
-      console.log("user ",user)
+      // console.log("user ",user)
       return user;
   }
 
@@ -84,8 +84,8 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.registerForm.value.sponsorshipId = this.sponsorId;
-    console.log('referral: ', this.sponsorId);
-    console.log('Reg form avant setform', this.registerForm);
+    // console.log('referral: ', this.sponsorId);
+    // console.log('Reg form avant setform', this.registerForm);
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
     }
     this.waitingRegistration = true;
     let user: User = this.setFormData();
-    console.log('data de setForm', user);
+    // console.log('data de setForm', user);
     this.authService.signInNewUser(user)
       .then((result) => {
         this.router.navigate(['auth/login']);
@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
       })
       .catch((error) => {
         this.waitingRegistration = false;
-        console.log("Error ",error);
+        // console.log("Error ",error);
         // tslint:disable-next-line:max-line-length
         this.notification.showNotification('top', 'center', 'danger', 'pe-7s-close-circle', '\<b>Sorry !\</b>\<br>' + error.message);
         this.submitted = false;

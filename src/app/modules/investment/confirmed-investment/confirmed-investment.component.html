@@ -1,46 +1,78 @@
 <div class="animated fadeIn">
-    <div class="row">
-      <div *ngIf="readyToPayInvestment.length==0 && onWaitingPayementInvestment.length==0">
-        <h4><span class="text-white">No investment to show</span></h4>
-      </div>
-      <div *ngFor="let invest of readyToPayInvestment" class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-primary">
-          <div class="card-body pb-0">
-            
-            <div class="text-value">{{invest.amount}} BTC</div>
-            <div>Payment Date: {{invest.getDateOf(invest.paymentDate) | date:'dd/MM/yyyy HH:mm a'}}</div>
-            <div>Members online</div>
-          </div>
-          <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-            <canvas baseChart class="chart"
-                    [datasets]="lineChart1Data"
-                    [labels]="lineChart1Labels"
-                    [options]="lineChart1Options"
-                    [colors]="lineChart1Colours"
-                    [legend]="lineChart1Legend"
-                    [chartType]="lineChart1Type"></canvas>
-          </div>
+    <div *ngIf="waitData">
+        <div class="d-flex justify-content-center">
+            <app-spinner style="background-color: bisque; border-radius: 15px;"></app-spinner>
         </div>
-      </div><!--/.col-->
-      <div *ngFor="let invest of onWaitingPayementInvestment" class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-warning">
-          <div class="card-body pb-0">
-            <div class="text-value" style="color: rgb(139, 105, 30);">{{invest.amount}} BTC</div>
-            <div style="color: rgb(0, 0, 0);">Payment Date: {{invest.getDateOf(invest.paymentDate) | date:'dd/MM/yyyy HH:mm a'}}</div>
-            <div style="color: rgb(0, 0, 0);">Members online</div>
-          </div>
-          <div class="chart-wrapper mt-3" style="height:70px;">
-            <canvas baseChart class="chart"
-            [datasets]="lineChart3Data"
-            [labels]="lineChart3Labels"
-            [options]="lineChart3Options"
-            [colors]="lineChart3Colours"
-            [legend]="lineChart3Legend"
-            [chartType]="lineChart3Type"></canvas>
-          </div>
+    </div>
+    <div *ngIf="!waitData">
+        <div class="row">
+            <div *ngIf="readyToPayInvestment.length==0 && onWaitingPayementInvestment.length==0">
+                <h4><span class="text-white">No investment to show</span></h4>
+            </div>
+            <div *ngFor="let invest of readyToPayInvestment" class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-warning">
+                    <div class="card-body pb-0">
+
+                        <div class="text-value" style="color: rgb(139, 105, 30);">{{invest.nextAmount}} TCC</div>
+                        <div style="color: rgb(0, 0, 0);">Investment: {{invest.amount}} TCC</div>
+                        <div style="color: rgb(0, 0, 0);">Plan: {{invest.plan}}</div>
+                        <div style="color: rgb(0, 0, 0);">Payment Date: {{invest.getDateOf(invest.paymentDate) |
+                            date:'dd/MM/yyyy'}}</div>
+                        <div style="color: rgb(0, 0, 0);">Status: Ready To Pay</div>
+                    </div>
+                    <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+                        <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels"
+                            [options]="lineChart3Options" [colors]="lineChart3Colours" [legend]="lineChart3Legend"
+                            [chartType]="lineChart3Type"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+            <div *ngFor="let invest of onWaitingPayementInvestment" class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-primary">
+                    <div class="card-body pb-0">
+                        <div class="text-value" style="color: rgb(255, 255, 255);">{{invest.nextAmount}} TCC</div>
+                        <div style="color: rgb(255, 255, 255);">Investment: {{invest.amount}} TCC</div>
+                        <div style="color: rgb(255, 255, 255);">Plan: {{invest.plan}}</div>
+                        <div style="color: rgb(255, 255, 255);">Payment Date: {{invest.getDateOf(invest.paymentDate) |
+                            date:'dd/MM/yyyy'}}</div>
+                        <div style="color: rgb(255, 255, 255);">Status: Working</div>
+                    </div>
+                    <div class="chart-wrapper mt-3" style="height:70px;">
+                        <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels"
+                            [options]="lineChart1Options" [colors]="lineChart1Colours" [legend]="lineChart1Legend"
+                            [chartType]="lineChart1Type"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
         </div>
-      </div><!--/.col-->
-    </div><!--/.row-->
+        <!--/.row-->
+        <div class="row">
+            <div *ngIf="readyToPayInvestment.length==0 && onWaitingPayementInvestment.length==0">
+                <h4><span class="text-white">No investment to show</span></h4>
+            </div>
+            <div *ngFor="let invest of readyToPayInvestment" class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-warning">
+                    <div class="card-body pb-0">
+
+                        <div class="text-value" style="color: rgb(139, 105, 30);">{{invest.nextAmount}} TCC</div>
+                        <div style="color: rgb(0, 0, 0);">Investment: {{invest.amount}} TCC</div>
+                        <div style="color: rgb(0, 0, 0);">Plan: {{invest.plan}}</div>
+                        <div style="color: rgb(0, 0, 0);">Payment Date: {{invest.getDateOf(invest.paymentDate) |
+                            date:'dd/MM/yyyy'}}</div>
+                        <div style="color: rgb(0, 0, 0);">Status: Ready To Pay</div>
+                    </div>
+                    <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+                        <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels"
+                            [options]="lineChart3Options" [colors]="lineChart3Colours" [legend]="lineChart3Legend"
+                            [chartType]="lineChart3Type"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </div>
     <!--/.card-->
-  </div>
-  
+</div>

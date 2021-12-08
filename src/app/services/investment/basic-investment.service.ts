@@ -106,7 +106,7 @@ export class BasicInvestmentService {
         .getFirebaseDatabase()
         .ref('investments')
         .on('child_added', (snapshot) => {
-            console.log('child_added ',snapshot.val())
+            // console.log('child_added ',snapshot.val())
             let investment: Investment = new Investment();
             investment.hydrate(snapshot.val());
             if (!this.investments.has(investment.id.toString())) {
@@ -143,7 +143,7 @@ export class BasicInvestmentService {
                 data: nstatus
               }])
               .then((result) => {
-                console.log("Result ",investment,investment.id.toString(),this.investmentList.getValue().get(investment.id.toString()))
+                // console.log("Result ",investment,investment.id.toString(),this.investmentList.getValue().get(investment.id.toString()))
                 this.investmentList.getValue().get(investment.id.toString()).investmentState = nstatus;
                 resolve(result);
               })
@@ -197,6 +197,15 @@ export class BasicInvestmentService {
 
     addInvestment(investment: Investment, user: User, isBonusInvestment= false): Promise<ResultStatut> {
         return new Promise<ResultStatut>((resolve, reject) => {
+            let paymentDate = new Date(investment.investmentDate);
+            // console.log("here date", investment.wantedGain,paymentDate.getDate()+investment.wantedGain.jour)           
+            paymentDate.setDate(paymentDate.getDate() + investment.plan);
+            investment.paymentDate = paymentDate.toISOString();
+            investment.investmentState = InvestmentState.INITIATE;
+            investment.plan = investment.plan;
+            investment.wantedGain.init();
+            // investment.wantedGain.hydrate(gain.toString());
+            investment.nextAmount = this.planService.calculePlan(investment.amount, investment.plan);
             this.firebaseApi.updates([
                 {
                     link: `investments/${investment.id}`,

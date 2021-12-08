@@ -54,7 +54,7 @@ export class UserNotificationService {
     ]);
   }
   findMessageByInvestmentId(idInvestment: EntityID, InvestmentOwnerID: EntityID): Promise<ResultStatut> {
-    console.log('IDInvestment ', idInvestment.toString());
+    // console.log('IDInvestment ', idInvestment.toString());
     return new Promise<ResultStatut>((resolve, reject) => {
       let message: Message = this.listNotifications.find((msg: Message) => msg.idInvestment.toString() == idInvestment.toString());
       let result: ResultStatut = new ResultStatut();
@@ -70,7 +70,7 @@ export class UserNotificationService {
       .limitToLast(1)
       .once('value', (data) => {
         let kdata = data.val();
-        console.log(kdata);
+        // console.log(kdata);
         let message: Message = new Message();
         // tslint:disable-next-line:forin
         for (let key in kdata) {

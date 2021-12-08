@@ -4,6 +4,7 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { Investment } from '../../../entity/investment';
 import { MarketService } from '../../../services/market/market.service';
+import { EventService } from '../../../services/event/event.service';
 
 @Component({
   selector: 'app-confirmed-investment',
@@ -11,6 +12,7 @@ import { MarketService } from '../../../services/market/market.service';
   styleUrls: ['./confirmed-investment.component.scss']
 })
 export class ConfirmedInvestmentComponent implements OnInit {
+  waitData = true;
 
 
   // lineChart1
@@ -323,14 +325,16 @@ export class ConfirmedInvestmentComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  readyToPayInvestment:Investment[]=[];
-  readyToPayInvestmentCheck:Map<String,boolean>=new Map<String,boolean>();
+  readyToPayInvestment: Investment[] = [];
+  readyToPayInvestmentCheck: Map<String, boolean> = new Map<String, boolean>();
 
-  onWaitingPayementInvestment:Investment[]=[];
-  onWaitingPayementInvestmentCheck:Map<String,boolean>=new Map<String,boolean>();
+  onWaitingPayementInvestment: Investment[] = [];
+  onWaitingPayementInvestmentCheck: Map<String, boolean> = new Map<String, boolean>();
   
-  public constructor(private marketService:MarketService)
+  public constructor(private marketService: MarketService,
+    private eventService: EventService)
   {
+    this.waitData = true;
 
   }
   ngOnInit(): void {
@@ -340,32 +344,37 @@ export class ConfirmedInvestmentComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+    this.eventService.newInvestmentArrivedEvent.subscribe((result) => {
+      if (result){ this.waitData = false}});
+
     this.marketService.getMyOrderedReadyToPayInvestment()
-    .subscribe((value:Investment)=>{
-      if(this.readyToPayInvestmentCheck.has(value.id.toString()))
+    .subscribe((value: Investment) => {
+      this.waitData = false;
+      if (this.readyToPayInvestmentCheck.has(value.id.toString()))
       {
-        let pos=this.readyToPayInvestment.findIndex((invest)=>invest.id.toString()==value.id.toString());
-        if(pos>-1)this.readyToPayInvestment[pos]=value;
+        let pos = this.readyToPayInvestment.findIndex((invest) => invest.id.toString() == value.id.toString());
+        if (pos > -1) {this.readyToPayInvestment[pos] = value; }
       }
       else
       {
         this.readyToPayInvestment.push(value);
-        this.readyToPayInvestmentCheck.set(value.id.toString(),true);
+        this.readyToPayInvestmentCheck.set(value.id.toString(), true);
       }
     })
 
     this.marketService.getMyOrderedWaitingPaymentDateInvestment()
-    .subscribe((value:Investment)=>{
-      if(this.onWaitingPayementInvestmentCheck.has(value.id.toString()))
+    .subscribe((value: Investment) => {
+      this.waitData = false;
+      if (this.onWaitingPayementInvestmentCheck.has(value.id.toString()))
       {
-        let pos=this.onWaitingPayementInvestment.findIndex((invest)=>invest.id.toString()==value.id.toString());
-        if(pos>-1)this.onWaitingPayementInvestment[pos]=value;
+        let pos = this.onWaitingPayementInvestment.findIndex((invest) => invest.id.toString() == value.id.toString());
+        if (pos > -1)this.onWaitingPayementInvestment[pos] = value;
       }
       else
       {
         this.onWaitingPayementInvestment.push(value);
-        this.onWaitingPayementInvestmentCheck.set(value.id.toString(),true);
+        this.onWaitingPayementInvestmentCheck.set(value.id.toString(), true);
       }
-    })
+    });
   }
 }

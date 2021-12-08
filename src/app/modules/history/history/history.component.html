@@ -33,7 +33,7 @@
                 </td>
               </tr>
               <tr *ngFor="let history of investments">
-                <td><b>{{history.amount}} BTC</b></td>
+                <td><b>{{history.amount}} TCC</b></td>
                 <td><b>{{history.investmentDate}}</b></td>
                 <td *ngIf="history.investmentState=='refuse'"><b><span class="badge badge-danger"> Rejected </span></b></td>
                 <td *ngIf="history.investmentState=='payed'"><b><span class="badge badge-success"> Payed </span></b></td>

@@ -17,6 +17,7 @@ import { UserService } from '../../../services/user/user.service';
   styleUrls: ['./investments-panel.component.css']
 })
 export class InvestmentsPanelComponent implements OnInit {
+  waitData=true;
   listAllInvestment: Investment[] = [];
   listAllInvestmentCheck: Map<string, boolean> = new Map<string, boolean>();
 
@@ -51,6 +52,7 @@ export class InvestmentsPanelComponent implements OnInit {
     private dataUpdateService: DataStateUpdateService,
     private dialog: BsModalService
   ) {
+    this.waitData=true;
     this.marketService.getAllInitiatedInvestment().subscribe((investment: Investment) => {
       if (!this.listInitiatedInvestmentCheck.has(investment.id.toString().toString())) {
         this.listInitiatedInvestmentCheck.set(investment.id.toString().toString(), true);
@@ -138,6 +140,7 @@ export class InvestmentsPanelComponent implements OnInit {
         this.listInitiatedInvestment.push(investment);
         localStorage.setItem('listInitiatedInvestment', this.listInitiatedInvestment.length.toString());
       }
+      this.waitData=false;
     });
 
     this.marketService.getAllWaitingPaymentDateInvestment().subscribe((investment: Investment) => {
@@ -146,6 +149,7 @@ export class InvestmentsPanelComponent implements OnInit {
         this.listWaitingPaymentDateInvestment.push(investment);
         localStorage.setItem('listWaitingPaymentDateInvestment', this.listWaitingPaymentDateInvestment.length.toString());
       }
+      this.waitData=false;
     });
 
     this.marketService.getAllReadyToPayInvestment().subscribe((investment: Investment) => {
@@ -154,6 +158,7 @@ export class InvestmentsPanelComponent implements OnInit {
         this.listReadyToPayInvestment.push(investment);
         localStorage.setItem('listReadyToPayInvestment', this.listReadyToPayInvestment.length.toString());
       }
+      this.waitData=false;
     });
 
     this.marketService.getAllPayedInvestment().subscribe((investment: Investment) => {
@@ -162,6 +167,7 @@ export class InvestmentsPanelComponent implements OnInit {
         this.listPayedInvestment.push(investment);
         localStorage.setItem('listPayedInvestment', this.listPayedInvestment.length.toString());
       }
+      this.waitData=false;
     });
 
     this.marketService.getAllRejectedInvestment().subscribe((investment: Investment) => {
@@ -170,6 +176,7 @@ export class InvestmentsPanelComponent implements OnInit {
         this.listRejectedInvestment.push(investment);
         localStorage.setItem('listRejectedInvestment', this.listRejectedInvestment.length.toString());
       }
+      this.waitData=false;
     });
 
     merge(
