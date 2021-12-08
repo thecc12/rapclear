@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 import { CustomFile } from '../../entity/custom-file';
 import { EntityID } from '../../entity/EntityID';

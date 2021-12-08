@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { AngularFireStorage } from '@angular/fire/storage';
 import { ImageService } from '../../../services/image/image.service';
+import { FileService } from '../../../services/files/file.service';
 
 @Component({
   selector: 'app-add-request',
@@ -20,6 +21,7 @@ export class AddRequestComponent implements OnInit {
   content: string = '';
   constructor(
     private formLog: FormBuilder,
+    // private fileService:FileService,
     // private storage: AngularFireStorage,
     private service: ImageService) {
       this.imgSrc = '/assets/img/image_placeholder.jpg';

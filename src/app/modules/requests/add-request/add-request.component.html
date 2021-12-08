@@ -12,12 +12,12 @@
                                 <h1>Request</h1>
                                 <p class="text-muted">Send request to administrator</p>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="subject" formControlName="subject"
+                                    <input type="text" id="subject" formControlName="object"
                                         placeholder="Enter Subject request" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.subject.errors }">
+                                        [ngClass]="{ 'is-invalid': submitted && f.object.errors }">
 
-                                    <div *ngIf="submitted && f.subject.errors" class="invalid-feedback text-danger">
-                                        <div *ngIf="f.subject.errors.required">Field is required</div>
+                                    <div *ngIf="submitted && f.object.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.object.errors.required">Field is required</div>
                                     </div>
                                 </div>
                                 <div class="input-group mb-4">
