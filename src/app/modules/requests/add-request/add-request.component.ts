@@ -3,14 +3,11 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ImageService } from '../../../services/image/image.service';
-<<<<<<< HEAD
 import { FileService } from '../../../services/files/file.service';
-=======
 import { finalize } from 'rxjs/operators';
 import { BasicRequestService } from '../../../services/request/basic-request.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Request } from '../../../entity/request';
->>>>>>> d2c26056e31f782705ef20fe4f0c9d764ba5f962
 
 @Component({
   selector: 'app-add-request',
