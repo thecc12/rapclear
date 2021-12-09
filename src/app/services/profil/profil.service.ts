@@ -229,7 +229,7 @@ export class ProfilService {
         let data = result.val();
         let promiseList = [];
         let userList = [];
-        // tslint:disable-next-line:forin
+        console.log("Data fieul ",data)
         for (let k in data) {
           let user: User = new User();
           user.hydrate(data[k]);
@@ -239,6 +239,7 @@ export class ProfilService {
         Promise.all(promiseList.map((pl) => pl.promise))
         .then((results: ResultStatut[]) => {
           // console.log("result ",results)
+          this.fieulList=[];
             for (let i = 0; i < results.length; i++) {
               if (withUserInvestment) {
                 this.fieulList.push({

@@ -351,7 +351,8 @@ export class ConfirmedInvestmentComponent implements OnInit {
     .subscribe((value: Investment) => {
       this.waitData = false;
       if (this.readyToPayInvestmentCheck.has(value.id.toString()))
-      { console.log('in if')
+      { 
+        // console.log('in if')
         let pos = this.readyToPayInvestment.findIndex((invest) => invest.id.toString() == value.id.toString());
         if (pos > -1) {this.readyToPayInvestment[pos] = value; console.log('in if if')}
       } else
@@ -365,7 +366,8 @@ export class ConfirmedInvestmentComponent implements OnInit {
     .subscribe((value: Investment) => {
       this.waitData = false;
       if (this.onWaitingPayementInvestmentCheck.has(value.id.toString()))
-      {console.log('in if 2')
+      {
+        // console.log('in if 2')
         let pos = this.onWaitingPayementInvestment.findIndex((invest) => invest.id.toString() == value.id.toString());
         if (pos > -1) {this.onWaitingPayementInvestment[pos] = value; console.log('in if if 2')}
       }

@@ -30,6 +30,7 @@ export class FamillyComponent implements OnInit {
   getInvestmentsFamilly() {
     this.userProfil.getFieulList()
     .then((result:ResultStatut)=>{
+      console.log("Fielys ",result.result)
       this.fieuls=result.result;
       this.waitData=false;
     })

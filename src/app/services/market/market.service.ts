@@ -76,7 +76,14 @@ export class MarketService {
     for (let investment of Array.from(this.listInvestment.values())) {
       // console.log(investment.idOwner.toString(), idUser.toString());
       // tslint:disable-next-line:triple-equals
-      if (investment.idOwner.toString() == idUser.toString()) { nbinvestment++; }
+      if (
+        investment.idOwner.toString() == idUser.toString() && 
+        (
+          investment.investmentState==InvestmentState.ON_WAITING_PAYMENT_DATE || 
+          investment.investmentState==InvestmentState.READY_TO_PAY || 
+          investment.investmentState==InvestmentState.PAYED
+        )
+      ) { nbinvestment++; }
     }
     return nbinvestment;
   }
