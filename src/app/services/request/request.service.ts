@@ -19,7 +19,6 @@ import { UserService } from '../user/user.service';
 @Injectable({
     providedIn: 'root'
 })
-
 export class InvestmentService {
     investments: Map<String, Investment> = new Map<String, Investment>();
     investmentList: BehaviorSubject<Map<String, Investment>> = new BehaviorSubject<Map<String, Investment>>(this.investments)

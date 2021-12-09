@@ -27,6 +27,7 @@ export class ProfilService {
 
   balancedAccount: number = 0;
   balancedAccountObservable: BehaviorSubject<number> = new BehaviorSubject<number>(this.balancedAccount);
+  user:User=null;
 
   constructor(
     private marketService: MarketService,
@@ -37,20 +38,44 @@ export class ProfilService {
     private memberShipService: MembershipService,
     private historyService: UserHistoryService
   ) {
-    // this.recombineHistory();
-    // this.reCalculateBonus();
 
+    
     this.eventService.loginEvent.subscribe((user: User) => {
       if (!user) { return; }
+      
       this.balancedAccount += user.bonus;
       this.balancedAccountObservable.next(this.balancedAccount);
     });
+
+    this.authService.currentUserSubject.subscribe((user:User)=>{
+      if(!this.user && user)
+      {
+        this.firebaseApi
+        .getFirebaseDatabase()
+        .ref('users')
+        .orderByChild('id')
+        .limitToLast(1)
+        .equalTo(user.id.toString())
+        .on("value",(data)=>{
+          // if(!result.result) return;
+          let d=data.val();
+          if(!d) return;
+          let userObj=Object.values(d)[0];
+          this.user=new User();
+          this.user.hydrate(userObj);
+          this.authService.currentUser=this.user;
+          this.authService.currentUserSubject.next(this.user);
+        })
+      }
+      
+    })
 
     this.eventService
     .newInvestmentArrivedEvent
     .subscribe((arrived: boolean) => {
       if (!arrived) { return; }
       this.balancedAccount = this.authService.currentUserSubject.getValue().bonus;
+      this.balancedAccountObservable.next(this.balancedAccount);
     });
 
     this.marketService
@@ -150,6 +175,7 @@ export class ProfilService {
         user.bigGrandParentSponsorShipId.toString() != ''?this.userService.getUserBySponsorId(user.bigGrandParentSponsorShipId):Promise.resolve(new ResultStatut())
       ])
       .then((results:ResultStatut[])=>{
+        console.log("Result User ",results);
         let users:User[] = results.map((result:ResultStatut)=>result.result);
         if(users[0]!=null){
           users[0].bonus = this.memberShipService.membership(investmentAmount,users[0].bonus,ConfigApp.gainConfig.parentBonnus);
@@ -177,6 +203,7 @@ export class ProfilService {
               data: users[2].bonus
           })
         } 
+        console.log("updates ",updates);
         return this.firebaseApi.updates(updates);       
       })
         .then((result: ResultStatut) => resolve(result))

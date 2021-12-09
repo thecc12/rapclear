@@ -307,64 +307,36 @@ export class BasicInvestmentService {
     // }
 
     // tslint:disable-next-line:max-line-length
-    confirmInvestment(p: Investment, msg: Message, user: User= this.authService.currentUserSubject.getValue(), onLine: boolean= true): Promise<ResultStatut> {
+    confirmInvestment(investment: Investment, user: User= this.authService.currentUserSubject.getValue(), onLine: boolean= false): Promise<ResultStatut> {
         return new Promise<ResultStatut>((resolve, reject) => {
-            this.getOnlineInvestment(p.id)
-            .then((result: ResultStatut) => {
-                let investment: Investment = result.result;
-                if (!onLine) { investment = p; }
+
                 if (investment.investmentState == InvestmentState.ON_WAITING_PAYMENT_DATE) {
                     let result: ResultStatut = new ResultStatut();
                     result.apiCode = ResultStatut.INVALID_ARGUMENT_ERROR;
                     result.message = 'Investment is already confirmed';
                     return reject(result);
                 }
-                // tslint:disable-next-line:triple-equals max-line-length
-                if (investment.investmentState != InvestmentState.INITIATE) {// || investment.idBuyer.toString().trim()==""
+
+                if (investment.investmentState != InvestmentState.INITIATE) {
                     let result: ResultStatut = new ResultStatut();
                     result.apiCode = ResultStatut.INVALID_ARGUMENT_ERROR;
                     result.message = 'The investment is not awaiting confirmation';
                     return reject(result);
                 }
+
                 investment.investmentState = InvestmentState.ON_WAITING_PAYMENT_DATE;
-                investment.paymentDate =  onLine == true ? (new Date()).toISOString() : investment.paymentDate;
-                // investment.nextAmount=this.planService.calculePlan(investment.amount,investment.wantedGain.jour)
-
-                let newInvestment: Investment = new Investment();
-                newInvestment.id.setId(investment.id.toString());
-                newInvestment.amount = investment.nextAmount;
-                newInvestment.investmentDate = investment.paymentDate;
-
-                let dateForSelle = new Date(newInvestment.investmentDate);
-                // console.log("here date", investment.wantedGain,dateForSelle.getDate()+investment.wantedGain.jour)
-                dateForSelle.setDate(dateForSelle.getDate() + investment.wantedGain.jour);
-                newInvestment.paymentDate = dateForSelle.toISOString();
-                newInvestment.investmentState = InvestmentState.ON_WAITING_PAYMENT_DATE;
-                newInvestment.plan = investment.wantedGain.jour;
-                newInvestment.wantedGain.init();
-                // newInvestment.idOwner.setId(msg.from.toString());
-                // newInvestment.idBuyer.setId(' ');
-
-                this.firebaseApi.updates([
-                    {
-                        link: `investments/${investment.id.toString()}`,
-                        data: newInvestment.toString()
-                    }
-                ])
-                .then((result) => this.userHistoryService.addToHistory(investment, user.id))
+                this.changeStatusMarket(investment,investment.investmentState)
                 .then((result) => {
-                    this.eventService.investmentPaidEvent.next(newInvestment);
-                    this.eventService.addInvestmentEvent.next(newInvestment);
-                    return this.userNotificationService.deleteNotification(msg);
+                    this.eventService.investmentPaidEvent.next(investment);
+                    this.eventService.addInvestmentEvent.next(investment);
+                    return this.userService.getUserById(investment.idOwner, true)
                 })
-                .then((result) => this.userService.getUserById(msg.from, true))
-                .then((result) => this.userProfil.addParentBonus(result.result, newInvestment.amount))
+                .then((result) => this.userProfil.addParentBonus(result.result, investment.amount))
                 .then((result) => resolve(result))
                 .catch((error) => {
                     this.firebaseApi.handleApiError(error);
                     reject(error);
                 });
-            });
         });
     }
 

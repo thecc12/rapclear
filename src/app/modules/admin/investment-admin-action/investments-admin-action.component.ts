@@ -60,11 +60,12 @@ export class InvestmentsAdminActionComponent implements OnInit, OnChanges {
   }
 
   confirmInvestment(investment: Investment) {
+    console.log("ConfirmInvest ",investment)
     if (this.waitResponse || this.waitResponseSecond || this.waitResponseThird || this.waitResponseFour) { return; }
     this.waitResponse = true;
     this.selectedInvestmentId = investment.id.toString();
     console.log(investment);
-    this.basicInvestmentService.changeStatusMarket(investment, this.basicInvestmentService.getNextStatust(investment.investmentState))
+    this.basicInvestmentService.confirmInvestment(investment)
     .then((result: ResultStatut) => {
       this.waitResponse = false;
       this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the investment is now \<b>On Waiting Payment Date\</b>`, 200);
