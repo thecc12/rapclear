@@ -229,7 +229,6 @@ export class ProfilService {
         let data = result.val();
         let promiseList = [];
         let userList = [];
-        console.log("Data fieul ",data)
         for (let k in data) {
           let user: User = new User();
           user.hydrate(data[k]);

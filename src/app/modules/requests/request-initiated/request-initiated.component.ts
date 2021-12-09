@@ -11,6 +11,7 @@ import { NotificationService } from '../../../services/notification/notification
 import { UserService } from '../../../services/user/user.service';
 import { Request } from '../../../entity/request';
 import { BasicRequestService } from '../../../services/request/basic-request.service';
+import { EntityID } from '../../../entity/EntityID';
 
 @Component({
   selector: 'app-request-initiated',
@@ -29,7 +30,7 @@ export class RequestInitiatedComponent implements OnInit {
   listInitiatedRequest: Request[] = [];
   listInitiatedRequestCheck: Map<string, boolean> = new Map<string, boolean>();
 
-
+  userOwner:User=new User();
   waitResponseSecondBtn: boolean = false;
   waitResponseBtn: boolean = false;
 
@@ -55,19 +56,29 @@ export class RequestInitiatedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('dans ngOnInit');
-    this.marketService.getAllInitiatedRequest().subscribe((request: Request) => {
-      this.waitData=false;
-      if (!this.listInitiatedRequestCheck.has(request.id.toString().toString())) {
-        this.listInitiatedRequestCheck.set(request.id.toString().toString(), true);
-        this.listInitiatedRequest.push(request);
-        console.log('initiated req: ', this.listInitiatedRequest)
+    this.authService.currentUserSubject.subscribe((user:User)=>{
+      if(user)
+      {
+        this.userOwner=user;
       }
-    });
-    this.eventService.newRequestArrivedEvent.subscribe((result) => {
-      if (result) { this.waitData = false; 
-        console.log('initiated req2: ', this.listInitiatedRequest)}});
-    }
+    })
+    // console.log('dans ngOnInit');
+    
+    // this.marketService.getAllInitiatedRequest().subscribe((request: Request) => {
+    //   this.waitData=false;
+    //   if (!this.listInitiatedRequestCheck.has(request.id.toString().toString())) {
+    //     this.listInitiatedRequestCheck.set(request.id.toString().toString(), true);
+    //     this.listInitiatedRequest.push(request);
+    //     console.log('initiated req: ', this.listInitiatedRequest)
+    //   }
+    // });
+
+
+    // this.eventService.newRequestArrivedEvent.subscribe((result) => {
+    //   if (result) { this.waitData = false; 
+    //     console.log('initiated req2: ', this.listInitiatedRequest)}});
+    
+  }
 
     ok() {
       setTimeout(() => {

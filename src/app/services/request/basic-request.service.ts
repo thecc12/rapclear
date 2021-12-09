@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { Message } from '../../entity/chat';
 import { EntityID } from '../../entity/EntityID';
 import {  Request,  RequestState } from '../../entity/request';
@@ -15,6 +15,7 @@ import { NotificationService } from '../notification/notification.service';
 import { UserNotificationService } from '../user-notification/user-notification.service';
 import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -36,8 +37,13 @@ export class BasicRequestService {
         ) {
             // this.eventService.loginEvent.subscribe((log) => {
             //   if (!log) { return; }
-              this.newRequestHandler();
+              
             // });
+            this.authService.currentUserSubject.subscribe((user)=>{
+                if(!user) return;
+                if(this.authService.isAdminer) this.newRequestAdminHandler();
+                else this.newRequestUserHandler(user.id);
+            })
         }
 
 
@@ -48,6 +54,32 @@ export class BasicRequestService {
         saveRequest (product) {
             return this.db.list('/requests').push(product);
           }
+
+        getRequest()
+        {
+            return this.requestList.pipe(
+                switchMap((p) => from(Array.from(p.values()))),
+              );
+        }
+
+        getUserRequest(idOwner: EntityID=this.authService.currentUserSubject.getValue().id) {
+            return this.getRequest().pipe(
+                filter((r:Request) => r.idOwner.toString() == idOwner.toString())
+            );
+        }
+        getUserRequestByState(idOwner: EntityID=this.authService.currentUserSubject.getValue().id,requestState:RequestState)
+        {
+            return this.getUserRequest(idOwner).pipe(
+                filter((request:Request)=> request.requestState==requestState)
+            )
+        }
+        getAllUserRequestByState(requestState:RequestState)
+        {
+            return this.getRequest().pipe(
+                filter((request:Request)=> request.requestState==requestState)
+            )
+        }
+
 
         approuveRequestStatus(idRequest: EntityID) {
             let nstatus = RequestState.VALIDED;
@@ -89,18 +121,49 @@ export class BasicRequestService {
         }
 
 
-    newRequestHandler() {
+    newRequestUserHandler(userID:EntityID)
+    {
+        this.firebaseApi
+        .getFirebaseDatabase()
+        .ref(`requests/${userID.toString()}`)
+        .once('value', (result) => {
+          this.requests.clear();
+          let data = result.val();
+          for(let reqID in data)
+          {
+            let request: Request = new Request();
+            request.hydrate(data[reqID]);
+            if (!this.requests.has(request.id.toString())) {
+                this.requests.set(request.id.toString(), request);
+            }
+          }
+          this.requestList.next(this.requests);    
+          this.eventService.newRequestArrivedEvent.next(true);     
+      })
+
+    }
+
+    newRequestAdminHandler() {
         this.firebaseApi
         .getFirebaseDatabase()
         .ref('requests')
-        .on('child_added', (snapshot) => {
-            // console.log('child_added ',snapshot.val())
-            let request: Request = new Request();
-            request.hydrate(snapshot.val());
-            if (!this.requests.has(request.id.toString())) {
-                this.requests.set(request.id.toString(), request);
-                this.requestList.next(this.requests);
+        .on('value', (snapshot) => {
+            let data=snapshot.val();
+            console.log("value on ",data)
+            for(let user in data)
+            {
+                for(let userId in data[user])
+                {
+                    let request: Request = new Request();
+                    request.hydrate(data[user][userId]);
+                    if (!this.requests.has(request.id.toString())) {
+                        this.requests.set(request.id.toString(), request);
+                    }
+                }
+                
             }
+            this.requestList.next(this.requests);         
+            this.eventService.newRequestArrivedEvent.next(true);   
         });
     }
 

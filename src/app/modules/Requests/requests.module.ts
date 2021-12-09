@@ -21,6 +21,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
 import { RequestInitiatedComponent } from './request-initiated/request-initiated.component';
+import { ListRequestComponent } from '../components/list-request/list-request.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { RequestInitiatedComponent } from './request-initiated/request-initiated
     MatPaginatorModule,
     MatTableModule,
     MatDialogModule,
-    NgbModule
+    NgbModule,
+    ProgressIndeterminateModule
   ],
   declarations: [
     RequestInitiatedComponent,
@@ -58,6 +60,7 @@ import { RequestInitiatedComponent } from './request-initiated/request-initiated
     RequestRejectedComponent,
     RequestValidedComponent,
     RequestPanelComponent,
+    ListRequestComponent
 
   ]
 })

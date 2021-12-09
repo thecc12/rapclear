@@ -56,57 +56,7 @@
             </div>
         </div>
         
-    <div class="row">
-        <div class="col-sm-12 col-md-12">
-            <div class="card" style="border-radius: 15px;">
-                <div class="card-header linear-gradient">
-                    <h3 class="text-center mx-4 mb-2">Requests History</h3>
-                </div>
-                <div class="card-body linear-gradient2">
-                    <table class="table table-bordered table-striped table-sm">
-                        <thead class="thead-light">
-                            <tr>
-                                <th><b>Date</b></th>
-                                <th><b>Subject</b></th>
-                                <th><b>Content</b></th>
-                                <th><b>Starus</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th><b>2021-12-10</b></th>
-                                <th><b>invest unvalid</b></th>
-                                <th>The content of the request</th>
-                                <th><div class="btn btn-danger">Rejected</div></th>
-                            </tr>
-                            <tr>
-                                <th><b>Test user</b></th>
-                                <th><b>2021-12-10</b></th>
-                                <th><b>invest unvalid</b></th>
-                                <th><div class="btn btn-success">Approuved</div></th>
-                            </tr>
-                            <tr>
-                                <th><b>Test user</b></th>
-                                <th><b>2021-12-10</b></th>
-                                <th><b>invest unvalid</b></th>
-                                <th><div class="btn btn-secondary">Initiated</div></th>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <nav>
-                        <ul class="pagination pull-right">
-                            <li class="page-item"><a class="page-link">Prev</a></li>
-                            <li class="page-item active">
-                                <a class="page-link">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link">2</a></li>
-                            <li class="page-item"><a class="page-link">3</a></li>
-                            <li class="page-item"><a class="page-link">Next</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+    <app-list-request requestType="all" label="Requests History" showModal=false [userOwner]="userOwner" forAll=false></app-list-request>
+    
     </div>
 </main>

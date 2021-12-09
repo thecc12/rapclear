@@ -1,0 +1,82 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-header linear-gradient">
+                    <h3 class="text-center mx-4 mb-2">{{label}}</h3>
+                </div>
+                <div class="card-body linear-gradient2">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th><b>user</b></th>
+                                <th><b>Date</b></th>
+                                <th><b>Subject</b></th>
+                                <th><b>Content</b></th>
+                                <th><b>Status</b></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="loadedData==false">
+                            <tr>
+                                <td colspan="5" style="text-align: center;">
+                                    <app-progress-indeterminate></app-progress-indeterminate>
+                                   </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="loadedData==true">
+                            <tr *ngIf="requestList.length==0">
+                                <td colspan="5" style="text-align: center;">No data found</td>
+                            </tr>
+                            <ng-container *ngIf="requestList.length!=0">
+                                <tr  (click)="clickToRequest(request,modalTemplate)" *ngFor="let request of requestList;let i=index">
+                                    <td>{{getOwner(request.idOwner).fullName}}</td>
+                                    <td>{{getFormatDate(request.requestDate)}}</td>
+                                    <td>{{request.requestSubject}}</td>
+                                    <td>{{request.requestContent}}</td>
+                                    <td>{{request.requestState}}</td>
+                                </tr>
+                            </ng-container>
+                            
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination pull-right">
+                            <li class="page-item"><a class="page-link">Prev</a></li>
+                            <li class="page-item active">
+                                <a class="page-link">1</a>
+                            </li>
+                            <li class="page-item"><a class="page-link">2</a></li>
+                            <li class="page-item"><a class="page-link">3</a></li>
+                            <li class="page-item"><a class="page-link">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalTemplate>
+    <!-- bsModal #myModal="bs-modal" -->
+    <!-- <div class="modal fade" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"> -->
+            <div class="modal-header">
+                <h4 class="modal-title">User: {{getOwner(selectedRequest.idOwner).fullName}}</h4>
+                <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><b>E-mail: </b>{{getOwner(selectedRequest.idOwner).email}}</p>
+                <p><b>Date: </b>{{getFormatDate(selectedRequest.requestDate)}}</p>
+                <p><b>Subject: </b>{{selectedRequest.requestSubject}}</p>
+                <p><b>Content: </b>{{selectedRequest.requestContent}}</p>
+                <p><img [src]="selectedRequest.imgUrl" alt="img"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="myModal.hide()">Reject</button>
+                <button type="button" class="btn btn-success" (click)="myModal.hide()">Approuve</button>
+            </div>
+       
+</ng-template>

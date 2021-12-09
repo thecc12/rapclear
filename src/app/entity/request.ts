@@ -2,6 +2,7 @@ import { Entity } from './entity';
 import { EntityID } from './EntityID';
 
 export enum RequestState {
+    STATE_FOR_ALL="all",
     INITIATE = 'initiated',
     VALIDED = 'valided',
     REJECTED = 'rejected',
@@ -26,13 +27,12 @@ export class Request extends Entity {
     }
 
     hydrate(entity: Record<string | number, any>): void {
+        // console.log("Entity ",entity)
         for (const key of Object.keys(entity)) {
             if (Reflect.has(this, key)) {
-                if (key == 'id') { this.id.setId(entity.id); } else if (key == 'idOwner') {
-                    this.idOwner.setId(entity.idOwner);
-                } else {
-                    Reflect.set(this, key, entity[key]);
-                }
+                if (key == 'id') this.id.setId(entity.id)
+                else if (key == 'idOwner') this.idOwner.setId(entity.idOwner)
+                else  Reflect.set(this, key, entity[key])
             }
         }
     }

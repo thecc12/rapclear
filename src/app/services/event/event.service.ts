@@ -19,4 +19,5 @@ export class EventService {
   newRequestArrivedEvent = new BehaviorSubject<boolean>(false);
   newBugEvent = new BehaviorSubject<Bug>(null);
   syncFamilyEvent = new BehaviorSubject<boolean> (true);
+  requestArrivedEvent=new BehaviorSubject<boolean> (true);
 }

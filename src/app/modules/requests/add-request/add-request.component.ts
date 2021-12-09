@@ -8,6 +8,7 @@ import { finalize } from 'rxjs/operators';
 import { BasicRequestService } from '../../../services/request/basic-request.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Request } from '../../../entity/request';
+import { User } from '../../../entity/user';
 
 @Component({
   selector: 'app-add-request',
@@ -24,7 +25,7 @@ export class AddRequestComponent implements OnInit {
   subject: string = '';
   content: string = '';
   requestData = new Request();
-
+  userOwner:User=new User();
   constructor(
     private authService: AuthService,
     private formLog: FormBuilder,
@@ -41,6 +42,10 @@ export class AddRequestComponent implements OnInit {
       'imageUrl': ['']
     });
     this.waitingSubmit = false;
+    this.authService.currentUserSubject.subscribe((user)=>{
+      if(!user) return;
+      this.userOwner=user;
+    })
   }
 
   showPreview(event: any) {
@@ -74,10 +79,8 @@ export class AddRequestComponent implements OnInit {
       this.requestData.requestSubject = this.requestForm.value.object;
       this.requestData.imgUrl = this.requestForm.value.imageUrl;
       if (this.requestForm.value.imageUrl) {
-        console.log("dans if");
         var filePath = `requests/${this.authService.currentUser.id.toString()}/${this.requestData.id}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
         const fileRef = this.storage.ref(filePath);
-        console.log(filePath);
         this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
@@ -93,7 +96,6 @@ export class AddRequestComponent implements OnInit {
           })
         ).subscribe();
       } else { 
-        console.log("dans else");
         this.requestService.addRequest(this.requestData);
         this.waitingSubmit = false;
         this.isSubmitted = false;

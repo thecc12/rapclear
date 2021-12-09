@@ -1,6 +1,6 @@
 <br>
 <button class="btn btn-warning" routerLink="/user/requests"> Back</button>
-<div class="animated fadeIn">
+<!-- <div class="animated fadeIn">
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="card" style="border-radius: 15px;">
@@ -90,8 +90,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
+<app-list-request requestType="initiated" label="Initiated request" [userOwner]="userOwner" forAll=true></app-list-request>
 
 <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">

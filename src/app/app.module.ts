@@ -60,6 +60,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { SpinnerComponent } from './modules/components/spinner/spinner.component';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ListRequestComponent } from './modules/components/list-request/list-request.component';
 
 // configure Bugsnag asap
 Bugsnag.start({ apiKey: '2737b9ab0303671f752970255de0f652' });
@@ -111,7 +112,7 @@ if (true) { enableProdMode(); } // true en prod et false en dev
     P500Component,
     Footer2Component,
     Header2Component,
-    NavbarsComponent,
+    NavbarsComponent
   ],
   providers: [
     AngularFireStorage,
