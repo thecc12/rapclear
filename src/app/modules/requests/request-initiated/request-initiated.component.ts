@@ -61,10 +61,12 @@ export class RequestInitiatedComponent implements OnInit {
       if (!this.listInitiatedRequestCheck.has(request.id.toString().toString())) {
         this.listInitiatedRequestCheck.set(request.id.toString().toString(), true);
         this.listInitiatedRequest.push(request);
+        console.log('initiated req: ', this.listInitiatedRequest)
       }
     });
     this.eventService.newRequestArrivedEvent.subscribe((result) => {
-      if (result) { this.waitData = false; }});
+      if (result) { this.waitData = false; 
+        console.log('initiated req2: ', this.listInitiatedRequest)}});
     }
 
     ok() {

@@ -15,6 +15,7 @@ import { ModalsComponent } from './modals.component';
 // Notifications Routing
 import { NotificationsRoutingModule } from './notifications-routing.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
