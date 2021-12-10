@@ -81,16 +81,17 @@ export class BasicRequestService {
         }
 
 
-        approuveRequestStatus(idRequest: EntityID) {
+        approuveRequestStatus(request: Request):Promise<ResultStatut> {
             let nstatus = RequestState.VALIDED;
             return new Promise<ResultStatut>((resolve, reject) => {
             this.firebaseApi.updates([{
-                link: `requests/${idRequest.toString()}/requestState`,
+                link: `requests/${request.idOwner.toString()}/${request.id.toString()}/requestState`,
                 data: nstatus
             }])
             .then((result) => {
-                if (this.requestList.getValue().has(idRequest.toString())) {
-                    this.requestList.getValue().get(idRequest.toString()).requestState = nstatus;
+                if (this.requestList.getValue().has(request.id.toString())) {
+                    this.requestList.getValue().get(request.id.toString()).requestState = nstatus;
+                    request.requestState=nstatus;
                 }
                 resolve(result);
             })
@@ -100,16 +101,18 @@ export class BasicRequestService {
             });
             });
         }
-        rejectRequestStatus(idRequest: EntityID) {
+        rejectRequestStatus(request: Request):Promise<ResultStatut> {
             let nstatus = RequestState.REJECTED;
             return new Promise<ResultStatut>((resolve, reject) => {
             this.firebaseApi.updates([{
-                link: `requests/${idRequest.toString()}/requestState`,
+                link: `requests/${request.idOwner.toString()}/${request.id.toString()}/requestState`,
                 data: nstatus
             }])
             .then((result) => {
-                if (this.requestList.getValue().has(idRequest.toString())) {
-                    this.requestList.getValue().get(idRequest.toString()).requestState = nstatus;
+                if (this.requestList.getValue().has(request.id.toString())) {
+                    this.requestList.getValue().get(request.id.toString()).requestState = nstatus;
+                    request.requestState=nstatus;
+
                 }
                 resolve(result);
             })

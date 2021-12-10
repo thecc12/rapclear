@@ -1,10 +1,12 @@
 import { Component, Input, OnInit, Output,EventEmitter, ViewChild, TemplateRef } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { EntityID } from '../../../entity/EntityID';
 import { Request, RequestState } from '../../../entity/request';
 import { User } from '../../../entity/user';
 import { EventService } from '../../../services/event/event.service';
+import { ResultStatut } from '../../../services/firebase/resultstatut';
+import { NotificationService } from '../../../services/notification/notification.service';
 import { BasicRequestService } from '../../../services/request/basic-request.service';
 import { RequestService } from '../../../services/request/request.service';
 import { UserService } from '../../../services/user/user.service';
@@ -29,14 +31,19 @@ export class ListRequestComponent implements OnInit {
   requestListUsername:Map<String,User>=new Map();
 
   loadedData:boolean=false;
+  modalRef:BsModalRef;
 
   selectedRequest:Request= new Request();
+  submitRequest:boolean=false;
+
   constructor(
     private requestService:RequestService,
     private basicRequestService:BasicRequestService,
     private userService:UserService,
     private eventService:EventService,
-    private modalService:BsModalService
+    private modalService:BsModalService,
+    private notification: NotificationService,
+
   ) { }
 
   ngOnInit(): void {
@@ -98,9 +105,46 @@ export class ListRequestComponent implements OnInit {
     this.selectedRequest=request;
     if(this.showModal==true)
     {
-      this.modalService.show(template);
+      this.modalRef=this.modalService.show(template);
     }
   }
+  closeModal()
+  {
+    // this.modalService.hide(0);
+    this.modalRef.hide();
+  }
+  rejectRequest()
+  {
+    if(this.submitRequest) return;
+    this.submitRequest=true;
+    this.basicRequestService.rejectRequestStatus(this.selectedRequest)
+    .then(()=>{
+      this.submitRequest=false;
+      this.notification.showNotification('top', 'center', 'green', 'pe-7s-close-circle', "Request has approuved successfully");
+    })
+    .catch((error:ResultStatut)=>{
+      this.submitRequest=false;
+      this.notification.showNotification('top', 'center', 'red', 'pe-7s-close-circle', error.message);
+
+    })
+  }
+  approuveRequest()
+  {
+    if(this.submitRequest) return;
+    this.submitRequest=true;
+    this.basicRequestService.approuveRequestStatus(this.selectedRequest)
+    .then(()=>{
+      this.submitRequest=false;
+      this.notification.showNotification('top', 'center', 'green', 'pe-7s-close-circle', "Request has approuved successfully");
+      this.notification.refreshFonct();
+    })
+    .catch((error:ResultStatut)=>{
+      this.submitRequest=false;
+      this.notification.showNotification('top', 'center', 'red', 'pe-7s-close-circle', error.message);
+
+    })
+  }
+
   getOwner(idOwner:EntityID)
   {
     return this.requestListUsername.has(idOwner.toString())? this.requestListUsername.get(idOwner.toString()):{"fullName":"","email":""};    

@@ -43,7 +43,7 @@ export class RequestsAdminActionComponent implements OnInit, OnChanges {
     this.waitResponse = true;
     this.selectedRequestId = request.id.toString();
     console.log(request);
-    this.basicRequestService.rejectRequestStatus(request.id)
+    this.basicRequestService.rejectRequestStatus(request)
     .then((result: ResultStatut) => {
       this.waitResponse = false;
       this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the request is now \<b>Rejected\</b>`, 200);
@@ -62,7 +62,7 @@ export class RequestsAdminActionComponent implements OnInit, OnChanges {
     this.waitResponse = true;
     this.selectedRequestId = request.id.toString();
     console.log(request);
-    this.basicRequestService.approuveRequestStatus(request.id)
+    this.basicRequestService.approuveRequestStatus(request)
     .then((result: ResultStatut) => {
       this.waitResponse = false;
       this.notificationService.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>The status of the request is now \<b>On Waiting Payment Date\</b>`, 200);

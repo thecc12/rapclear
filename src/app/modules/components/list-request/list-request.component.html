@@ -63,7 +63,7 @@
         <div class="modal-content"> -->
             <div class="modal-header">
                 <h4 class="modal-title">User: {{getOwner(selectedRequest.idOwner).fullName}}</h4>
-                <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                <button type="button" class="close" (click)="closeModal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -74,9 +74,14 @@
                 <p><b>Content: </b>{{selectedRequest.requestContent}}</p>
                 <p><img [src]="selectedRequest.imgUrl" alt="img"></p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" (click)="myModal.hide()">Reject</button>
-                <button type="button" class="btn btn-success" (click)="myModal.hide()">Approuve</button>
+            <div class="modal-footer" *ngIf="requestType=='initiated'">
+                <ng-container *ngIf="submitRequest==false">
+                    <button type="button" class="btn btn-danger" (click)="rejectRequest()">Reject</button>
+                    <button type="button" class="btn btn-success" (click)="approuveRequest()">Approuve</button>
+                </ng-container>
+                <ng-container *ngIf="submitRequest==true">
+                    <app-progress-indeterminate></app-progress-indeterminate>
+                </ng-container>
             </div>
        
 </ng-template>
