@@ -99,6 +99,7 @@ export class UserService {
   getUserBySponsorId(sponsorID: SponsorID): Promise<ResultStatut> {
     return new Promise<ResultStatut>((resolve, reject) => {
       let user:User=Array.from(this.listUser.values()).find((user:User)=>user.mySponsorShipId.toString()==sponsorID.toString());
+      console.log("find by bonus ", user)
       if(user)
       {
         this.listUser.set(user.id.toString(),user);
@@ -113,7 +114,7 @@ export class UserService {
         .equalTo(sponsorID.toString())
         .once('value', (data) => {
           let result: ResultStatut = new ResultStatut();
-      // console.log("find by bonus ",data.val())
+      console.log("find by bonus2 ",data.val())
           if (!data.val()) {
             result.apiCode = FireBaseConstant.STORAGE_OBJECT_NOT_FOUND;
             result.message = 'user not found';

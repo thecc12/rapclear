@@ -304,7 +304,7 @@ export class FirebaseApi {
         let bug = new Bug(result);
         // this.eventService.newBugEvent.next(bug);
         //Bugsnag.notify(bug.error)
-        // console.log("Result error ",result)
+        console.log("Result error ",result)
         result.message = 'Unknow error. Please contact administrator';
         break;
     }

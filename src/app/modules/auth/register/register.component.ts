@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
       })
       .catch((error) => {
         this.waitingRegistration = false;
-        // console.log("Error ",error);
+        console.log("Error ",error);
         // tslint:disable-next-line:max-line-length
         this.notification.showNotification('top', 'center', 'danger', 'pe-7s-close-circle', '\<b>Sorry !\</b>\<br>' + error.message);
         this.submitted = false;

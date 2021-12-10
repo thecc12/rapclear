@@ -41,6 +41,7 @@ export class AuthService {
   }
 
   setUserData(user: User) {
+    if(!user){ return}
     this.localStorageService.setUserData({
       user,
       isLoggedIn: true
@@ -127,15 +128,18 @@ export class AuthService {
     return new Promise<ResultStatut>((resolve, reject) => {
       // console.log('1 in service: ', user);
       if (user.parentSponsorShipId.toString().length>0) {
+        console.log("avant get sponsort");
         this.userService.getUserBySponsorId(user.parentSponsorShipId)
         .then((result:ResultStatut)=> {
+          console.log("get sponsort",result.result);
           let u:User=result.result;
           user.grandParentSponsorShipId.setId(u.parentSponsorShipId.toString());
           user.bigGrandParentSponsorShipId.setId(u.grandParentSponsorShipId.toString());
           return this.saveNewUser(user);
         })
         .then((result:ResultStatut)=>resolve(result))
-        .catch((error)=>reject(error));
+        .catch((error)=>
+        {console.log("get sponsort", error);reject(error)});
       } else {
         this.saveNewUser(user)
         .then((result:ResultStatut)=>resolve(result))

@@ -33,8 +33,8 @@ export class User extends Entity {
                 if (key == 'id') { this.id.setId(entity.id); }
                 else if (key == 'mySponsorShipId') this.mySponsorShipId.setId(entity.mySponsorShipId); 
                 else if (key == 'parentSponsorShipId') this.parentSponsorShipId.setId(entity.parentSponsorShipId); 
-                else if (key == 'grandParentSponsorShipId') this.grandParentSponsorShipId.setId(entity.grandparentSponsorShipId); 
-                else if (key == 'bigGrandParentSponsorShipId') this.bigGrandParentSponsorShipId.setId(entity.biggrandparentSponsorShipId); 
+                else if (key == 'grandParentSponsorShipId') this.grandParentSponsorShipId.setId(entity.grandParentSponsorShipId); 
+                else if (key == 'bigGrandParentSponsorShipId') this.bigGrandParentSponsorShipId.setId(entity.bigGrandParentSponsorShipId); 
                 else { Reflect.set(this, key, entity[key]); }
             }
         }

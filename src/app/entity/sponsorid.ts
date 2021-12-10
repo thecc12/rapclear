@@ -6,7 +6,7 @@ import { User } from "./user";
 @created: 09/10/2020
 */
 export class SponsorID {
-    private _id: String="";
+    private _id: String=" ";
     constructor() {
     }
     /**
