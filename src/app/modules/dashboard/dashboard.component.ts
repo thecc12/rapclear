@@ -36,15 +36,16 @@ export class DashboardComponent implements OnInit {
   allSaleAmount: number = 0;
   allPurchaseAmount: number = 0;
   allAmount: number = 0;
-  minBonus :number =0;
+  minBonus: number = 0;
   waitResponse = false;
 
   radioModel: string = 'Month';
 
   bonus: number = 0;
-  initiatedInvestAmount:number = 0;
-  onWaitingPayementDateInvestAmount:number = 0;
-  readyToPayInvestAmount:number = 0;
+  initiatedInvestAmount: number = 0;
+  onWaitingPayementDateInvestAmount: number = 0;
+  readyToPayInvestAmount: number = 0;
+  allUserSimullation: number;
 
   // lineChart1
   public lineChart1Data: Array<any> = [
@@ -278,7 +279,7 @@ export class DashboardComponent implements OnInit {
       mode: 'index',
       position: 'nearest',
       callbacks: {
-        labelColor: function(tooltipItem, chart) {
+        labelColor: function (tooltipItem, chart) {
           return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor };
         }
       }
@@ -291,7 +292,7 @@ export class DashboardComponent implements OnInit {
           drawOnChartArea: false,
         },
         ticks: {
-          callback: function(value: any) {
+          callback: function (value: any) {
             return value.charAt(0);
           }
         }
@@ -341,6 +342,161 @@ export class DashboardComponent implements OnInit {
   ];
   public mainChartLegend = false;
   public mainChartType = 'line';
+
+  // barChart3
+  public barChart3Data: Array<any> = [
+    {
+      data: [ 12, 11, 17, 20, 15, 28, 32],
+      label: 'Percentage'
+    }
+  ];
+  public barChart3Labels: Array<any> = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  public barChart3Options: any = {
+    tooltips: {
+      enabled: false,
+      custom: CustomTooltips
+    },
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        display: false
+      }],
+      yAxes: [{
+        display: false
+      }]
+    },
+    legend: {
+      display: false
+    }
+  };
+  public barChart3Primary: Array<any> = [
+    {
+      backgroundColor: getStyle('--primary'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart3Danger: Array<any> = [
+    {
+      backgroundColor: getStyle('--danger'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart3Success: Array<any> = [
+    {
+      backgroundColor: getStyle('--success'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart3Legend = false;
+  public barChart3Type = 'bar';
+
+
+
+  // barChart6
+  public barChart6Data: Array<any> = [
+    {
+      data: [ 1, 2, 1, 0, 2, 0, 1],
+      label: 'Percentage'
+    }
+  ];
+  public barChart6Labels: Array<any> = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  public barChart6Options: any = {
+    tooltips: {
+      enabled: false,
+      custom: CustomTooltips
+    },
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        display: false
+      }],
+      yAxes: [{
+        display: false
+      }]
+    },
+    legend: {
+      display: false
+    }
+  };
+  public barChart6Primary: Array<any> = [
+    {
+      backgroundColor: getStyle('--primary'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart6Danger: Array<any> = [
+    {
+      backgroundColor: getStyle('--danger'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart6Success: Array<any> = [
+    {
+      backgroundColor: getStyle('--success'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart6Legend = false;
+  public barChart6Type = 'bar';
+
+
+
+  // barChart7
+  public barChart7Data: Array<any> = [
+    {
+      data: [ 15, 20, 27, 20, 35, 30, 38],
+      label: 'Percentage'
+    }
+  ];
+  public barChart7Labels: Array<any> = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  public barChart7Options: any = {
+    tooltips: {
+      enabled: false,
+      custom: CustomTooltips
+    },
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        display: false
+      }],
+      yAxes: [{
+        display: false
+      }]
+    },
+    legend: {
+      display: false
+    }
+  };
+  public barChart7Primary: Array<any> = [
+    {
+      backgroundColor: getStyle('--primary'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart7Danger: Array<any> = [
+    {
+      backgroundColor: getStyle('--danger'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart7Success: Array<any> = [
+    {
+      backgroundColor: getStyle('--success'),
+      borderColor: 'transparent',
+      borderWidth: 1
+    }
+  ];
+  public barChart7Legend = false;
+  public barChart7Type = 'bar';
+
 
   // social box charts
 
@@ -422,12 +578,60 @@ export class DashboardComponent implements OnInit {
     private bsModal: BsModalService,
     // private translate:TranslateService,
     private eventService: EventService,
-    private basicInvestmentService:BasicInvestmentService,
-    private configAppService:ConfigAppService,
+    private basicInvestmentService: BasicInvestmentService,
+    private configAppService: ConfigAppService,
     private profilService: ProfilService) {
-      this.waitData = true
+    this.waitData = true;
     this.getInitiateInvestments();
     this.getConfirmInvestments();
+
+    let dString = 'November, 11, 2021';
+    let d1 = new Date(dString);
+    let d2 = new Date();
+    console.log('différence de date: ', this.inDays(d1, d2));
+    this.allUserSimulation();
+  }
+
+  allUserSimulation(){
+    let dString = 'November, 11, 2021';
+    let d1 = new Date(dString);
+    let d2 = new Date();
+    this.allUserSimullation = this.inDays(d1, d2) + 255;
+    console.log('allUserSimullation: ', this.allUserSimullation);
+  }
+  inDays(d1, d2): number {
+    let t2 = d2.getTime();
+    let t1 = d1.getTime();
+    // let t3 = d2.getHours();
+    // console.log('t3: ', t3);
+
+    // tslint:disable-next-line:radix
+    let difDate = (t2 - t1) / (24 * 3600 * 1000);
+    let entier = Math.trunc((t2 - t1) / (24 * 3600 * 1000));
+    let allUserSimullation = Math.trunc((difDate - entier) * 100) + 6 + entier;
+    console.log('allUserSimullation: ', allUserSimullation);
+    return allUserSimullation;
+  }
+
+  inWeeks(d1, d2): number {
+    let t2 = d2.getTime();
+    let t1 = d1.getTime();
+
+    // tslint:disable-next-line:radix
+    return (t2 - t1) / (24 * 3600 * 1000 * 7);
+  }
+
+  inMonths(d1, d2) {
+    let d1Y = d1.getFullYear();
+    let d2Y = d2.getFullYear();
+    let d1M = d1.getMonth();
+    let d2M = d2.getMonth();
+
+    return (d2M + 12 * d2Y) - (d1M + 12 * d1Y);
+  }
+
+  inYears(d1, d2) {
+    return d2.getFullYear() - d1.getFullYear();
   }
 
   getInitiateInvestments() {
@@ -479,31 +683,32 @@ export class DashboardComponent implements OnInit {
   saleMyBonus() {
     this.waitResponse = true;
     this.basicInvestmentService.transfertBonusToInvestment()
-    .then((result: ResultStatut) => {
-      this.waitResponse = false;
-      this.showSaleBonus.hide();
-      this.notification.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>${this.minBonus} MC \</b>of your bonuses have been put on the market`);
-    })
-      .catch((error:ResultStatut) => {
-        let message="";
+      .then((result: ResultStatut) => {
+        this.waitResponse = false;
         this.showSaleBonus.hide();
-        if(error.apiCode==ResultStatut.INVALID_ARGUMENT_ERROR) message =error.message;
-        else message="\<b>Oops!!\</b>Unknow error. please contact administrator <br> contact.momo.coin@gmail.com"
+        this.notification.showNotification('top', 'center', 'success', 'pe-7s-close-circle', `\<b>Success !\</b>\<br>${this.minBonus} MC \</b>of your bonuses have been put on the market`);
+      })
+      .catch((error: ResultStatut) => {
+        let message = '';
+        this.showSaleBonus.hide();
+        if (error.apiCode == ResultStatut.INVALID_ARGUMENT_ERROR) message = error.message;
+        else message = '\<b>Oops!!\</b>Unknow error. please contact administrator <br> contact.momo.coin@gmail.com'
         setTimeout(() => this.notification.showNotification('top', 'center', 'danger', '', 'An error has occurred <br/>'), 200)
         this.waitResponse = false;
       });
-    }
+  }
 
-    showModal() {
-      this.showSaleBonus.show();
-    }
-    hideModal() {
-      this.showSaleBonus.hide();
-    }
+  showModal() {
+    this.showSaleBonus.show();
+  }
+  hideModal() {
+    this.showSaleBonus.hide();
+  }
 
   ngOnInit(): void {
     this.eventService.newInvestmentArrivedEvent.subscribe((result) => {
-      if (result){ this.waitData = false}});
+      if (result) { this.waitData = false }
+    });
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));
@@ -520,15 +725,15 @@ export class DashboardComponent implements OnInit {
     this.authService.currentUserSubject.subscribe((user: User) => {
       // console.log("min ",this.minBonus);
       this.bonus = user.bonus;
-      if(user.bonus >= this.configAppService.bonus.getValue().minBonus) {
+      if (user.bonus >= this.configAppService.bonus.getValue().minBonus) {
         this.saleBonus = true;
         this.nextBonus = user.bonus - this.configAppService.bonus.getValue().minBonus;
       }
     });
 
-    this.configAppService.bonus.subscribe((value)=>{
-      this.minBonus=value.minBonus;
-      if(this.bonus >= this.configAppService.bonus.getValue().minBonus) {
+    this.configAppService.bonus.subscribe((value) => {
+      this.minBonus = value.minBonus;
+      if (this.bonus >= this.configAppService.bonus.getValue().minBonus) {
         this.saleBonus = true;
         this.nextBonus = this.bonus - this.configAppService.bonus.getValue().minBonus;
       }
@@ -551,16 +756,15 @@ export class DashboardComponent implements OnInit {
     //   this.numPurchaseInvestment=0;
     //   this.numSaleInvestment=0;
     // })
-    this.authService.currentUserSubject.subscribe((user)=>{
-      this.bonus=user.bonus;
+    this.authService.currentUserSubject.subscribe((user) => {
+      this.bonus = user.bonus;
     })
-    this.myInvestment.investments.subscribe((mapInvest:Map<String,Investment>)=>{
+    this.myInvestment.investments.subscribe((mapInvest: Map<String, Investment>) => {
       this.initiatedInvestAmount = 0;
       this.onWaitingPayementDateInvestAmount = 0;
       this.readyToPayInvestAmount = 0;
-      Array.from(mapInvest.values()).filter((invest:Investment)=>invest.idOwner.toString()==this.authService.currentUserSubject.getValue().id.toString()).forEach((invest:Investment)=>{
-        switch(invest.investmentState)
-        {
+      Array.from(mapInvest.values()).filter((invest: Investment) => invest.idOwner.toString() == this.authService.currentUserSubject.getValue().id.toString()).forEach((invest: Investment) => {
+        switch (invest.investmentState) {
           case InvestmentState.INITIATE:
             this.initiatedInvestAmount++;
             break;
