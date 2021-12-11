@@ -584,6 +584,7 @@ export class DashboardComponent implements OnInit {
     this.waitData = true;
     this.getInitiateInvestments();
     this.getConfirmInvestments();
+    // this.notification.refreshFonct();
 
     let dString = 'November, 11, 2021';
     let d1 = new Date(dString);
@@ -599,6 +600,7 @@ export class DashboardComponent implements OnInit {
     this.allUserSimullation = this.inDays(d1, d2) + 255;
     console.log('allUserSimullation: ', this.allUserSimullation);
   }
+
   inDays(d1, d2): number {
     let t2 = d2.getTime();
     let t1 = d1.getTime();

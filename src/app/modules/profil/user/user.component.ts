@@ -43,7 +43,8 @@ export class UserComponent implements OnInit {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = 'localhost:4200/#/auth/register/' + val; // a remplacer par le lien https de la page registration de TCC
+    // selBox.value = 'localhost:4200/#/auth/register/' + val; // a remplacer par le lien https de la page registration de TCC
+    selBox.value = 'https://app-the-crypto-currency.000webhostapp.com/#/auth/register/' + val; // a remplacer par le lien https de la page registration de TCC
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();

@@ -65,8 +65,7 @@ export class RegisterComponent implements OnInit {
   setFormData(): User {
 
       let user: User = new User();
-      user.hydrate(this.registerForm.value)
-      // user.fullName = this.registerForm.value.name;
+      user.hydrate(this.registerForm.value);
       user.email = this.sanitizeService.emailSanitize(this.registerForm.value.email);
       // user.password = this.registerForm.value.password;
       // user.country = this.registerForm.value.country;

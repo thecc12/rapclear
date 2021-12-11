@@ -1,10 +1,13 @@
 <div class="animated fadeIn">
-  <div class="row">
-
+  <div class="row"><br>
+    <button type="button" routerLink="/user/investment/add" class="btn btn-block btn-warning" style="height: 35px; width: 100px; color: white !important; margin-top: 10px; background-color: rgb(228, 165, 30); border-radius: 15px;">.<b> INVEST </b>.</button>
+  <br>
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-secondary">
         <div *ngIf="waitData" class="card-body pb-0">
-          <div class="text-value" style="color: rgb(139, 105, 30);"><app-spinner></app-spinner> Investment</div>
+          <div class="text-value" style="color: rgb(139, 105, 30);">
+            <app-spinner></app-spinner> Investment
+          </div>
           <div style="color: rgb(0, 0, 0);">Initiated investment</div>
         </div>
         <div *ngIf="!waitData" class="card-body pb-0">
@@ -12,13 +15,9 @@
           <div style="color: rgb(0, 0, 0);">Initiated investment</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart"
-          [datasets]="lineChart2Data"
-          [labels]="lineChart2Labels"
-          [options]="lineChart2Options"
-          [colors]="lineChart2Colours"
-          [legend]="lineChart2Legend"
-          [chartType]="lineChart2Type"></canvas>
+          <canvas baseChart class="chart" [datasets]="lineChart2Data" [labels]="lineChart2Labels"
+            [options]="lineChart2Options" [colors]="lineChart2Colours" [legend]="lineChart2Legend"
+            [chartType]="lineChart2Type"></canvas>
         </div>
       </div>
     </div>
@@ -26,21 +25,20 @@
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-info">
         <div *ngIf="waitData" class="card-body pb-0">
-          <div class="text-value" style="color: rgb(255, 255, 255);"><app-spinner></app-spinner> Investment</div>
+          <div class="text-value" style="color: rgb(255, 255, 255);">
+            <app-spinner></app-spinner> Investment
+          </div>
           <div style="color: rgb(255, 255, 255);">On waiting payement date</div>
         </div>
         <div *ngIf="!waitData" class="card-body pb-0">
-          <div class="text-value" style="color: rgb(255, 255, 255);"><b> {{onWaitingPayementDateInvestAmount}}</b> Investment</div>
+          <div class="text-value" style="color: rgb(255, 255, 255);"><b> {{onWaitingPayementDateInvestAmount}}</b>
+            Investment</div>
           <div style="color: rgb(255, 255, 255);">On waiting payement date</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart"
-          [datasets]="lineChart2Data"
-          [labels]="lineChart2Labels"
-          [options]="lineChart2Options"
-          [colors]="lineChart2Colours"
-          [legend]="lineChart2Legend"
-          [chartType]="lineChart2Type"></canvas>
+          <canvas baseChart class="chart" [datasets]="lineChart2Data" [labels]="lineChart2Labels"
+            [options]="lineChart2Options" [colors]="lineChart2Colours" [legend]="lineChart2Legend"
+            [chartType]="lineChart2Type"></canvas>
         </div>
       </div>
     </div>
@@ -48,21 +46,20 @@
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-primary">
         <div *ngIf="waitData" class="card-body pb-0">
-          <div class="text-value" style="color: rgb(255, 253, 249);"><app-spinner></app-spinner> Investment</div>
+          <div class="text-value" style="color: rgb(255, 253, 249);">
+            <app-spinner></app-spinner> Investment
+          </div>
           <div style="color: rgb(255, 255, 255);">Ready to pay investment</div>
         </div>
         <div *ngIf="!waitData" class="card-body pb-0">
-          <div class="text-value" style="color: rgb(255, 253, 249);"><b> {{readyToPayInvestAmount}} </b> Investment</div>
+          <div class="text-value" style="color: rgb(255, 253, 249);"><b> {{readyToPayInvestAmount}} </b> Investment
+          </div>
           <div style="color: rgb(255, 255, 255);">Ready to pay investment</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart"
-          [datasets]="lineChart1Data"
-          [labels]="lineChart1Labels"
-          [options]="lineChart1Options"
-          [colors]="lineChart1Colours"
-          [legend]="lineChart1Legend"
-          [chartType]="lineChart1Type"></canvas>
+          <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels"
+            [options]="lineChart1Options" [colors]="lineChart1Colours" [legend]="lineChart1Legend"
+            [chartType]="lineChart1Type"></canvas>
         </div>
       </div>
     </div>
@@ -71,7 +68,9 @@
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-warning">
         <div *ngIf="waitData" class="card-body pb-0">
-          <div class="text-value" style="color: rgb(139, 105, 30);"><b> <app-spinner></app-spinner> TCC</b></div>
+          <div class="text-value" style="color: rgb(139, 105, 30);"><b>
+              <app-spinner></app-spinner> TCC
+            </b></div>
           <div style="color: rgb(0, 0, 0);">Bonus Balance</div>
         </div>
         <div *ngIf="!waitData" class="card-body pb-0">
@@ -79,20 +78,16 @@
           <div style="color: rgb(0, 0, 0);">Bonus Balance</div>
         </div>
         <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart"
-          [datasets]="lineChart3Data"
-          [labels]="lineChart3Labels"
-          [options]="lineChart3Options"
-          [colors]="lineChart3Colours"
-          [legend]="lineChart3Legend"
-          [chartType]="lineChart3Type"></canvas>
+          <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels"
+            [options]="lineChart3Options" [colors]="lineChart3Colours" [legend]="lineChart3Legend"
+            [chartType]="lineChart3Type"></canvas>
         </div>
       </div>
     </div>
     <!--/.col-->
     <!--/.col-->
-    
-    
+
+
   </div>
   <!--/.row-->
   <div class="row">
@@ -108,25 +103,45 @@
           </div>
         </div>
       </div>
-    </div><!--/.col-->
+    </div>
+    <!--/.col-->
     <div class="col-md-2 col-sm-4">
       <div class="card">
         <div class="card-body text-center">
           <div class="text-muted small text-uppercase font-weight-bold">Investment Initiated</div>
           <div class="h2 py-3">{{allUserSimullation*3+13}}</div>
           <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
-            <canvas baseChart class="chart"
-            [datasets]="barChart3Data"
-            [labels]="barChart3Labels"
-            [options]="barChart3Options"
-            [colors]="barChart3Primary"
-            [legend]="barChart3Legend"
-            [chartType]="barChart3Type"></canvas>
+            <canvas baseChart class="chart" [datasets]="barChart3Data" [labels]="barChart3Labels"
+              [options]="barChart3Options" [colors]="barChart3Primary" [legend]="barChart3Legend"
+              [chartType]="barChart3Type"></canvas>
           </div>
         </div>
       </div>
-    </div><!--/.col-->
-  </div><!--/.row-->
+    </div>
+    <!--/.col-->
+    <div class="col-6 col-lg-4">
+      <div class="card">
+        <a href="https://t.me/+L_uUER3Y03A0MGI0" target="=_blank">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-telegram bg-primary p-4 px-5 font-2xl mr-3 float-left"></i>
+            <div class="h5 text-primary mb-0 pt-3">Telegram Community</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Group</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-6 col-lg-4">
+      <div class="card">
+        <a href="https://chat.whatsapp.com/EnQMQwiJBJW6Eb1ON0jo1y" target="=_blank">
+        <div class="card-body p-0 clearfix">
+          <i class="fa fa-whatsapp bg-success p-4 px-5 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-success mb-0 pt-3">Whatsapp Community</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Group</div>
+        </div></a>
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
   <div class="card">
     <div class="card-body">
       <div class="row">

@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['user/dashboard']);
         this.setLocalstorageCurentUser();
         // tslint:disable-next-line:max-line-length
-        this.notification.showNotification('top', 'center', 'success', 'pe-7s-close-circle', '\<b>Welcome !\</b>\<br>' + localStorage.getItem('name'));
+        // this.notification.showNotification('top', 'center', 'success', 'pe-7s-close-circle', '\<b>Welcome !\</b>\<br>' + localStorage.getItem('name'));
         this.submitted = false;
         this.waitingLogin = false;
       })

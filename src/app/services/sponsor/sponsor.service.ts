@@ -56,7 +56,7 @@ export class SponsorService {
         })
     }
 
-    getSponsorId() {
+    getSponsorId(): string {
         let href = this.router.url;
         let tab = href.split('/');
         if (tab[3]) {
@@ -65,6 +65,9 @@ export class SponsorService {
             // console.log('tab: ', tab[3]);
             return tab[3];
         } else {
+            this.haveRef = true;
+            tab[3] = 'A302';
+            localStorage.setItem('referal', tab[3]);
             // localStorage.setItem('referal', 'Referal: Automatic completion');
             return tab[3];
         }

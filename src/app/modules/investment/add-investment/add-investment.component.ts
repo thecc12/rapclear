@@ -63,6 +63,9 @@ export class AddInvestmentComponent implements OnInit {
   addInvestment() {
     this.submitted = true;
     if (this.form.invalid) { return; }
+    if (this.form.value.amount <= 10000) {
+      this.notificationService.showNotification('top', 'center', 'danger', 'pe-7s-close-circle', '\<b>Sorry !\</b>\<br>Your investment must be greater than or equal to 10000.');
+      return; }
     this.waitResponse = true;
     this.userService.getListUser();
     let idOwner: EntityID = new EntityID();

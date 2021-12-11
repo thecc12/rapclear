@@ -59,7 +59,7 @@ export const routes: Routes = [
   {
     path: 'user',
     component: DefaultLayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
@@ -115,18 +115,18 @@ export const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
-      },
+      // {
+      //   path: 'icons',
+      //   loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
+      // },
+      // {
+      //   path: 'notifications',
+      //   loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
+      // },
+      // {
+      //   path: 'theme',
+      //   loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
+      // },
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)

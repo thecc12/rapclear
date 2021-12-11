@@ -72,7 +72,8 @@
                 <p><b>Date: </b>{{getFormatDate(selectedRequest.requestDate)}}</p>
                 <p><b>Subject: </b>{{selectedRequest.requestSubject}}</p>
                 <p><b>Content: </b>{{selectedRequest.requestContent}}</p>
-                <p><img [src]="selectedRequest.imgUrl" alt="img"></p>
+                <p *ngIf="selectedRequest.imgUrl"><img [src]="selectedRequest.imgUrl" alt="img" class="responsive-img"></p>
+                <!-- <p *ngIf="!selectedRequest.imgUrl"><img [src]="../../../../assets/img/image_placeholder.jpg" alt="img"></p> -->
             </div>
             <div class="modal-footer" *ngIf="requestType=='initiated'">
                 <ng-container *ngIf="submitRequest==false">

@@ -25,9 +25,6 @@ export class NotificationService {
     }
 
     refreshFonct() {
-        if (this.refresh == 1) {
             window.location.reload();
-            this.refresh = 0;
-        }
     }
 }

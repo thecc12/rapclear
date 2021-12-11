@@ -18,7 +18,7 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class ListRequestComponent implements OnInit {
   @Input() requestType:RequestState=RequestState.STATE_FOR_ALL;
-  @Input() label:String="";
+  @Input() label:String='';
   @Input() userOwner:User=null;
   @Output() selectRequestEvent:EventEmitter<Request>=new EventEmitter();
   @Input() forAll;
@@ -35,6 +35,7 @@ export class ListRequestComponent implements OnInit {
 
   selectedRequest:Request= new Request();
   submitRequest:boolean=false;
+  imgUrl: string = '../..'
 
   constructor(
     private requestService:RequestService,
@@ -50,12 +51,12 @@ export class ListRequestComponent implements OnInit {
     let observable:Observable<Request>;
     if(this.requestType==RequestState.STATE_FOR_ALL) 
     {
-      if(this.forAll==true || this.forAll=="true") observable=this.basicRequestService.getRequest();
+      if(this.forAll==true || this.forAll=='true') observable=this.basicRequestService.getRequest();
       else observable=this.basicRequestService.getUserRequest(this.userOwner.id);
     }
     else
     {
-      if(this.forAll==true || this.forAll=="true") observable=this.basicRequestService.getAllUserRequestByState(this.requestType);
+      if(this.forAll==true || this.forAll=='true') observable=this.basicRequestService.getAllUserRequestByState(this.requestType);
       else observable=this.basicRequestService.getUserRequestByState(this.userOwner.id,this.requestType);
     }
     this.eventService.newRequestArrivedEvent.subscribe((arrived)=>{
@@ -100,7 +101,7 @@ export class ListRequestComponent implements OnInit {
   }
   clickToRequest(request:Request,template: TemplateRef<any>)
   {
-    console.log("Request ",request)
+    console.log('Request ',request)
     this.selectRequestEvent.next(request);
     this.selectedRequest=request;
     if(this.showModal==true)
@@ -120,22 +121,27 @@ export class ListRequestComponent implements OnInit {
     this.basicRequestService.rejectRequestStatus(this.selectedRequest)
     .then(()=>{
       this.submitRequest=false;
-      this.notification.showNotification('top', 'center', 'green', 'pe-7s-close-circle', "Request has approuved successfully");
+      this.notification.showNotification('top', 'center', 'success', 'pe-7s-close-circle', 'Request has approuved successfully');
+      this.closeModal();
+      this.notification.refreshFonct();
     })
     .catch((error:ResultStatut)=>{
       this.submitRequest=false;
-      this.notification.showNotification('top', 'center', 'red', 'pe-7s-close-circle', error.message);
+      this.closeModal();
+      this.notification.showNotification('top', 'center', 'danger', 'pe-7s-close-circle', error.message);
 
-    })
+    });
   }
   approuveRequest()
   {
+    this.notification.showNotification('top', 'center', 'green', 'pe-7s-close-circle', 'Request has approuved successfully');
     if(this.submitRequest) return;
     this.submitRequest=true;
     this.basicRequestService.approuveRequestStatus(this.selectedRequest)
     .then(()=>{
       this.submitRequest=false;
-      this.notification.showNotification('top', 'center', 'green', 'pe-7s-close-circle', "Request has approuved successfully");
+      this.closeModal();
+      this.notification.showNotification('top', 'center', 'green', 'pe-7s-close-circle', 'Request has approuved successfully');
       this.notification.refreshFonct();
     })
     .catch((error:ResultStatut)=>{
@@ -147,7 +153,7 @@ export class ListRequestComponent implements OnInit {
 
   getOwner(idOwner:EntityID)
   {
-    return this.requestListUsername.has(idOwner.toString())? this.requestListUsername.get(idOwner.toString()):{"fullName":"","email":""};    
+    return this.requestListUsername.has(idOwner.toString())? this.requestListUsername.get(idOwner.toString()):{'fullName':'','email':''};    
   }
 
 

@@ -1,0 +1,10 @@
+
+.responsive-img {
+    display: block;
+    width: 100%;
+  }
+  
+  .responsive {
+    width: 100%;
+    height: auto;
+  }
